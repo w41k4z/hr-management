@@ -1,25 +1,51 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+/* COMPONENTS */
+import { Route, Routes } from "react-router-dom";
+import { BrowserRouter } from "react-router-dom";
+import SidePanel from "./components/panel/SidePanel";
+
+/* PAGES */
+import AllDepartment from "./pages/all-department";
+import Needs from "./pages/needs";
+import Resume from "./pages/resume";
+import Test from "./pages/test";
+
+/* STYLES */
+import "bootstrap/dist/css/bootstrap.css";
+import "./assets/css/App.css";
+
+/* STATIC DATA */
+import { SidePanelContent } from "./static-data/SidePanelContent";
+
+/* COMPONENTS */
+const sidePanelHeader = (
+  <div className="d-flex justify-content-between">
+    <h3>HR</h3>
+    <h3>Management</h3>
+  </div>
+);
+const department = [];
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <div className="d-flex">
+        <SidePanel header={sidePanelHeader} panelItems={SidePanelContent} />
+        <Routes>
+          {/* Entry point of the application */}
+          <Route index element={<p>Entry point</p>} />
+          <Route
+            path="/department/all-department"
+            element={<AllDepartment />}
+          />
+          <Route path="/department/needs" element={<Needs />} />
+          <Route path="/forms/resume" element={<Resume />} />
+          <Route path="/forms/test" element={<Test />} />
+
+          {/* Error 404 */}
+          <Route path="*" element={<p>404 Not Found</p>} />
+        </Routes>
+      </div>
+    </BrowserRouter>
   );
 }
 

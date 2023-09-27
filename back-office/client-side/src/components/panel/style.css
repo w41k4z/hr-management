@@ -1,0 +1,6 @@
+.side-panel {
+    max-width: "280px";
+    height: "100vh";
+    overflow: "scroll";
+}
+
