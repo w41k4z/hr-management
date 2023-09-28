@@ -8,6 +8,8 @@ import AllDepartment from "./pages/all-department";
 import Needs from "./pages/needs";
 import Resume from "./pages/resume";
 import Test from "./pages/test";
+import CritereSelection from "./pages/critere-selection";
+
 
 /* STYLES */
 import "bootstrap/dist/css/bootstrap.css";
@@ -15,6 +17,7 @@ import "./assets/css/App.css";
 
 /* STATIC DATA */
 import { SidePanelContent } from "./static-data/SidePanelContent";
+import Annoncce from "./pages/annonce";
 
 /* COMPONENTS */
 const sidePanelHeader = (
@@ -34,13 +37,14 @@ function App() {
           {/* Entry point of the application */}
           <Route index element={<p>Entry point</p>} />
           <Route
-            path="/department/all-department"
+            path="/department/all-department" 
             element={<AllDepartment />}
           />
           <Route path="/department/needs" element={<Needs />} />
           <Route path="/forms/resume" element={<Resume />} />
           <Route path="/forms/test" element={<Test />} />
-
+          <Route path="/offre/critere" element={<CritereSelection/>}></Route>
+          <Route path="/offre/annonce" element={<Annoncce/>}></Route>
           {/* Error 404 */}
           <Route path="*" element={<p>404 Not Found</p>} />
         </Routes>
