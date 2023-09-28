@@ -8,6 +8,7 @@ import AllDepartment from "./pages/all-department";
 import Needs from "./pages/needs";
 import Resume from "./pages/resume";
 import Test from "./pages/test";
+import PageAddQuestion from "./pages/test/questionadd";
 
 /* STYLES */
 import "bootstrap/dist/css/bootstrap.css";
@@ -40,6 +41,7 @@ function App() {
           <Route path="/department/needs" element={<Needs />} />
           <Route path="/forms/resume" element={<Resume />} />
           <Route path="/forms/test" element={<Test />} />
+          <Route path="/question/Test/questionaddy" element={<PageAddQuestion />} />
 
           {/* Error 404 */}
           <Route path="*" element={<p>404 Not Found</p>} />

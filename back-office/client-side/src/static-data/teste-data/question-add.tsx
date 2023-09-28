@@ -1,6 +1,6 @@
 import * as FlatColor from "react-icons/fc";
 
-export const SidePanelContent = [
+export const AddQuestionContent = [
   // {
   //   title: "Dashboard",
   //   type: "nav-item",
