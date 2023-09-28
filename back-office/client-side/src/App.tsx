@@ -10,6 +10,7 @@ import Resume from "./pages/resume";
 import Test from "./pages/test";
 import PageAddQuestion from "./pages/test/questionadd";
 import CritereSelection from "./pages/critere-selection";
+import TestResume from "./pages/client-side-page/resume";
 
 /* STYLES */
 import "bootstrap/dist/css/bootstrap.css";
@@ -37,8 +38,8 @@ function App() {
           <header
             style={{ height: "50px", backgroundColor: "#babbbb" }}
           ></header>
-          <section className="d-flex px-1 justify-content-center">
-            <div className="card mt-4 p-sm-1 p-md-5" style={{ width: "90%" }}>
+          <section className="d-flex flex-wrap px-1 justify-content-center">
+            <div className="card mt-4 p-sm-1 p-md-3" style={{ width: "90%" }}>
               <Routes>
                 {/* Entry point of the application */}
                 <Route index element={<p>Entry point</p>} />
@@ -59,6 +60,9 @@ function App() {
                   element={<CritereSelection />}
                 ></Route>
                 <Route path="/offre/annonce" element={<Annoncce />}></Route>
+
+                {/* Client side page test */}
+                <Route path="/test/resume" element={<TestResume />}></Route>
 
                 {/* Error 404 */}
                 <Route path="*" element={<p>404 Not Found</p>} />
