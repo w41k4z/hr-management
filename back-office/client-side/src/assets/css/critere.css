@@ -1,0 +1,55 @@
+#row-with-margin-top {
+    margin-top: 40px;
+    margin-bottom: 30px; 
+}
+
+#row-with-margin-top2 {
+    margin-bottom: 5px; 
+}
+
+#row-with-margin-top4 {
+    margin-bottom: 20px; 
+}
+
+#add-button  {
+    max-width: 100px;
+    float: right;
+}
+
+#generate-button  {
+    max-width: 200px;
+    float: right;
+}
+
+#rowvertical {
+    margin-bottom: 20px;
+}
+
+#ac h6 {
+    margin-left: 10px;
+    width: 150px;
+    font-weight: lighter;
+}
+
+#lab {
+    margin-bottom: 5px;
+}
+
+#ac {
+    display: flex;
+    align-items:baseline;
+    margin-bottom: 5px;
+}
+
+#acn {
+    max-width: 300px;
+}
+
+label {
+    font-weight: bolder;
+}
+
+#del {
+    background-color: red;
+    color : white;
+}
