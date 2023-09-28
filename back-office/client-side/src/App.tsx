@@ -20,7 +20,7 @@ import { SidePanelContent } from "./static-data/SidePanelContent";
 const sidePanelHeader = (
   <div className="d-flex justify-content-between">
     <h3>HR</h3>
-    <h3>Management</h3>
+    {/* <h3>Management</h3> */}
   </div>
 );
 const department = [];
@@ -30,20 +30,29 @@ function App() {
     <BrowserRouter>
       <div className="d-flex">
         <SidePanel header={sidePanelHeader} panelItems={SidePanelContent} />
-        <Routes>
-          {/* Entry point of the application */}
-          <Route index element={<p>Entry point</p>} />
-          <Route
-            path="/department/all-department"
-            element={<AllDepartment />}
-          />
-          <Route path="/department/needs" element={<Needs />} />
-          <Route path="/forms/resume" element={<Resume />} />
-          <Route path="/forms/test" element={<Test />} />
+        <div className="content w-100">
+          <header
+            style={{ height: "50px", backgroundColor: "#babbbb" }}
+          ></header>
+          <section className="d-flex px-1 justify-content-center">
+            <div className="card mt-4 p-sm-1 p-md-5" style={{ width: "90%" }}>
+              <Routes>
+                {/* Entry point of the application */}
+                <Route index element={<p>Entry point</p>} />
+                <Route
+                  path="/department/all-department"
+                  element={<AllDepartment />}
+                />
+                <Route path="/department/needs" element={<Needs />} />
+                <Route path="/forms/resume" element={<Resume />} />
+                <Route path="/forms/test" element={<Test />} />
 
-          {/* Error 404 */}
-          <Route path="*" element={<p>404 Not Found</p>} />
-        </Routes>
+                {/* Error 404 */}
+                <Route path="*" element={<p>404 Not Found</p>} />
+              </Routes>
+            </div>
+          </section>
+        </div>
       </div>
     </BrowserRouter>
   );
