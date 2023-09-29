@@ -57,7 +57,7 @@ function Resume() {
               </select>
             </div>
           </div>
-          <div className="ms-md-2 mt-sm-4 mt-md-0 contact-info">
+          <div className="ms-md-2 mt-4 mt-md-0 contact-info">
             <h3 className="title">
               <b>Contact</b>
             </h3>

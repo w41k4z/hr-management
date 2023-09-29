@@ -24,9 +24,9 @@ import Annoncce from "./pages/annonce";
 
 /* COMPONENTS */
 const sidePanelHeader = (
-  <div className="d-flex justify-content-md-between justify-content-sm-center">
+  <div className="d-flex justify-content-md-evenly justify-content-sm-center">
     <h3>HR</h3>
-    {/* <h3>Management</h3> */}
+    <h3 className="d-none d-md-block">Management</h3>
   </div>
 );
 const department = [];
