@@ -14,19 +14,19 @@ const Degree = ({ degree, grade, onDelete }: DegreeProps) => {
     <div className="row mt-3">
       <input
         type="text"
-        className="col-md-3 form-control-sm"
+        className="col-md-3 border-less form-control-sm"
         defaultValue={degreeValue}
       />
       <input
         type="text"
-        className="col-md-4 offset-1 form-control-sm"
+        className="col-md-4 offset-1 border-less form-control-sm"
         defaultValue={gradeValue}
       />
-      <div className="btn-group col-md-2 offset-1">
+      <div className="btn-group col-md-2 offset-2">
         <button className="btn btn-danger" onClick={onDelete}>
           X
         </button>
-        <button className="btn btn-primary">Import</button>
+        <button className="btn btn-outline-secondary">Import</button>
       </div>
     </div>
   );

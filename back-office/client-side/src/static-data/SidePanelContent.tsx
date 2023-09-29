@@ -51,4 +51,16 @@ export const SidePanelContent = [
     icon: <FlatColor.FcDocument />,
     onItemClick: () => {},
   },
+  {
+    title: "Client side",
+    type: "menu-title",
+    onItemClick: () => {},
+  },
+  {
+    title: "Form resume",
+    type: "nav-item",
+    path: "/test/resume",
+    icon: <FlatColor.FcKindle />,
+    onItemClick: () => {},
+  },
 ];

@@ -1,5 +1,5 @@
-import React from 'react';
-import './stylequestion.css';
+import React from "react";
+import "./stylequestion.css";
 
 interface AnswerProps {
   answer: { text: string; isCorrect: boolean };
@@ -8,7 +8,12 @@ interface AnswerProps {
   onRemove: () => void;
 }
 
-const AnswerComponent: React.FC<AnswerProps> = ({ answer, onChange, onToggleCorrect, onRemove }) => (
+const AnswerComponent: React.FC<AnswerProps> = ({
+  answer,
+  onChange,
+  onToggleCorrect,
+  onRemove,
+}) => (
   <div className="mb-3">
     <div className="input-group">
       <input

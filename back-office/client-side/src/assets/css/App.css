@@ -36,3 +36,27 @@
     transform: rotate(360deg);
   }
 }
+
+/* BOOTSTRAP OVERRIDE */
+.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+    color: var(--bs-nav-pills-link-active-color);
+    background-color: #1f2125;
+}
+
+.head-nav {
+  /* height: 50px; */
+  padding: 10px 0px;
+  background-color: #282c34;
+}
+
+.search-bar input {
+  border-radius: 15px;
+  padding: 5px;
+  border: 1px black outset;
+}
+
+.border-less {
+    outline: none;
+    border: none;
+    border-bottom: 1px solid;
+}
