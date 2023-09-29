@@ -51,4 +51,11 @@ export const SidePanelContent = [
     icon: <FlatColor.FcDocument />,
     onItemClick: () => {},
   },
+  {
+    title: "QCM",
+    type: "nav-item",
+    path: "/question/Test/questionanswer",
+    icon: <FlatColor.FcDocument />,
+    onItemClick: () => {},
+  },
 ];
