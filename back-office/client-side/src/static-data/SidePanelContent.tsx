@@ -52,6 +52,18 @@ export const SidePanelContent = [
     onItemClick: () => {},
   },
   {
+    title: "Client side",
+    type: "menu-title",
+    onItemClick: () => {},
+  },
+  {
+    title: "Form resume",
+    type: "nav-item",
+    path: "/test/resume",
+    icon: <FlatColor.FcKindle />,
+    onItemClick: () => {},
+  },
+  {
     title: "QCM",
     type: "nav-item",
     path: "/question/Test/questionanswer",
