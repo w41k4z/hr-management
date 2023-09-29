@@ -69,5 +69,5 @@ export const SidePanelContent = [
     path: "/question/Test/questionanswer",
     icon: <FlatColor.FcDocument />,
     onItemClick: () => {},
-  },
+  }
 ];
