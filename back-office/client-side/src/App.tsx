@@ -18,7 +18,7 @@ import "./assets/css/App.css";
 
 /* STATIC DATA */
 import { SidePanelContent } from "./static-data/SidePanelContent";
-import Annoncce from "./pages/annonce";
+import Annonce from "./pages/annonce";
 
 /* COMPONENTS */
 const sidePanelHeader = (
@@ -47,7 +47,7 @@ function App() {
           <Route path="/question/Test/questionaddy" element={<PageAddQuestion />} />
 
           <Route path="/offre/critere" element={<CritereSelection/>}></Route>
-          <Route path="/offre/annonce" element={<Annoncce/>}></Route>
+          <Route path="/offre/annonce" element={<Annonce/>}></Route>
           {/* Error 404 */}
           <Route path="*" element={<p>404 Not Found</p>} />
         </Routes>
