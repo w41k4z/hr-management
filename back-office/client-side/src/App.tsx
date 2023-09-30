@@ -9,7 +9,7 @@ import { FiLogOut } from "react-icons/fi";
 import AllDepartment from "./pages/all-department";
 import Needs from "./pages/needs";
 import Resume from "./pages/resume";
-import Test from "./pages/test";
+import ListResume from "./pages/list/resume";
 import PageAddQuestion from "./pages/test/questionadd";
 import CritereSelection from "./pages/critere-selection";
 import TestResume from "./pages/client-side-page/resume";
@@ -71,12 +71,16 @@ function App() {
                   element={<AllDepartment />}
                 />
                 <Route path="/department/needs" element={<Needs />} />
+
                 <Route path="/forms/resume" element={<Resume />} />
-                <Route path="/forms/test" element={<Test />} />
+
+                <Route path="/list/resume" element={<ListResume />} />
+
                 <Route
                   path="/question/Test/questionaddy"
                   element={<PageAddQuestion />}
                 />
+
                 <Route
                   path="/offre/critere"
                   element={<CritereSelection />}

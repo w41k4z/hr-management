@@ -38,17 +38,22 @@ export const SidePanelContent = [
     onItemClick: () => {},
   },
   {
-    title: "Test",
-    type: "nav-item",
-    path: "forms/test",
-    icon: <FlatColor.FcDocument />,
-    onItemClick: () => {},
-  },
-  {
     title: "Question de test",
     type: "nav-item",
     path: "/question/Test/questionaddy",
     icon: <FlatColor.FcDocument />,
+    onItemClick: () => {},
+  },
+  {
+    title: "List",
+    type: "menu-title",
+    onItemClick: () => {},
+  },
+  {
+    title: "Resume",
+    type: "nav-item",
+    path: "list/resume",
+    icon: <FlatColor.FcKindle />,
     onItemClick: () => {},
   },
   {
@@ -69,5 +74,5 @@ export const SidePanelContent = [
     path: "/question/Test/questionanswer",
     icon: <FlatColor.FcDocument />,
     onItemClick: () => {},
-  }
+  },
 ];
