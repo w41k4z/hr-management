@@ -8,11 +8,13 @@ import { FiLogOut } from "react-icons/fi";
 /* PAGES */
 import AllDepartment from "./pages/all-department";
 import Needs from "./pages/needs";
-import Resume from "./pages/resume";
+import Resume from "./pages/client-side-page/resume";
 import ListResume from "./pages/list/resume";
 import PageAddQuestion from "./pages/test/questionadd";
 import CritereSelection from "./pages/critere-selection";
-import TestResume from "./pages/client-side-page/resume";
+
+/* INTERFACES */
+import Region from "./model/RegionInterface";
 
 /* STYLES */
 import "bootstrap/dist/css/bootstrap.css";
@@ -21,6 +23,7 @@ import "./assets/css/App.css";
 /* STATIC DATA */
 import { SidePanelContent } from "./static-data/SidePanelContent";
 import Annonce from "./pages/annonce";
+import { useEffect, useState } from "react";
 
 /* COMPONENTS */
 const sidePanelHeader = (
@@ -32,6 +35,16 @@ const sidePanelHeader = (
 const department = [];
 
 function App() {
+  /* HOOKS */
+  const [allRegion, setAllRegion] = useState<Region[]>([]);
+  useEffect(() => {
+    if (allRegion.length === 0) {
+      fetch("http://localhost:8080/Region/getAll")
+        .then((res) => res.json())
+        .then((data) => setAllRegion(data));
+    }
+  }, []);
+
   return (
     <BrowserRouter>
       <div className="d-flex">
@@ -72,7 +85,10 @@ function App() {
                 />
                 <Route path="/department/needs" element={<Needs />} />
 
-                <Route path="/forms/resume" element={<Resume />} />
+                <Route
+                  path="/forms/resume"
+                  element={<Resume regions={allRegion} />}
+                />
 
                 <Route path="/list/resume" element={<ListResume />} />
 
@@ -88,7 +104,6 @@ function App() {
                 <Route path="/offre/annonce" element={<Annonce />}></Route>
 
                 {/* Client side page test */}
-                <Route path="/test/resume" element={<TestResume />}></Route>
 
                 {/* Error 404 */}
                 <Route path="*" element={<p>404 Not Found</p>} />

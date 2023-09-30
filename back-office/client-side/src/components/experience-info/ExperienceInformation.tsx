@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import Experience from "./Experience";
 
-const ExperienceInformation = () => {
+const ExperienceInformation = ({ onSave }: { onSave: () => void }) => {
   /* HOOKS SECTION */
   const [experiences, setExperiences] = useState<
     { id: number; experience: string }[]
@@ -58,7 +58,9 @@ const ExperienceInformation = () => {
           ))}
         </div>
         <div className="col-md-5 d-flex flex-column justify-content-end align-items-end">
-          <button className="btn btn-lg btn-secondary">Send information</button>
+          <button className="btn btn-lg btn-secondary" onClick={onSave}>
+            Send information
+          </button>
         </div>
       </section>
     </div>

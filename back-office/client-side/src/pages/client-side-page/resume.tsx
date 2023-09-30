@@ -1,12 +1,47 @@
 /* COMPONENTS */
-import React from "react";
+import React, { useState } from "react";
 import DegreeInformation from "../../components/degree-info/DegreeInformation";
 import ExperienceInformation from "../../components/experience-info/ExperienceInformation";
 
+/* COM */
+import Axios from "../../http-client-side/Axios";
+
 /* STYLES */
 import "../../assets/css/resume.css";
+import Region from "../../model/RegionInterface";
 
-function Resume() {
+function Resume({ regions }: { regions: Region[] }) {
+  /* HOOKS */
+  const [NIC, setNIC] = useState("");
+  const [name, setName] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [maritialStatus, setMaritialStatus] = useState("married");
+  const [gender, setGender] = useState("male");
+  const [region, setRegion] = useState("");
+  const [number, setNumber] = useState("");
+  const [email, setEmail] = useState("");
+
+  /* LOGIC */
+  const send = async () => {
+    const formData = new FormData();
+    console.log("mandeha");
+    formData.append("cin", NIC);
+    formData.append("nom", name);
+    formData.append("prenom", firstName);
+    formData.append("sm", maritialStatus);
+    formData.append("sexe", gender);
+    formData.append("adresse", region !== "" ? region : "1");
+    formData.append("tel", number);
+    formData.append("email", email);
+    await Axios.post("/Cv/save", formData)
+      .then((res) => {
+        alert("ok");
+      })
+      .catch((value) => {
+        alert(value);
+      });
+  };
+
   return (
     <>
       <h2 className="card-title ms-2" style={{ fontFamily: "Arial" }}>
@@ -19,13 +54,30 @@ function Resume() {
               <b>CV</b>
             </h3>
             <div className="mt-4 input-group justify-content-between">
+              <label htmlFor="nic">NIC</label>
+              <input
+                type="text"
+                className="border-less form-control-sm w-50"
+                name="nic"
+                placeholder="xxxxxxxxxxxxxxxxx"
+                id="nic"
+                defaultValue={NIC}
+                onChange={(e) => {
+                  setNIC(e.target.value);
+                }}
+              />
+            </div>
+            <div className="mt-3 input-group justify-content-between">
               <label htmlFor="name">Name</label>
               <input
                 type="text"
                 className="border-less form-control-sm w-50"
-                name=""
                 placeholder="xxxxxxxxxxxxxxxxx"
                 id="name"
+                defaultValue={name}
+                onChange={(e) => {
+                  setName(e.target.value);
+                }}
               />
             </div>
             <div className="mt-3 input-group justify-content-between">
@@ -33,27 +85,32 @@ function Resume() {
               <input
                 type="text"
                 className="border-less form-control-sm w-50"
-                name=""
                 placeholder="xxxxxxxxxxxxxxxxx"
                 id="firstName"
+                defaultValue={firstName}
+                onChange={(e) => {
+                  setFirstName(e.target.value);
+                }}
               />
             </div>
             <div className="mt-3 input-group justify-content-between">
               <label htmlFor="maritialStatus">M. status</label>
               <select
                 className="form-select-sm w-50"
-                name=""
                 id="maritialStatus"
+                onChange={(e) => {
+                  setMaritialStatus(e.target.value);
+                }}
               >
-                <option value="">Married</option>
-                <option value="">Single</option>
+                <option value="married">Married</option>
+                <option value="single">Single</option>
               </select>
             </div>
             <div className="mt-3 input-group justify-content-between">
               <label htmlFor="gender">Gender</label>
-              <select className="form-select-sm w-50" name="" id="gender">
-                <option value="">Male</option>
-                <option value="">Female</option>
+              <select className="form-select-sm w-50" id="gender">
+                <option value="male">Male</option>
+                <option value="female">Female</option>
               </select>
             </div>
           </div>
@@ -62,14 +119,22 @@ function Resume() {
               <b>Contact</b>
             </h3>
             <div className="mt-3 input-group justify-content-between">
-              <label htmlFor="address">Address : </label>
-              <input
-                type="text"
-                className="border-less form-control-sm w-50"
-                placeholder="xxxxxxxxxxxxxxxxx"
-                name=""
+              <label htmlFor="address">Region : </label>
+              <select
+                className="form-select-sm w-50"
                 id="address"
-              />
+                onChange={(e) => {
+                  setRegion(e.target.value);
+                }}
+              >
+                {regions.map((region) => {
+                  return (
+                    <option key={region.id} value={region.id}>
+                      {region.nom}
+                    </option>
+                  );
+                })}
+              </select>
             </div>
             <div className="mt-2 input-group justify-content-between">
               <label htmlFor="number">Number : </label>
@@ -77,7 +142,6 @@ function Resume() {
                 type="text"
                 className="border-less form-control-sm w-50"
                 placeholder="xxxxxxxxxxxxxxxxx"
-                name=""
                 id="number"
               />
             </div>
@@ -87,7 +151,6 @@ function Resume() {
                 type="text"
                 className="border-less form-control-sm w-50"
                 placeholder="xxxxxxxxxxxxxxxxx"
-                name=""
                 id="email"
               />
             </div>
@@ -95,7 +158,7 @@ function Resume() {
         </section>
         <section className="professional-info-section">
           <DegreeInformation />
-          <ExperienceInformation />
+          <ExperienceInformation onSave={send} />
         </section>
       </div>
     </>

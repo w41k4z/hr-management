@@ -9,15 +9,14 @@ import com.example.springserve.helpers.OptionalGet;
 
 @RestController
 @RequestMapping("/Region")
-public class RegionController 
-{
+@CrossOrigin(origins = "http://localhost:3000")
+public class RegionController {
     @Autowired
     private RegionService regionService;
 
     @GetMapping("/getAll")
     @ResponseBody
-    public List<Region> getAllRegion() 
-    {
+    public List<Region> getAllRegion() {
         return regionService.getAllRegions();
     }
 

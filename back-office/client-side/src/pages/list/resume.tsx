@@ -1,5 +1,5 @@
 /* COMPONENTS */
-import React from "react";
+import React, { useEffect } from "react";
 import { TableColumn } from "../../components/datatable/TableColumn";
 
 /* INTERFACES */
@@ -8,39 +8,14 @@ import BasicCRUDTable from "../../components/datatable/BasicCRUDTable";
 
 function ListResume() {
   /* HOOKS */
-  const [resumes, setResumes] = React.useState<ResumeInterface[]>([
-    { id: 0, name: "Alain Rico", email: "alainricor@gmail.com" },
-    { id: 1, name: "Jean Mirlin", email: "jeanmirlin@gmail.com" },
-  ]);
+  const [resumes, setResumes] = React.useState<ResumeInterface[]>([]);
+  useEffect(() => {
+    fetch("http://localhost:8080/Cv/getAll")
+      .then((res) => res.json())
+      .then((data) => setResumes(data));
+  }, []);
 
   /* ELEMENTS */
-  const addModalFormInputs = [
-    {
-      label: (
-        <label htmlFor="name" className="form-label">
-          Name
-        </label>
-      ),
-      input: (
-        <input
-          type="text"
-          className="form-control"
-          id="name"
-          maxLength={50}
-          required
-        />
-      ),
-    },
-    {
-      label: (
-        <label htmlFor="email" className="form-label">
-          Email
-        </label>
-      ),
-      input: <input type="text" className="form-control" id="email" required />,
-    },
-  ];
-
   const updateModalFormInputs = (row: ResumeInterface) => [
     {
       input: (
@@ -64,7 +39,23 @@ function ListResume() {
           type="text"
           className="form-control"
           id="name"
-          defaultValue={row.name}
+          defaultValue={row.nom}
+          disabled
+        />
+      ),
+    },
+    {
+      label: (
+        <label htmlFor="firstName" className="form-label">
+          First name
+        </label>
+      ),
+      input: (
+        <input
+          type="text"
+          className="form-control"
+          id="fistName"
+          defaultValue={row.prenom}
           disabled
         />
       ),
@@ -91,7 +82,12 @@ function ListResume() {
   const columns: TableColumn[] = [
     {
       name: "Name",
-      propTarget: "name",
+      propTarget: "nom",
+      format: "default",
+    },
+    {
+      name: "First name",
+      propTarget: "prenom",
       format: "default",
     },
     {
@@ -109,7 +105,7 @@ function ListResume() {
       title={"Application list"}
       hasExportPdf
       indexedRow
-      addModalFormInputs={addModalFormInputs}
+      addModalFormInputs={[]}
       onAdd={() => {}}
       onUpdate={() => {}}
       onDelete={() => {}}

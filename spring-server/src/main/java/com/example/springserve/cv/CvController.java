@@ -9,8 +9,8 @@ import com.example.springserve.helpers.OptionalGet;
 
 @RestController
 @RequestMapping("/Cv")
-public class CvController 
-{
+@CrossOrigin(origins = "http://localhost:3000")
+public class CvController {
     @Autowired
     private CvService cvService;
 
