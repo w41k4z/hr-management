@@ -1,19 +1,21 @@
-package com.example.model;
+package com.example.springserve.region;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 @Entity
-public class MyUser {
+@Table(name = "region")
+public class Region {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    public Long id;
 
-    private String username;
-    private String email;
+    @Column(name = "nom")
+    public String nom;
 
-    // Getters and setters...
 }
-

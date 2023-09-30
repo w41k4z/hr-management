@@ -20,7 +20,7 @@ import "./assets/css/App.css";
 
 /* STATIC DATA */
 import { SidePanelContent } from "./static-data/SidePanelContent";
-import Annoncce from "./pages/annonce";
+import Annonce from "./pages/annonce";
 
 /* COMPONENTS */
 const sidePanelHeader = (
@@ -85,7 +85,7 @@ function App() {
                   path="/offre/critere"
                   element={<CritereSelection />}
                 ></Route>
-                <Route path="/offre/annonce" element={<Annoncce />}></Route>
+                <Route path="/offre/annonce" element={<Annonce />}></Route>
 
                 {/* Client side page test */}
                 <Route path="/test/resume" element={<TestResume />}></Route>
