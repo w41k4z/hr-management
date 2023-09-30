@@ -19,7 +19,7 @@ interface SidePanelProps {
 }
 
 const SidePanel = ({
-  bootstrapClass = "d-flex flex-column flex-shrink-0 p-3 bg-light sticky-top",
+  bootstrapClass = "d-flex flex-column flex-shrink-0 px-2 py-3 bg-light sticky-top",
   header,
   panelItems,
   currentPageIndex = 0,
@@ -61,11 +61,11 @@ const SidePanel = ({
               >
                 <span
                   className="d-flex align-items-center"
-                  style={{ fontSize: "25px" }}
+                  style={{ fontSize: "20px" }}
                 >
                   {item.icon}
                 </span>
-                <p className="m-0 ms-4 d-none d-md-block">{item.title}</p>
+                <p className="m-0 ms-3 d-none d-md-block">{item.title}</p>
               </Link>
             </li>
           );

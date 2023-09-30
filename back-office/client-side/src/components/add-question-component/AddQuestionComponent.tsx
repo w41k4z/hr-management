@@ -61,7 +61,7 @@ const AddQuestionComponent: React.FC<AddQuestionProps> = ({
     setSelectedQuestions(updatedSelectedQuestions);
   };
 
-  const NoAction  = () => {}
+  const NoAction  = () => {};
 
   return (
     <div className="container mt-4">
