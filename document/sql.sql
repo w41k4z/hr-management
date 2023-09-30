@@ -113,7 +113,3 @@ CREATE TABLE questionannonce (
     idannonce integer REFERENCES annonce(id),
     idquestion integer REFERENCES question(id)
 );
-
-
-
-
