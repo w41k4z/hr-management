@@ -36,3 +36,4 @@ INSERT INTO region VALUES
 (20, 'Ihorombe'),
 (21, 'Menabe'),
 (22, 'Atsimo-Andrefana');
+

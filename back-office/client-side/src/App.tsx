@@ -13,6 +13,7 @@ import ListResume from "./pages/list/resume";
 import PageAddQuestion from "./pages/test/questionadd";
 import CritereSelection from "./pages/critere-selection";
 import Annonce from "./pages/annonce";
+import Services from "./pages/management/services";
 
 /* INTERFACES */
 import Region from "./model/RegionInterface";
@@ -93,6 +94,8 @@ function App() {
 
                 <Route path="/list/resume" element={<ListResume />} />
 
+                <Route path="/management/services" element={<Services />} />
+
                 <Route
                   path="/question/Test/questionaddy"
                   element={<PageAddQuestion />}
@@ -102,7 +105,7 @@ function App() {
                   path="/offre/critere"
                   element={<CritereSelection />}
                 ></Route>
-                
+
                 <Route path="/offre/annonce" element={<Annonce />}></Route>
 
                 {/* Client side page test */}

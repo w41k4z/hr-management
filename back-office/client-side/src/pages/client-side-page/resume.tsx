@@ -24,7 +24,6 @@ function Resume({ regions }: { regions: Region[] }) {
   /* LOGIC */
   const send = async () => {
     const formData = new FormData();
-    console.log("mandeha");
     formData.append("cin", NIC);
     formData.append("nom", name);
     formData.append("prenom", firstName);

@@ -24,7 +24,7 @@ export const SidePanelContent = [
     icon: <FlatColor.FcSettings />,
     path: "department/needs",
     onItemClick: () => {},
-  },  
+  },
   {
     title: "Criteria needs",
     type: "nav-item",
@@ -64,6 +64,18 @@ export const SidePanelContent = [
     onItemClick: () => {},
   },
   {
+    title: "Management",
+    type: "menu-title",
+    onItemClick: () => {},
+  },
+  {
+    title: "Services",
+    type: "nav-item",
+    path: "management/services",
+    icon: <FlatColor.FcServices />,
+    onItemClick: () => {},
+  },
+  {
     title: "Client side",
     type: "menu-title",
     onItemClick: () => {},
@@ -89,5 +101,5 @@ export const SidePanelContent = [
     path: "/question/Test/questionanswer",
     icon: <FlatColor.FcDocument />,
     onItemClick: () => {},
-  }
+  },
 ];

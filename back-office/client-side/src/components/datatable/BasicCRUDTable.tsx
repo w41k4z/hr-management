@@ -298,7 +298,7 @@ const BasicCRUDTable = ({
                 );
               })}
               <th scope="col" className="text-center">
-                <div>Actions</div> <div style={{ height: "30px" }}></div>
+                <div></div> <div style={{ height: "30px" }}></div>
               </th>
             </tr>
           </thead>
