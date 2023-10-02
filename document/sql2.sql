@@ -96,7 +96,7 @@ CREATE  TABLE "public".question (
 CREATE  TABLE "public".questionreponse ( 
 	id                   bigint DEFAULT nextval('questionreponse_id_seq'::regclass) NOT NULL  ,
 	idquestion           bigint    ,
-	idreponse            bigint    ,
+	reponse              varchar(255)    ,
 	status               text    ,
 	CONSTRAINT questionreponse_pkey PRIMARY KEY ( id ),
 	CONSTRAINT questionreponse_idquestion_fkey FOREIGN KEY ( idquestion ) REFERENCES "public".question( id )   

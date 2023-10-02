@@ -17,6 +17,4 @@ public class Question {
 
     @Column(name = "question")
     public String question;
-    
-
 }
