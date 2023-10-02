@@ -11,18 +11,25 @@ export const SidePanelContent = [
     type: "menu-title",
     onItemClick: () => {},
   },
-  {
-    title: "All department",
-    type: "nav-item",
-    icon: <FlatColor.FcDepartment />,
-    path: "department/all-department",
-    onItemClick: () => {},
-  },
+  // {
+  //   title: "All department",
+  //   type: "nav-item",
+  //   icon: <FlatColor.FcDepartment />,
+  //   path: "department/all-department",
+  //   onItemClick: () => {},
+  // },
   {
     title: "Needs",
     type: "nav-item",
     icon: <FlatColor.FcSettings />,
     path: "department/needs",
+    onItemClick: () => {},
+  },  
+  {
+    title: "Criteria needs",
+    type: "nav-item",
+    icon: <FlatColor.FcSettings />,
+    path: "/offre/critere",
     onItemClick: () => {},
   },
   {
@@ -61,11 +68,19 @@ export const SidePanelContent = [
     type: "menu-title",
     onItemClick: () => {},
   },
+  // {
+  //   title: "Form resume",
+  //   type: "nav-item",
+  //   path: "/test/resume",
+  //   icon: <FlatColor.FcKindle />,
+  //   onItemClick: () => {},
+  // },
+
   {
-    title: "Form resume",
+    title: "Annonce",
     type: "nav-item",
-    path: "/test/resume",
-    icon: <FlatColor.FcKindle />,
+    path: "/offre/annonce",
+    icon: <FlatColor.FcDocument />,
     onItemClick: () => {},
   },
   {
@@ -74,5 +89,5 @@ export const SidePanelContent = [
     path: "/question/Test/questionanswer",
     icon: <FlatColor.FcDocument />,
     onItemClick: () => {},
-  },
+  }
 ];

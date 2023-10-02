@@ -12,6 +12,7 @@ import Resume from "./pages/client-side-page/resume";
 import ListResume from "./pages/list/resume";
 import PageAddQuestion from "./pages/test/questionadd";
 import CritereSelection from "./pages/critere-selection";
+import Annonce from "./pages/annonce";
 
 /* INTERFACES */
 import Region from "./model/RegionInterface";
@@ -22,7 +23,6 @@ import "./assets/css/App.css";
 
 /* STATIC DATA */
 import { SidePanelContent } from "./static-data/SidePanelContent";
-import Annonce from "./pages/annonce";
 import { useEffect, useState } from "react";
 import PageAnswerQuestion from "./pages/test/answerquestion";
 
@@ -102,6 +102,7 @@ function App() {
                   path="/offre/critere"
                   element={<CritereSelection />}
                 ></Route>
+                
                 <Route path="/offre/annonce" element={<Annonce />}></Route>
 
                 {/* Client side page test */}

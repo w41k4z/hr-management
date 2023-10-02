@@ -8,11 +8,11 @@ function Needs() {
         <div className="row g-3">
           <label htmlFor="service">Service</label>
           <select id="service" className="form-select w-50" required>
-            <option value="">A</option>
-            <option value="">B</option>
-            <option value="">C</option>
-            <option value="">D</option>
-            <option value="">E</option>
+            <option value="Marketing">Marketing</option>
+            <option value="Sales">Sales</option>
+            <option value="Human Resources">Human Resources</option>
+            <option value="Finance">Finance</option>
+            <option value="Information Technology">Information Technology</option>
           </select>
         </div>
         <div className="row mt-5">

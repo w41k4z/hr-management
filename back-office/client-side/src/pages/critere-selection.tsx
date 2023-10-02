@@ -41,7 +41,7 @@ function MyFormComponent({ index, onDelete }: { index: number; onDelete: () => v
                         </select>
                     </div>
                 </div>
-                <div className="col-md-3">
+                <div className="col-md-2">
                     <div className="form-group">
                         <label htmlFor={coeffId}>Coeff</label>
                         <input
@@ -51,7 +51,7 @@ function MyFormComponent({ index, onDelete }: { index: number; onDelete: () => v
                         />
                     </div>
                 </div>
-                <div className="col-md-1">
+                <div className="col-md-2">
                     <div className="form-group">
                         <label></label>
                         <button  className="form-control" id="del" onClick={onDelete}>Delete</button>
