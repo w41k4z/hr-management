@@ -14,9 +14,14 @@ import PageAddQuestion from "./pages/test/questionadd";
 import CritereSelection from "./pages/critere-selection";
 import Annonce from "./pages/annonce";
 import Services from "./pages/management/services";
+import Sectors from "./pages/management/sectors";
+import Grades from "./pages/management/grades";
+import Positions from "./pages/management/positions";
+import Regions from "./pages/management/regions";
 
 /* INTERFACES */
 import Region from "./model/RegionInterface";
+import Service from "./model/ServiceInterface";
 
 /* STYLES */
 import "bootstrap/dist/css/bootstrap.css";
@@ -34,16 +39,19 @@ const sidePanelHeader = (
     <h3 className="d-none d-md-block">Management</h3>
   </div>
 );
-const department = [];
 
 function App() {
   /* HOOKS */
   const [allRegion, setAllRegion] = useState<Region[]>([]);
+  const [allService, setAllService] = useState<Service[]>([]);
   useEffect(() => {
     if (allRegion.length === 0) {
       fetch("http://localhost:8080/Region/getAll")
         .then((res) => res.json())
         .then((data) => setAllRegion(data));
+      fetch("http://localhost:8080/Service/getAll")
+        .then((res) => res.json())
+        .then((data) => setAllService(data));
     }
   }, []);
 
@@ -95,6 +103,10 @@ function App() {
                 <Route path="/list/resume" element={<ListResume />} />
 
                 <Route path="/management/services" element={<Services />} />
+                <Route path="/management/sectors" element={<Sectors />} />
+                <Route path="/management/grades" element={<Grades />} />
+                <Route path="/management/positions" element={<Positions />} />
+                <Route path="/management/regions" element={<Regions />} />
 
                 <Route
                   path="/question/Test/questionaddy"

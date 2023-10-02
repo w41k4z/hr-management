@@ -9,8 +9,8 @@ import com.example.springserve.helpers.OptionalGet;
 
 @RestController
 @RequestMapping("/Filiere")
-public class FiliereController 
-{
+@CrossOrigin(origins = "http://localhost:3000")
+public class FiliereController {
     @Autowired
     private FiliereService filiereService;
 
