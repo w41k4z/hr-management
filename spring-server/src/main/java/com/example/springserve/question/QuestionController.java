@@ -9,6 +9,7 @@ import com.example.springserve.helpers.OptionalGet;
 
 @RestController
 @RequestMapping("/Question")
+@CrossOrigin("http://localhost:3000")
 public class QuestionController 
 {
     @Autowired
@@ -31,7 +32,14 @@ public class QuestionController
     }
 
     @DeleteMapping("/deleteById/{id}")
+    @ResponseBody
     public void deleteQuestion(@PathVariable Long id) {
         questionService.deleteQuestion(id);
+    }
+
+    @GetMapping("/getLastQuestionByPostId/{idposte}")
+    @ResponseBody
+    public List<Question> getLastQuestionByPostId(@PathVariable Long idposte) {
+        return questionService.getQuestionsByPosteId(idposte);
     }
 }
