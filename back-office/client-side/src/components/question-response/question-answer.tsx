@@ -11,7 +11,7 @@ interface ToPage {
 const QuestionAnswer : React.FC<ToPage> = ({questions , handleAnswerSelect}) => {
 
     return (
-        <div className="container mt-4" style={{maxWidth : '70%'}}>
+        <div className="container mt-4" style={{maxWidth : '90%'}}>
             <h2 className="questionnaire-title">Veuillez cochez le(s) reponses</h2>
 
                 <div className="container mt-5">

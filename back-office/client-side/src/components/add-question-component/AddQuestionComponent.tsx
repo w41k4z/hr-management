@@ -92,7 +92,7 @@ const AddQuestionComponent: React.FC<AddQuestionProps> = ({
         <br />
         
         <div className='row'>
-          <div className='col-md-1'>
+          <div className='col-md-3'>
             <h6>Annonce</h6>
           </div>
           <div>

@@ -24,6 +24,7 @@ import "./assets/css/App.css";
 import { SidePanelContent } from "./static-data/SidePanelContent";
 import Annonce from "./pages/annonce";
 import { useEffect, useState } from "react";
+import PageAnswerQuestion from "./pages/test/answerquestion";
 
 /* COMPONENTS */
 const sidePanelHeader = (
@@ -104,6 +105,10 @@ function App() {
                 <Route path="/offre/annonce" element={<Annonce />}></Route>
 
                 {/* Client side page test */}
+                <Route
+                  path="/question/Test/questionanswer"
+                  element={<PageAnswerQuestion />}
+                />
 
                 {/* Error 404 */}
                 <Route path="*" element={<p>404 Not Found</p>} />
