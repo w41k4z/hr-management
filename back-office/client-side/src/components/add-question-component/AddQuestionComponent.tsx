@@ -1,7 +1,10 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import QuestionComponent from './QuestionComponent';
 import {FaPlus} from 'react-icons/fa';
 import QuestionSelection from './QuestionSelection';
+import Poste from '../../model/PosteInterface';
+import { V_besoinannonce } from '../../model/V_besoinannonce';
+import { Question } from '../../model/QuestionInterface';
 
 interface AddQuestionProps {
   questions: { text: string; answers: { text: string; isCorrect: boolean }[] }[];
@@ -15,28 +18,6 @@ interface AddQuestionProps {
   onSubmitQuestion: () => void;
 }
 
-const testData = {
-  annonceOptions: [
-    { value: 'ing1', label: 'Ingénieur logiciel chez XYZ Corp' },
-    { value: 'dev2', label: 'Développeur Full Stack chez ABC Company' },
-    { value: 'pm3', label: 'Chef de projet IT chez DEF Ltd.' },
-  ],
-  titrePosteOptions: [
-    { value: 'dev1', label: 'Développeur Front-end' },
-    { value: 'eng2', label: 'Ingénieur de test logiciel' },
-    { value: 'mgr3', label: 'Gestionnaire de projet technique' },
-  ],
-};
-
-
-const alreadyUsedQuestions = [
-  'Parlez-moi de vous et de votre expérience professionnelle.',
-  'Quels sont vos points forts et vos points faibles ?',
-  'Pouvez-vous me donner un exemple de situation où vous avez résolu un problème avec succès ?',
-  'Comment travaillez-vous en équipe ?',
-  'Où vous voyez-vous dans cinq ans ?',
-];
-
 const AddQuestionComponent: React.FC<AddQuestionProps> = ({
   questions,
   onQuestionChange,
@@ -49,6 +30,8 @@ const AddQuestionComponent: React.FC<AddQuestionProps> = ({
   onSubmitQuestion,
 }) => {
   const [selectedQuestions, setSelectedQuestions] = useState<string[]>([]);
+  const [selectedPoste, setSelectedPoste] = useState(String);
+  const [canChangeQuestion , setCanChangeQuestion] = useState(Boolean);
 
   const handleQuestionSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
     const question = e.target.value;
@@ -61,6 +44,41 @@ const AddQuestionComponent: React.FC<AddQuestionProps> = ({
     setSelectedQuestions(updatedSelectedQuestions);
   };
 
+  const handleChangeSelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const idposte = e.target.value;
+    setSelectedPoste(idposte);
+    setCanChangeQuestion(true);
+  }
+
+  const [allPostes, setAllPoste] = useState<Poste[]>([]);
+  useEffect(() => {
+    if (allPostes.length === 0) {
+      fetch("http://localhost:8080/Poste/getAll")
+        .then((res) => res.json())
+        .then((data) => setAllPoste(data));
+    }
+  }, [allPostes]);
+
+  const [all_V_besoinannonce , setBesoinAnnonce] = useState<V_besoinannonce[]>([]);
+  useEffect(() => {
+    if(all_V_besoinannonce.length === 0){
+      fetch("http://localhost:8080/V_besoinannonce/getAll")
+        .then((res) => res.json())
+        .then((data) => setBesoinAnnonce(data));
+    }
+  } , [all_V_besoinannonce]);
+
+  const [alreadyUsedQuestions , setAlreadyUsedQuestion] = useState<Question[]>([]);
+  useEffect(() => {
+    if(selectedPoste.length === 0)setSelectedPoste("0");
+    if(canChangeQuestion === true){
+      setCanChangeQuestion(false);
+      fetch(`http://localhost:8080/Question/getLastQuestionByPostId/${selectedPoste}`)
+        .then((res) => res.json())
+        .then((data) => setAlreadyUsedQuestion(data));
+    }
+  } , [canChangeQuestion, selectedPoste, alreadyUsedQuestions]);
+
   const NoAction  = () => {};
 
   return (
@@ -72,15 +90,17 @@ const AddQuestionComponent: React.FC<AddQuestionProps> = ({
           <h6>Titre du poste</h6>
           <div className='row'>
             <div className="col-md-6">
-              <select className="form-select" aria-label="Sélectionnez un titre de poste">
+              <select className="form-select" onChange={handleChangeSelect} aria-label="Sélectionnez un titre de poste">
                 <option value="" disabled selected hidden>
                   Sélectionnez un titre de poste
                 </option>
-                {testData.titrePosteOptions.map((option) => (
-                  <option key={option.value} value={option.value}>
-                    {option.label}
-                  </option>
-                ))}
+                {
+                  allPostes.map((option) => (
+                    <option key={option.id} value={option.id}>
+                      {option.nom}
+                    </option>
+                  ))
+                }
               </select>
             </div>
             <div className="col-md-4">
@@ -100,9 +120,9 @@ const AddQuestionComponent: React.FC<AddQuestionProps> = ({
               <option value="" disabled selected hidden>
                 Sélectionnez une annonce
               </option>
-              {testData.annonceOptions.map((option) => (
-                <option key={option.value} value={option.value}>
-                  {option.label}
+              {all_V_besoinannonce.map((option) => (
+                <option key={option.idannonce} value={option.idannonce}>
+                  {option.description}
                 </option>
               ))}
             </select>
@@ -113,15 +133,17 @@ const AddQuestionComponent: React.FC<AddQuestionProps> = ({
         
         <div className="row mt-4 similar-question">
           <h6>Question similaire</h6>
-          {alreadyUsedQuestions.map((question, index) => (
-            <div className="col-md-6" key={index}>
-              <QuestionSelection
-                question={question}
-                onSelect={handleQuestionSelect}
-                selected={selectedQuestions.includes(question)}
-              />
-            </div>
-          ))}
+          <div id="already-in-use">
+            {alreadyUsedQuestions.map((usedquestion, index) => (
+              <div className="col-md-6" key={index}>
+                <QuestionSelection
+                  question={usedquestion.question}
+                  onSelect={handleQuestionSelect}
+                  selected={selectedQuestions.includes(usedquestion.question)}
+                />
+              </div>
+            ))}
+          </div>
         </div>
       
       </div>

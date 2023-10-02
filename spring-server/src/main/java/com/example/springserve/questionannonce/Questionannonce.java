@@ -16,9 +16,9 @@ public class Questionannonce {
     private Long id;
     
     @Column(name = "idannonce")
-    public String idannonce;
+    public Long idannonce;
     @Column(name = "idquestion")
-    public String idquestion;
+    public Long idquestion;
     
 
 }
