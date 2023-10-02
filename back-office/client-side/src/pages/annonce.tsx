@@ -2,7 +2,6 @@ import React from "react"
 import "../assets/css/annonce.css"
 
 import { Container, Row, Col } from 'react-bootstrap';
-import exp from "constants";
 
 interface JobOfferProps {
 	nomEntreprise: string;
