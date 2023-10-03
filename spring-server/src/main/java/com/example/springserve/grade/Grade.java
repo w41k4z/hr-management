@@ -17,5 +17,4 @@ public class Grade {
 
     @Column(name = "nom")
     public String nom;
-
 }

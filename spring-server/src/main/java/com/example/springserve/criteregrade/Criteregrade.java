@@ -19,7 +19,7 @@ public class Criteregrade {
     public Long idcritereselection;
 
     @Column(name = "idfiliere")
-    public Long idfiliaire;
+    public Long idfiliere;
 
     @Column(name = "idgrade")
     public Long idgrade;

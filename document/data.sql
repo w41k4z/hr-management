@@ -134,3 +134,22 @@ VALUES (4, 16), (4, 17), (4, 18), (4, 19), (4, 20);
 -- Test Data 5
 INSERT INTO questionannonce (idannonce, idquestion)
 VALUES (5, 21), (5, 22), (5, 23), (5, 24), (5, 25);
+INSERT INTO grade VALUES
+(1,'BACC'),
+(2,'DTS'),
+(3,'LICENSE'),
+(4,'MASTER'),
+(5,'DOCTORAT');
+
+
+INSERT INTO filiere VALUES
+(1,''),
+(2,'Info'),
+(3,'Compta'),
+(4,'Managment');
+
+
+INSERT INTO poste VALUES
+(1,'P1'),
+(2,'P2'),
+(3,'P3');
