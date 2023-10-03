@@ -25,13 +25,13 @@ export const SidePanelContent = [
     path: "department/needs",
     onItemClick: () => {},
   },
-  {
-    title: "Criteria needs",
-    type: "nav-item",
-    icon: <FlatColor.FcSettings />,
-    path: "/offre/critere",
-    onItemClick: () => {},
-  },
+  // {
+  //   title: "Criteria needs",
+  //   type: "nav-item",
+  //   icon: <FlatColor.FcSettings />,
+  //   path: "/offre/critere",
+  //   onItemClick: () => {},
+  // },
   {
     title: "Forms",
     type: "menu-title",
@@ -116,13 +116,13 @@ export const SidePanelContent = [
   //   onItemClick: () => {},
   // },
 
-  {
-    title: "Annonce",
-    type: "nav-item",
-    path: "/offre/annonce",
-    icon: <FlatColor.FcDocument />,
-    onItemClick: () => {},
-  },
+  // {
+  //   title: "Annonce",
+  //   type: "nav-item",
+  //   path: "/offre/annonce",
+  //   icon: <FlatColor.FcDocument />,
+  //   onItemClick: () => {},
+  // },
   {
     title: "QCM",
     type: "nav-item",
