@@ -1,4 +1,4 @@
-package com.example.springserve.questionannonce;
+package com.example.springserve.grade;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -8,17 +8,14 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "questionannonce")
-public class Questionannonce {
+@Table(name = "grade")
+public class Grade {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    
-    @Column(name = "idannonce")
-    public Long idannonce;
-    @Column(name = "idquestion")
-    public Long idquestion;
-    
+    public Long id;
 
+    @Column(name = "nom")
+    public String nom;
+    
 }

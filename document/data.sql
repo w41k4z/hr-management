@@ -36,3 +36,24 @@ INSERT INTO region VALUES
 (20, 'Ihorombe'),
 (21, 'Menabe'),
 (22, 'Atsimo-Andrefana');
+
+
+INSERT INTO grade VALUES
+(1,'BACC'),
+(2,'DTS'),
+(3,'LICENSE'),
+(4,'MASTER'),
+(5,'DOCTORAT');
+
+
+INSERT INTO filiere VALUES
+(1,''),
+(2,'Info'),
+(3,'Compta'),
+(4,'Managment');
+
+
+INSERT INTO poste VALUES
+(1,'P1'),
+(2,'P2'),
+(3,'P3');
