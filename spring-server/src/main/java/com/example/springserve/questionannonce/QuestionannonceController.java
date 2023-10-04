@@ -9,6 +9,7 @@ import com.example.springserve.helpers.OptionalGet;
 
 @RestController
 @RequestMapping("/Questionannonce")
+@CrossOrigin("http://localhost:3000")
 public class QuestionannonceController 
 {
     @Autowired

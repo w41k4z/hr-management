@@ -4,10 +4,13 @@ import {FaPlus} from 'react-icons/fa';
 import QuestionSelection from './QuestionSelection';
 import Poste from '../../model/PosteInterface';
 import { V_besoinannonce } from '../../model/V_besoinannonce';
-import { Question } from '../../model/QuestionInterface';
+import LastQuestion from '../../datamanipulator/lastquestion';
+import { NewQuestionAnnonce } from '../../model/UtilInterface';
 
 interface AddQuestionProps {
-  questions: { text: string; answers: { text: string; isCorrect: boolean }[] }[];
+  questions: NewQuestionAnnonce[];
+  handleIdAnnonce: (e: React.ChangeEvent<HTMLSelectElement>) => void;
+  handleLastQuestionSelected: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onQuestionChange: (e: React.ChangeEvent<HTMLInputElement>, questionIndex: number) => void;
   onAnswerChange: (e: React.ChangeEvent<HTMLInputElement>,questionIndex: number, answerIndex: number) => void;
   onCorrectAnswerChange: (questionIndex: number, answerIndex: number) => void;
@@ -20,6 +23,8 @@ interface AddQuestionProps {
 
 const AddQuestionComponent: React.FC<AddQuestionProps> = ({
   questions,
+  handleIdAnnonce,
+  handleLastQuestionSelected,
   onQuestionChange,
   onAnswerChange,
   onCorrectAnswerChange,
@@ -29,20 +34,9 @@ const AddQuestionComponent: React.FC<AddQuestionProps> = ({
   onAddQuestion,
   onSubmitQuestion,
 }) => {
-  const [selectedQuestions, setSelectedQuestions] = useState<string[]>([]);
   const [selectedPoste, setSelectedPoste] = useState(String);
   const [canChangeQuestion , setCanChangeQuestion] = useState(Boolean);
-
-  const handleQuestionSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const question = e.target.value;
-    const updatedSelectedQuestions = [...selectedQuestions];
-    if (updatedSelectedQuestions.includes(question)) {
-      updatedSelectedQuestions.splice(updatedSelectedQuestions.indexOf(question), 1);
-    } else {
-      updatedSelectedQuestions.push(question);
-    }
-    setSelectedQuestions(updatedSelectedQuestions);
-  };
+  const [isPageLoad , setIsPageLoad] = useState(Boolean);
 
   const handleChangeSelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const idposte = e.target.value;
@@ -52,23 +46,24 @@ const AddQuestionComponent: React.FC<AddQuestionProps> = ({
 
   const [allPostes, setAllPoste] = useState<Poste[]>([]);
   useEffect(() => {
-    if (allPostes.length === 0) {
+    if (isPageLoad === false) {
       fetch("http://localhost:8080/Poste/getAll")
         .then((res) => res.json())
         .then((data) => setAllPoste(data));
     }
-  }, [allPostes]);
+  }, [isPageLoad, allPostes]);
 
   const [all_V_besoinannonce , setBesoinAnnonce] = useState<V_besoinannonce[]>([]);
   useEffect(() => {
-    if(all_V_besoinannonce.length === 0){
+    if(isPageLoad === false){
+      setIsPageLoad(true);
       fetch("http://localhost:8080/V_besoinannonce/getAll")
         .then((res) => res.json())
         .then((data) => setBesoinAnnonce(data));
     }
-  } , [all_V_besoinannonce]);
+  } , [isPageLoad, all_V_besoinannonce]);
 
-  const [alreadyUsedQuestions , setAlreadyUsedQuestion] = useState<Question[]>([]);
+  const [alreadyUsedQuestions , setAlreadyUsedQuestion] = useState<LastQuestion[]>([]);
   useEffect(() => {
     if(selectedPoste.length === 0)setSelectedPoste("0");
     if(canChangeQuestion === true){
@@ -91,7 +86,7 @@ const AddQuestionComponent: React.FC<AddQuestionProps> = ({
           <div className='row'>
             <div className="col-md-6">
               <select className="form-select" onChange={handleChangeSelect} aria-label="Sélectionnez un titre de poste">
-                <option value="" disabled selected hidden>
+                <option value="" disabled selected>
                   Sélectionnez un titre de poste
                 </option>
                 {
@@ -116,8 +111,8 @@ const AddQuestionComponent: React.FC<AddQuestionProps> = ({
             <h6>Annonce</h6>
           </div>
           <div>
-            <select className="form-select" aria-label="Sélectionnez une annonce">
-              <option value="" disabled selected hidden>
+            <select className="form-select" onChange={handleIdAnnonce} aria-label="Sélectionnez une annonce" >
+              <option value="" disabled selected>
                 Sélectionnez une annonce
               </option>
               {all_V_besoinannonce.map((option) => (
@@ -135,11 +130,10 @@ const AddQuestionComponent: React.FC<AddQuestionProps> = ({
           <h6>Question similaire</h6>
           <div id="already-in-use">
             {alreadyUsedQuestions.map((usedquestion, index) => (
-              <div className="col-md-6" key={index}>
+              <div className="col-md-11 offset-md-1 mt-3" key={index}>
                 <QuestionSelection
-                  question={usedquestion.question}
-                  onSelect={handleQuestionSelect}
-                  selected={selectedQuestions.includes(usedquestion.question)}
+                  lastquestion={usedquestion}
+                  onSelect={handleLastQuestionSelected}
                 />
               </div>
             ))}

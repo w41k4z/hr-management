@@ -1,5 +1,7 @@
 package com.example.springserve.questionannonce;
 
+import java.sql.Date;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -13,12 +15,14 @@ public class Questionannonce {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    public Long id;
     
     @Column(name = "idannonce")
     public Long idannonce;
+
     @Column(name = "idquestion")
     public Long idquestion;
-    
 
+    @Column(name = "date_question_annonce", columnDefinition = "DATE DEFAULT CURRENT_DATE")
+    public Date date_question_annonce;
 }

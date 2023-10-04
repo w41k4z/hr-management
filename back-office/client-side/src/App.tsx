@@ -33,7 +33,6 @@ const sidePanelHeader = (
     <h3 className="d-none d-md-block">Management</h3>
   </div>
 );
-const department = [];
 
 function App() {
   /* HOOKS */
