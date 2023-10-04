@@ -1,18 +1,14 @@
 import React, { useState } from 'react';
 import AddQuestionComponent from '../../components/add-question-component/AddQuestionComponent';
+import axiosInstance from '../../http-client-side/Axios';
+import { Type_questionannonce } from '../../components/question-response/TypeUtils';
+import { Question } from '../../model/QuestionInterface';
+import { NewQuestionAnnonce } from '../../model/UtilInterface';
 
-interface Answer {
-  text: string;
-  isCorrect: boolean;
-}
-
-interface Question {
-  text: string;
-  answers: Answer[];
-}
 
 const PageAddQuestion: React.FC = () => {
-  const [questions, setQuestions] = useState<Question[]>([]);
+
+  const [questions, setQuestions] = useState<NewQuestionAnnonce[]>([]);
 
   const addAnswer = (questionIndex: number) => {
     const updatedQuestions = [...questions];
@@ -21,12 +17,12 @@ const PageAddQuestion: React.FC = () => {
   };
 
   const addQuestion = () => {
-    setQuestions([...questions, { text: "", answers: [] }]); // Ajoute une question vide à la liste des questions
+    setQuestions([...questions, { question: {id: 0 ,question:""}, answers: [] }]); // Ajoute une question vide à la liste des questions
   };
 
   const handleQuestionChange = (e: React.ChangeEvent<HTMLInputElement>, questionIndex: number) => {
     const updatedQuestions = [...questions];
-    updatedQuestions[questionIndex].text = e.target.value;
+    updatedQuestions[questionIndex].question.question = e.target.value;
     setQuestions(updatedQuestions);
   };
 
@@ -62,22 +58,78 @@ const PageAddQuestion: React.FC = () => {
     setQuestions(updatedQuestions);
   };
 
-  const submitQuestion = () => {
+  const [selectedLastQuestions, setSelectedLastQuestions] = useState<number[]>([]);
+  const handleLastQuestionSelected_ = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const idquestion = e.target.value;
+    const updatedSelectedLastQuestions = [...selectedLastQuestions];
+    if (updatedSelectedLastQuestions.includes( parseInt(idquestion) )) {
+      updatedSelectedLastQuestions.splice(updatedSelectedLastQuestions.indexOf(parseInt(idquestion)));
+    } else {
+      updatedSelectedLastQuestions.push(parseInt(idquestion));
+    }
+    setSelectedLastQuestions(updatedSelectedLastQuestions);
+  };
+
+  const [idAnnonce , setIdAnnonce ] = useState<number>();
+  const handleIdAnnonce_ = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setIdAnnonce(parseInt(e.target.value));
+  }
+
+  const addNewQuestion = async (p_question: Question): Promise<Question> => {
+    try{
+      const { data } = await axiosInstance.post("/Question/save", { question : p_question.question });
+      return data as Question;
+    }
+    catch(error){
+      console.error('Error sending data:', error);
+      throw error;
+    }
+  }
+
+  const addQuestionAnnonce = async (data: {idannonce:number , idquestion:number }) => {
+    try{
+      await axiosInstance.post("/Questionannonce/save", data);
+    }
+    catch(error){
+      console.error('Error sending data:', error);
+      throw error;
+    }
+  }
+
+  const addNewQuestionReponse = async (p_questionsannonce: NewQuestionAnnonce[], idannonce_: number) => {
+    try{
+      for (const questionreponse of p_questionsannonce) {
+        const newQuestion = await addNewQuestion(questionreponse.question);
+
+        for(const answer of questionreponse.answers){
+          const newQuestionAnnonce = {question: newQuestion , reponse : answer.text , status : answer.isCorrect} as Type_questionannonce;
+          await axiosInstance.post("/Questionreponse/save", newQuestionAnnonce);
+        }
+
+        await addQuestionAnnonce({idannonce : idannonce_ , idquestion : newQuestion.id });
+      }
+    }
+    catch(error){
+      console.error('Error sending data:', error);
+    }
+  }
+
+  const submitQuestion = async () => {
+    console.log("IdAnnonce:", idAnnonce);
     console.log("Questions:", questions);
-
-    const data = {
-      questions: questions,
-      jobTitle: "Repair Technician",
-      employmentType: "Full-time",
-      required: true
-    };
-
-    console.log("Data:", data);
+    console.log("Last questions : ", selectedLastQuestions);
+    try {
+      if(idAnnonce)await addNewQuestionReponse(questions , idAnnonce);
+    } catch (error) {
+      console.error('Error sending data:', error);
+    }
   };
 
   return (
     <AddQuestionComponent
       questions={questions}
+      handleIdAnnonce={handleIdAnnonce_}
+      handleLastQuestionSelected={handleLastQuestionSelected_}
       onQuestionChange={handleQuestionChange}
       onAnswerChange={handleAnswerChange}
       onCorrectAnswerChange={handleCorrectAnswerChange}

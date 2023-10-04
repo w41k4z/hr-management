@@ -22,7 +22,7 @@ public class Questionreponse {
     @ManyToOne
     @JoinColumn(name = "idquestion")
     public Question question;
-
+    
     @Column(name = "reponse")
     public String reponse;
 

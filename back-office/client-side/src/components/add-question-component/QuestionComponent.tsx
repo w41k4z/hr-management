@@ -1,9 +1,10 @@
 import React from 'react';
 import { FaPlus, FaTimes } from 'react-icons/fa';
 import AnswerComponent from './AnswerComponent';
+import { NewQuestionAnnonce } from '../../model/UtilInterface';
 
 interface QuestionProps {
-  question: { text: string; answers: { text: string; isCorrect: boolean }[] };
+  question: NewQuestionAnnonce;
   onQuestionChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onAnswerChange: (e: React.ChangeEvent<HTMLInputElement>, answerIndex: number) => void;
   onCorrectAnswerChange: (answerIndex: number) => void;
@@ -26,7 +27,7 @@ const QuestionComponent: React.FC<QuestionProps> = ({
     <div className='row'>
         <div className='col-md-3'>
             <h6>Question</h6>
-            <input type="text" value={question.text} onChange={onQuestionChange} className="form-control" />
+            <input type="text" value={question.question.question} onChange={onQuestionChange} className="form-control" />
         </div>
         <div className='col-md-5'>
             <h6>Réponse(s)</h6>
