@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import AddQuestionComponent from '../../components/add-question-component/AddQuestionComponent';
 import axiosInstance from '../../http-client-side/Axios';
-import { Type_questionannonce } from '../../components/question-response/TypeUtils';
+import { Type_questionannonce } from '../../components/answer-question-component/TypeUtils';
 import { Question } from '../../model/QuestionInterface';
 import { NewQuestionAnnonce } from '../../model/UtilInterface';
 

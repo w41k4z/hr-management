@@ -35,4 +35,9 @@ public class QuestionreponseController
     public void deleteQuestionreponse(@PathVariable Long id) {
         questionreponseService.deleteQuestionreponse(id);
     }
+
+    @GetMapping("/getByIdQuestion/{idQuestion}")
+    public List<Questionreponse> getQuestionreponseByIdQuestion(@PathVariable Long idQuestion) {
+        return questionreponseService.getQuestionreponseByIdQuestion(idQuestion);
+    }
 }

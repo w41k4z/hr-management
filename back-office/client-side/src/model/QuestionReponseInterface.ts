@@ -4,5 +4,6 @@ export interface QuestionReponse{
     id         : number;
     question   : Question;
     reponse    : string;
-    status     : string;
+    status     : boolean;
+    change     : boolean;
 }

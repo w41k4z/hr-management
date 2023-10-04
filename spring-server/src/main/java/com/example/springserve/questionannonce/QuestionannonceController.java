@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import com.example.springserve.helpers.OptionalGet;
+import com.example.springserve.question.Question;
 
 @RestController
 @RequestMapping("/Questionannonce")
@@ -34,5 +35,10 @@ public class QuestionannonceController
     @DeleteMapping("/deleteById/{id}")
     public void deleteQuestionannonce(@PathVariable Long id) {
         questionannonceService.deleteQuestionannonce(id);
+    }
+
+    @GetMapping("/getQuestionsByIdAnnonce/{idAnnonce}")
+    public List<Question> getQuestionsByIdAnnonce(@PathVariable Long idAnnonce) {
+        return questionannonceService.getQuestionsByIdAnnonce(idAnnonce);
     }
 }
