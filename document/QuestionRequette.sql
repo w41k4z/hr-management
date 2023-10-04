@@ -19,3 +19,13 @@ SELECT Q.id AS idquestion, Q.question FROM questionannonce QA
 						WHERE idposte={--------- idposte ---------------------}
 						ORDER BY datebesoinservice DESC 
 						LIMIT 1));
+-------------------------------------------------------------------------------------------------------
+
+-- les questions correspondant a une annonce			
+SELECT Q.id , Q.question FROM questionannonce QA
+	JOIN question Q ON Q.id=QA.idquestion
+	WHERE idannonce = {--------- idannonce ---------------------}
+	AND date_question_annonce = ( SELECT  date_question_annonce FROM questionannonce 
+						WHERE idannonce = {--------- idannonce ---------------------} 
+						ORDER BY date_question_annonce DESC LIMIT 1)
+						

@@ -55,10 +55,7 @@ public class QuestionService {
             " JOIN Question Q ON Q.id=QA.idquestion " + 
             " WHERE idannonce = (" + subQuery + ") ");
         subQuery = correpondant_question.toString();
-
-        Query subQuery_ = em.createQuery(subQuery);
-        subQuery_.setParameter("idPoste", idPoste);
-
+        
         Query query = em.createQuery(subQuery);
         query.setParameter("idPoste", idPoste);
 

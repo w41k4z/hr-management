@@ -2,13 +2,14 @@ package com.example.springserve.view;
 
 import java.sql.Date;
 
+import org.hibernate.annotations.Immutable;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
-import jakarta.persistence.Table;
 
-@Entity
-@Table(name = "V_besoinannonce")
+@Entity(name = "V_besoinannonce")
+@Immutable
 public class V_besoinannonce {
 
     @Id

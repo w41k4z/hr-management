@@ -21,12 +21,16 @@ public class QuestionreponseService {
         return questionreponseRepository.save(questionreponse);
     }
 
-    public Optional<Questionreponse> getQuestionreponseById(Long id) {
-        Optional<Questionreponse> res = questionreponseRepository.findById(id);
+    public Optional<Questionreponse> getQuestionreponseById(Long idQuestion) {
+        Optional<Questionreponse> res = questionreponseRepository.findById(idQuestion);
         return res;
     }
 
     public void deleteQuestionreponse(Long id) {
         questionreponseRepository.deleteById(id);
+    }
+
+    public List<Questionreponse> getQuestionreponseByIdQuestion(Long idQuestion) {
+        return questionreponseRepository.findByQuestion_Id(idQuestion);
     }
 }

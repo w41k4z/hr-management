@@ -20,13 +20,13 @@ public class Questionreponse {
     public Long id;
 
     @ManyToOne
-    @JoinColumn(name = "idquestion")
+    @JoinColumn(name = "idquestion", nullable = false)
     public Question question;
     
-    @Column(name = "reponse")
+    @Column(name = "reponse", nullable = false)
     public String reponse;
 
-    @Column(name = "status")
+    @Column(name = "status", nullable = false)
     public String status;
     
 }

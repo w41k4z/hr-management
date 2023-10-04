@@ -7,6 +7,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
 
 @Entity
@@ -17,12 +18,19 @@ public class Questionannonce {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long id;
     
-    @Column(name = "idannonce")
+    @Column(name = "idannonce", nullable = false)
     public Long idannonce;
 
-    @Column(name = "idquestion")
+    @Column(name = "idquestion", nullable = false)
     public Long idquestion;
 
-    @Column(name = "date_question_annonce", columnDefinition = "DATE DEFAULT CURRENT_DATE")
+    @Column(name = "date_question_annonce",nullable = false)
     public Date date_question_annonce;
+
+    @PrePersist
+    public void prePersist() {
+        if(date_question_annonce == null) date_question_annonce = new Date(new java.util.Date().getTime());
+    }
+    //This method is not depend on database type/version underneath the Hibernate. 
+    // Default value is set before persisting the mapping object.
 }
