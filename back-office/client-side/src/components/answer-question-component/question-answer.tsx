@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import AnswerSelection from "./AnswerSelection";
-import './stylequestionresponse.css';
 import { V_besoinannonce } from "../../model/V_besoinannonce";
 import { Question } from "../../model/QuestionInterface";
 import { QuestionReponse } from "../../model/QuestionReponseInterface";
 import { ReponseTest } from "../../model/ResponseTest";
 import { Cv } from "../../model/CvInterface";
 import axiosInstance from "../../http-client-side/Axios";
+import { h6, myAnswer, questionnaireTitle } from "../../assets/css/rounded-circle-adding";
 
 
 const QuestionAnswer = () => {
@@ -133,10 +133,10 @@ const QuestionAnswer = () => {
     
     return (
         <div className="container mt-4" style={{maxWidth : '90%'}}>
-            <h2 className="questionnaire-title">Veuillez décochez le(s) fausses reponses</h2>
+            <h2 style={questionnaireTitle}>Veuillez décochez le(s) fausses reponses</h2>
                 
             <section className="mt-4">
-                <h6>Cv postulé</h6>
+                <h6 style={h6}>Cv postulé</h6>
                 <div className='row'>
                     <div className="col-md-6">
                         <select defaultValue={0} onChange={handleSelectedCv} className="form-select" aria-label="Sélectionnez le cv postulé">
@@ -174,7 +174,7 @@ const QuestionAnswer = () => {
                 {questionsWithAnswer.map((questionblock, index) => (
                     <React.Fragment key={index}>
                     <h6 style={{marginBottom : '3%'}}>{index + 1} - {questionblock.Oquestion.question}</h6>
-                    <div className="my-answer">
+                    <div style={myAnswer}>
                         {questionblock.questionreponses.map((questionreponse, answerIndex) => (
                             <AnswerSelection
                                 key={answerIndex}
