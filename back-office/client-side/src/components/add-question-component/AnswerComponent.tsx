@@ -1,5 +1,5 @@
-import React from "react";
-import "./stylequestion.css";
+import React, { useEffect, useState } from "react";
+import { customBtnDanger, customBtnDangerHover } from "../../assets/css/rounded-circle-adding";
 
 interface AnswerProps {
   answer: { text: string; isCorrect: boolean };
@@ -13,7 +13,14 @@ const AnswerComponent: React.FC<AnswerProps> = ({
   onChange,
   onToggleCorrect,
   onRemove,
-}) => (
+}) => {
+  
+  const [isHovered, setIsHovered] = useState(false);
+  useEffect(() => {
+    setIsHovered(false);
+  }, []);
+
+  return (
   <div className="mb-3">
     <div className="input-group">
       <input
@@ -34,12 +41,16 @@ const AnswerComponent: React.FC<AnswerProps> = ({
         </div>
       </div>
       <div className="input-group-append">
-        <button onClick={onRemove} className="btn custom-btn-danger">
+        <button onClick={onRemove} className="btn"
+              style={isHovered ? { ...customBtnDangerHover } : { ...customBtnDanger }}
+              onMouseEnter={() => setIsHovered(true)}
+              onMouseLeave={() => setIsHovered(false)}
+        >
           Supprimer
         </button>
       </div>
     </div>
   </div>
-);
+)};
 
 export default AnswerComponent;

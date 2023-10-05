@@ -19,6 +19,11 @@ public class CvController {
     public List<Cv> getAllCv() {
         return cvService.getAllCvs();
     }
+    
+    @GetMapping("/getAllByIdAnnonce/{idAnnonce}")
+    public List<Cv> getAllCvByAnnonceId(@PathVariable Long idAnnonce) {
+        return cvService.getAllCvByAnnonceId(idAnnonce);
+    }
 
     @PostMapping("/save")
     public Cv saveCv(@RequestBody Cv cv) {

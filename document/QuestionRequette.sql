@@ -29,3 +29,9 @@ SELECT Q.id , Q.question FROM questionannonce QA
 						WHERE idannonce = {--------- idannonce ---------------------} 
 						ORDER BY date_question_annonce DESC LIMIT 1)
 						
+--------------------------------------------------------------------------------------------------------
+
+-- les cv aptes aux entretients
+SELECT * FROM Cv 
+	WHERE Cv.id IN (SELECT idcv FROM Reponsetest WHERE idannonce = 1) 
+						

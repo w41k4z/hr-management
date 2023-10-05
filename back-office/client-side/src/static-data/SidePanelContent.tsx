@@ -64,6 +64,13 @@ export const SidePanelContent = [
     onItemClick: () => {},
   },
   {
+    title: "Inerviewer list",
+    type: "nav-item",
+    path: "list/able-to-interview",
+    icon: <FlatColor.FcKindle />,
+    onItemClick: () => {},
+  },
+  {
     title: "Management",
     type: "menu-title",
     onItemClick: () => {},

@@ -51,7 +51,7 @@ public class QuestionService {
         subQuery = annonce_correspondant.toString();
 
         StringBuilder correpondant_question = new StringBuilder(
-            "SELECT Q.id AS idquestion, Q.question FROM Questionannonce QA" +
+            "SELECT Q FROM Questionannonce QA" +
             " JOIN Question Q ON Q.id=QA.idquestion " + 
             " WHERE idannonce = (" + subQuery + ") ");
         subQuery = correpondant_question.toString();
@@ -59,20 +59,7 @@ public class QuestionService {
         Query query = em.createQuery(subQuery);
         query.setParameter("idPoste", idPoste);
 
-        List<Object[]> result = query.getResultList();
-        
-        List<Question> questions = new ArrayList<>();
-        for (Object[] row : result) {
-            Long idquestion = (Long) row[0];
-            String questionText = (String) row[1];
-    
-            Question question = new Question();
-            question.id = (idquestion);
-            question.question = (questionText);
-    
-            questions.add(question);
-        }
-    
-        return questions;
+        List<Question> result = query.getResultList();
+        return result;
     }
 }

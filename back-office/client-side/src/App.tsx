@@ -10,6 +10,7 @@ import AllDepartment from "./pages/all-department";
 import Needs from "./pages/needs";
 import Resume from "./pages/client-side-page/resume";
 import ListResume from "./pages/list/resume";
+import ListInterview from "./pages/list/list-to-interview";
 import PageAddQuestion from "./pages/test/questionadd";
 import CritereSelection from "./pages/critere-selection";
 import Annonce from "./pages/annonce";
@@ -101,6 +102,8 @@ function App() {
                 />
 
                 <Route path="/list/resume" element={<ListResume />} />
+                <Route path="/list/able-to-interview" element={<ListInterview />} />
+                
 
                 <Route path="/management/services" element={<Services />} />
                 <Route path="/management/sectors" element={<Sectors />} />

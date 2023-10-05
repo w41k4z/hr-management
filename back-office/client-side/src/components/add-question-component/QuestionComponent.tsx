@@ -2,6 +2,7 @@ import React from 'react';
 import { FaPlus, FaTimes } from 'react-icons/fa';
 import AnswerComponent from './AnswerComponent';
 import { NewQuestionAnnonce } from '../../model/UtilInterface';
+import { icon, circleContainer, h6 } from '../../assets/css/rounded-circle-adding';
 
 interface QuestionProps {
   question: NewQuestionAnnonce;
@@ -26,11 +27,11 @@ const QuestionComponent: React.FC<QuestionProps> = ({
 
     <div className='row'>
         <div className='col-md-3'>
-            <h6>Question</h6>
+            <h6 style={h6}>Question</h6>
             <input type="text" value={question.question.question} onChange={onQuestionChange} className="form-control" />
         </div>
         <div className='col-md-5'>
-            <h6>Réponse(s)</h6>
+            <h6 style={h6}>Réponse(s)</h6>
             {question.answers.map((answer, answerIndex) => (
             <AnswerComponent
                 key={answerIndex}
@@ -42,13 +43,13 @@ const QuestionComponent: React.FC<QuestionProps> = ({
             ))}
         </div>
         <div className='col-md-4'>
-            <h6>Action</h6>
+            <h6 style={h6}>Action</h6>
             <div className='row'>
                 <div className='col-md-5'>
                     <input type="text" className='form-control' disabled={true} value={"Réponse"} />
                 </div>
-                <div className="my-cirlce-btn" onClick={onAddAnswer} style={{backgroundColor : '#198754'}}>
-                    <FaPlus className="icon" />
+                <div className="rounded-circle" onClick={onAddAnswer} style={{backgroundColor : '#198754', ...circleContainer}}>
+                    <FaPlus style={icon} />
                 </div>
             </div>
             <br />
@@ -56,8 +57,8 @@ const QuestionComponent: React.FC<QuestionProps> = ({
                 <div className='col-md-5'>
                     <input type="text" className='form-control' disabled={true} value={"Question"} />
                 </div>
-                <div className="my-cirlce-btn" onClick={onRemoveQuestion} style={{backgroundColor : '#de1212'}}>
-                    <FaTimes className='icon'/>
+                <div className="rounded-circle" onClick={onRemoveQuestion} style={{backgroundColor : '#de1212', ...circleContainer} }>
+                    <FaTimes style={icon}/>
                 </div>
             </div>
         </div>

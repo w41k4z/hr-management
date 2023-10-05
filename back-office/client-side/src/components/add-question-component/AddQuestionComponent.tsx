@@ -6,6 +6,7 @@ import Poste from '../../model/PosteInterface';
 import { V_besoinannonce } from '../../model/V_besoinannonce';
 import LastQuestion from '../../datamanipulator/lastquestion';
 import { NewQuestionAnnonce } from '../../model/UtilInterface';
+import { icon, circleContainer, similarQuestion, questionnaireTitle, h6 } from '../../assets/css/rounded-circle-adding';
 
 interface AddQuestionProps {
   questions: NewQuestionAnnonce[];
@@ -78,11 +79,11 @@ const AddQuestionComponent: React.FC<AddQuestionProps> = ({
 
   return (
     <div className="container mt-4">
-      <h2 className="questionnaire-title">Questionnaire</h2>
+      <h2 style={questionnaireTitle}>Questionnaire</h2>
       <div className="container mt-5">
         
         <section className="mt-4">
-          <h6>Titre du poste</h6>
+          <h6 style={h6}>Titre du poste</h6>
           <div className='row'>
             <div className="col-md-6">
               <select defaultValue={0} className="form-select" onChange={handleChangeSelect} aria-label="Sélectionnez un titre de poste">
@@ -108,7 +109,7 @@ const AddQuestionComponent: React.FC<AddQuestionProps> = ({
         
         <div className='row'>
           <div className='col-md-3'>
-            <h6>Annonce</h6>
+            <h6 style={h6}>Annonce</h6>
           </div>
           <div>
             <select defaultValue={0} className="form-select" onChange={handleIdAnnonce} aria-label="Sélectionnez une annonce" >
@@ -126,8 +127,8 @@ const AddQuestionComponent: React.FC<AddQuestionProps> = ({
         
         <br />
         
-        <div className="row mt-4 similar-question">
-          <h6>Question similaire</h6>
+        <div className="row mt-4" style={similarQuestion}>
+          <h6 style={h6}>Question similaire</h6>
           <div id="already-in-use">
             {alreadyUsedQuestions.map((usedquestion, index) => (
               <div className="col-md-11 offset-md-1 mt-3" key={index}>
@@ -161,8 +162,8 @@ const AddQuestionComponent: React.FC<AddQuestionProps> = ({
         <div className='col-md-3 offset-md-2'>
           <input type="text" className='form-control' disabled={true} value={"Ajouter une question"} />
         </div>
-        <div className="my-cirlce-btn col-md-2" onClick={onAddQuestion} style={{backgroundColor : '#198754'}}>
-          <FaPlus className="icon" />
+        <div className="rounded-circle col-md-2" onClick={onAddQuestion} style={{backgroundColor : '#198754', ...circleContainer}}>
+          <FaPlus style={icon} />
         </div>
         <button className="btn btn-success col-md-3 offset-md-2" onClick={onSubmitQuestion} style={{backgroundColor : 'green'}}>
           Soumettre les questions
