@@ -110,7 +110,7 @@ const PageAddQuestion: React.FC = () => {
       }
     }
     catch(error){
-      console.error('Error sending data:', error);
+      throw error;
     }
   }
 
@@ -119,9 +119,13 @@ const PageAddQuestion: React.FC = () => {
     console.log("Questions:", questions);
     console.log("Last questions : ", selectedLastQuestions);
     try {
-      if(idAnnonce)await addNewQuestionReponse(questions , idAnnonce);
+      if(idAnnonce){
+        await addNewQuestionReponse(questions , idAnnonce);
+        alert("Insertion reussie");
+      }
     } catch (error) {
-      console.error('Error sending data:', error);
+      console.error('Error sending data :', error);
+      alert('Error sending data : '+ error);
     }
   };
 

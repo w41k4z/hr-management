@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import AnswerSelection from "./AnswerSelection";
 import './stylequestionresponse.css';
 import { V_besoinannonce } from "../../model/V_besoinannonce";
@@ -6,6 +6,7 @@ import { Question } from "../../model/QuestionInterface";
 import { QuestionReponse } from "../../model/QuestionReponseInterface";
 import { ReponseTest } from "../../model/ResponseTest";
 import { Cv } from "../../model/CvInterface";
+import axiosInstance from "../../http-client-side/Axios";
 
 
 const QuestionAnswer = () => {
@@ -56,7 +57,7 @@ const QuestionAnswer = () => {
             setQuestionsWithAnswer(updatequestionswithanswer);
         } catch (error) {
             console.error('Error fetching data:', error);
-        }
+        }   
     };
 
     const handleAnswerSelect = (question_id: number, reponse: string) => {
@@ -111,70 +112,72 @@ const QuestionAnswer = () => {
         console.log(score);
         setReponseTest({idcv: idCv , idannonce: idannonce, point: score});
     }
-    useEffect(() => {
-        fetch("http:/localhost:8080/ReponseTest/save")
-            .then((reponse) => reponse.json())
-            .then((data) => alert(data))
-            .catch((error) => alert("Error : "+ error))
-    }, [reponseTest]);
+    // useEffect(() => {
+    //     try{
+    //         // await axiosInstance.post("/ReponseTest/save", reponseTest);
+    //     }catch(error)
+    //     {
+
+    //     }
+    // }, [reponseTest]);
     
     return (
         <div className="container mt-4" style={{maxWidth : '90%'}}>
             <h2 className="questionnaire-title">Veuillez décochez le(s) fausses reponses</h2>
                 
-                <section className="mt-4">
-                    <h6>Cv postulé</h6>
-                    <div className='row'>
-                        <div className="col-md-6">
-                            <select defaultValue={0} onChange={handleSelectedCv} className="form-select" aria-label="Sélectionnez le cv postulé">
-                                <option value={0} disabled>
-                                    Cv postulé
-                                </option>
-                                {allTesteur.map((option) => (
-                                    <option key={option.id} value={option.id}>
-                                    {option.nom + " " + option.prenom}
-                                    </option>
-                                ))}
-                            </select>
-                        </div>
-                        <div className="col-md-5">
-                            <button className="btn btn-primary">Sélectionner le cv postulé</button>
-                        </div>
-                    </div>
-                </section>
-
-
-                <div className="containre mt-5 form-input">
-                    <select defaultValue={0} onChange={handleSelectedAnnonce} className="form-control form-select">
-                        <option disabled value={0}>
-                            Sélectionnez l` annonce origine
-                        </option>
-                        {v_besoinannonce.map((annonce , index) => (
-                            <option value={annonce.idannonce} key={annonce.idannonce}>
-                                {annonce.description}
+            <section className="mt-4">
+                <h6>Cv postulé</h6>
+                <div className='row'>
+                    <div className="col-md-6">
+                        <select defaultValue={0} onChange={handleSelectedCv} className="form-select" aria-label="Sélectionnez le cv postulé">
+                            <option value={0} disabled>
+                                Cv postulé
                             </option>
-                        ))}
-                    </select>
-                </div>
-
-                <div className="container mt-5">
-                    {questionsWithAnswer.map((questionblock, index) => (
-                        <React.Fragment key={index}>
-                        <h6 style={{marginBottom : '3%'}}>{index + 1} - {questionblock.Oquestion.question}</h6>
-                        <div className="my-answer">
-                            {questionblock.questionreponses.map((questionreponse, answerIndex) => (
-                                <AnswerSelection
-                                    key={answerIndex}
-                                    questionreponse = { questionreponse }
-                                    onToggleCorrect = { () => handleAnswerSelect( questionblock.Oquestion.id ,  questionreponse.reponse)}
-                                />
+                            {allTesteur.map((option) => (
+                                <option key={option.id} value={option.id}>
+                                {option.nom + " " + option.prenom}
+                                </option>
                             ))}
-                        </div>
-                        <br />
-                        </React.Fragment>
-                    ))}
+                        </select>
+                    </div>
+                    <div className="col-md-5">
+                        <button className="btn btn-primary">Sélectionner le cv postulé</button>
+                    </div>
                 </div>
-                <button onClick={saveScore} className="btn btn-success col-md-3 offset-md-8">Valider</button>
+            </section>
+
+
+            <div className="containre mt-5 form-input">
+                <select defaultValue={0} onChange={handleSelectedAnnonce} className="form-control form-select">
+                    <option disabled value={0}>
+                        Sélectionnez l` annonce origine
+                    </option>
+                    {v_besoinannonce.map((annonce , index) => (
+                        <option value={annonce.idannonce} key={annonce.idannonce}>
+                            {annonce.description}
+                        </option>
+                    ))}
+                </select>
+            </div>
+
+            <div className="container mt-5">
+                {questionsWithAnswer.map((questionblock, index) => (
+                    <React.Fragment key={index}>
+                    <h6 style={{marginBottom : '3%'}}>{index + 1} - {questionblock.Oquestion.question}</h6>
+                    <div className="my-answer">
+                        {questionblock.questionreponses.map((questionreponse, answerIndex) => (
+                            <AnswerSelection
+                                key={answerIndex}
+                                questionreponse = { questionreponse }
+                                onToggleCorrect = { () => handleAnswerSelect( questionblock.Oquestion.id ,  questionreponse.reponse)}
+                            />
+                        ))}
+                    </div>
+                    <br />
+                    </React.Fragment>
+                ))}
+            </div>
+            <button onClick={saveScore} className="btn btn-success col-md-3 offset-md-8">Valider</button>
         </div>
     );
 };

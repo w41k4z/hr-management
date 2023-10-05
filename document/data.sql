@@ -101,40 +101,42 @@ VALUES
 (default, 'Quelles sont vos compétences en gestion de projet IT ?');
 
 -- Test Data 1
-INSERT INTO questionannonce (idannonce, idquestion)
-VALUES (1, 1), (1, 2), (1, 3), (1, 4), (1, 5);
+INSERT INTO questionannonce (idannonce, idquestion, date_question_annonce)
+VALUES (1, 1, '2023-10-05'), (1, 2, '2023-10-05'), (1, 3, '2023-10-05'), (1, 4, '2023-10-05'), (1, 5, '2023-10-05');
 
 -- Test Data 2
-INSERT INTO questionannonce (idannonce, idquestion)
-VALUES (2, 6), (2, 7), (2, 8), (2, 9), (2, 10);
+INSERT INTO questionannonce (idannonce, idquestion, date_question_annonce)
+VALUES (2, 6, '2023-10-05'), (2, 7, '2023-10-05'), (2, 8, '2023-10-05'), (2, 9, '2023-10-05'), (2, 10, '2023-10-05');
 
 -- Test Data 3
-INSERT INTO questionannonce (idannonce, idquestion)
-VALUES (3, 11), (3, 12), (3, 13), (3, 14), (3, 15);
+INSERT INTO questionannonce (idannonce, idquestion, date_question_annonce)
+VALUES (3, 11, '2023-10-05'), (3, 12, '2023-10-05'), (3, 13, '2023-10-05'), (3, 14, '2023-10-05'), (3, 15, '2023-10-05');
 
 -- Test Data 4
-INSERT INTO questionannonce (idannonce, idquestion)
-VALUES (4, 16), (4, 17), (4, 18), (4, 19), (4, 20);
+INSERT INTO questionannonce (idannonce, idquestion, date_question_annonce)
+VALUES (4, 16, '2023-10-05'), (4, 17, '2023-10-05'), (4, 18, '2023-10-05'), (4, 19, '2023-10-05'), (4, 20, '2023-10-05');
 
 -- Test Data 5
-INSERT INTO questionannonce (idannonce, idquestion)
-VALUES (5, 21), (5, 22), (5, 23), (5, 24), (5, 25);
+INSERT INTO questionannonce (idannonce, idquestion, date_question_annonce)
+VALUES (5, 21, '2023-10-05'), (5, 22, '2023-10-05'), (5, 23, '2023-10-05'), (5, 24, '2023-10-05'), (5, 25, '2023-10-05');
+
+
 INSERT INTO grade VALUES
-(1,'BACC'),
-(2,'DTS'),
-(3,'LICENSE'),
-(4,'MASTER'),
-(5,'DOCTORAT');
+(default,'BACC'),
+(default,'DTS'),
+(default,'LICENSE'),
+(default,'MASTER'),
+(default,'DOCTORAT');
 
 
 INSERT INTO filiere VALUES
-(1,''),
-(2,'Info'),
-(3,'Compta'),
-(4,'Managment');
+(default,'Design'),
+(default,'Info'),
+(default,'Compta'),
+(default,'Managment');
 
 
 INSERT INTO poste VALUES
-(1,'P1'),
-(2,'P2'),
-(3,'P3');
+(default,'P1'),
+(default,'P2'),
+(default,'P3');

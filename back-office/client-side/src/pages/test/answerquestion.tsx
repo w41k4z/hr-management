@@ -5,7 +5,9 @@ import QuestionAnswer from "../../components/answer-question-component/question-
 const PageAnswerQuestion = () => {
 
     return (
-      <QuestionAnswer/>
+      <>
+        <QuestionAnswer/>
+      </>
     );
 };
 

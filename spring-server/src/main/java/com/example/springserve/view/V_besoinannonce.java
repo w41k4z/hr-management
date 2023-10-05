@@ -11,7 +11,7 @@ import jakarta.persistence.Id;
 @Entity(name = "V_besoinannonce")
 @Immutable
 public class V_besoinannonce {
-
+    
     @Id
     @Column(name = "id")
     public Long id;

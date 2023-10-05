@@ -85,8 +85,8 @@ const AddQuestionComponent: React.FC<AddQuestionProps> = ({
           <h6>Titre du poste</h6>
           <div className='row'>
             <div className="col-md-6">
-              <select className="form-select" onChange={handleChangeSelect} aria-label="Sélectionnez un titre de poste">
-                <option value="" disabled selected>
+              <select defaultValue={0} className="form-select" onChange={handleChangeSelect} aria-label="Sélectionnez un titre de poste">
+                <option value={0} disabled>
                   Sélectionnez un titre de poste
                 </option>
                 {
@@ -111,8 +111,8 @@ const AddQuestionComponent: React.FC<AddQuestionProps> = ({
             <h6>Annonce</h6>
           </div>
           <div>
-            <select className="form-select" onChange={handleIdAnnonce} aria-label="Sélectionnez une annonce" >
-              <option value="" disabled selected>
+            <select defaultValue={0} className="form-select" onChange={handleIdAnnonce} aria-label="Sélectionnez une annonce" >
+              <option value={0} disabled selected>
                 Sélectionnez une annonce
               </option>
               {all_V_besoinannonce.map((option) => (

@@ -189,20 +189,9 @@ CREATE  TABLE "public".service (
 	CONSTRAINT service_pkey PRIMARY KEY ( id )
  );
 
-CREATE  TABLE "public".v_besoinannonce ( 
-	datebesoinservice    date    ,
-	volumehoraire        double precision    ,
-	volumetache          double precision    ,
-	id                   bigint  NOT NULL  ,
-	idannonce            bigint    ,
-	idposte              bigint    ,
-	idregion             bigint    ,
-	idservice            bigint    ,
-	description          varchar(255)    ,
-	qualite              varchar(255)    ,
-	typecontrat          varchar(255)    ,
-	CONSTRAINT v_besoinannonce_pkey PRIMARY KEY ( id )
- );
+CREATE VIEW v_besoinannonce AS
+	SELECT A.id as idannonce , BS.* FROM annonce A
+	JOIN besoinservice AS BS ON BS.id = A.idbesoinservice;
 
 CREATE  TABLE "public".besoinservice ( 
 	datebesoinservice    date    ,
