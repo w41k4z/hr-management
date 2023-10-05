@@ -11,6 +11,17 @@ import axiosInstance from "../../http-client-side/Axios";
 
 const QuestionAnswer = () => {
 
+    const reinitialiserPage = () => {
+        setV_besoinannonce([]);
+        setIsPageLoad(false);
+        setAllTesteur([]);
+        setIdAnnonce(-1);
+        setChangeQuestions([]);
+        setQuestionsWithAnswer([]);
+        setIdCv(-1);
+        setReponseTest(undefined);
+    };
+
     const [v_besoinannonce , setV_besoinannonce] = useState<V_besoinannonce[]>([]);
     const [isPageLoad , setIsPageLoad] = useState<boolean>();
     const [allTesteur , setAllTesteur] = useState<Cv[]>([]);
@@ -107,19 +118,18 @@ const QuestionAnswer = () => {
     }
 
     const [reponseTest , setReponseTest] = useState<ReponseTest>();
-    const saveScore = () => {
-        const score = calculateScore();
-        console.log(score);
-        setReponseTest({idcv: idCv , idannonce: idannonce, point: score});
+    const saveScore = async () => {
+        try{
+            const score = calculateScore();
+            setReponseTest({idcv: idCv , idannonce: idannonce, point: score});
+            console.log(reponseTest);
+            await axiosInstance.post("/ReponseTest/save", reponseTest);
+            alert("Teste sauvegarder");
+            reinitialiserPage();
+        }catch(error){
+            alert("Erreur " + error);
+        }
     }
-    // useEffect(() => {
-    //     try{
-    //         // await axiosInstance.post("/ReponseTest/save", reponseTest);
-    //     }catch(error)
-    //     {
-
-    //     }
-    // }, [reponseTest]);
     
     return (
         <div className="container mt-4" style={{maxWidth : '90%'}}>

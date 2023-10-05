@@ -8,6 +8,14 @@ import { NewQuestionAnnonce } from '../../model/UtilInterface';
 
 const PageAddQuestion: React.FC = () => {
 
+  const reinitialisePage = () => {
+    setQuestions([]);
+    setSelectedLastQuestions([]);
+    setIdAnnonce(-1);
+    setQuestions([]);    
+    setSelectedLastQuestions([])
+  };
+
   const [questions, setQuestions] = useState<NewQuestionAnnonce[]>([]);
 
   const addAnswer = (questionIndex: number) => {
@@ -122,6 +130,7 @@ const PageAddQuestion: React.FC = () => {
       if(idAnnonce){
         await addNewQuestionReponse(questions , idAnnonce);
         alert("Insertion reussie");
+        reinitialisePage();
       }
     } catch (error) {
       console.error('Error sending data :', error);

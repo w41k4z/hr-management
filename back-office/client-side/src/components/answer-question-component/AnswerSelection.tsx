@@ -17,7 +17,7 @@ const AnswerSelection : React.FC<AnswerSelectionProps> = ({questionreponse , onT
                         type="checkbox"
                         onChange={onToggleCorrect}
                         className="form-check-input"
-                        checked={questionreponse.change !== undefined}
+                        checked={questionreponse.change === true}
                     />
                 </div>
             </div>
