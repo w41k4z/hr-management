@@ -1,0 +1,12 @@
+#title {
+    text-align: center;
+}
+#title span {
+    font-weight: lighter;
+    font-size: large;
+}
+
+#annonce {
+    margin-left: 5%;
+    /* margin-right: 5%; */
+}
