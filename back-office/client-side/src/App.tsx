@@ -19,6 +19,7 @@ import Sectors from "./pages/management/sectors";
 import Grades from "./pages/management/grades";
 import Positions from "./pages/management/positions";
 import Regions from "./pages/management/regions";
+import FicheDePoste from "./pages/fiche-de-poste";
 
 /* INTERFACES */
 import Region from "./model/RegionInterface";
@@ -123,11 +124,15 @@ function App() {
 
                 <Route path="/offre/annonce" element={<Annonce />}></Route>
 
+                
+
                 {/* Client side page test */}
                 <Route
                   path="/question/Test/questionanswer"
                   element={<PageAnswerQuestion />}
                 />
+
+                <Route path="/embauche/fichedeposte" element={<FicheDePoste/>}/>
 
                 {/* Error 404 */}
                 <Route path="*" element={<p>404 Not Found</p>} />
