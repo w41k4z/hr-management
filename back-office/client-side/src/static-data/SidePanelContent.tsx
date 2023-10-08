@@ -38,10 +38,10 @@ export const SidePanelContent = [
     onItemClick: () => {},
   },
   {
-    title: "Resume",
+    title: "QCM",
     type: "nav-item",
-    path: "forms/resume",
-    icon: <FlatColor.FcKindle />,
+    path: "/question/Test/questionanswer",
+    icon: <FlatColor.FcDocument />,
     onItemClick: () => {},
   },
   {
@@ -117,11 +117,6 @@ export const SidePanelContent = [
     icon: <FlatColor.FcKindle />,
     onItemClick: () => {},
   },
-  {
-    title: "Client side",
-    type: "menu-title",
-    onItemClick: () => {},
-  },
   // {
   //   title: "Form resume",
   //   type: "nav-item",
@@ -137,11 +132,4 @@ export const SidePanelContent = [
   //   icon: <FlatColor.FcDocument />,
   //   onItemClick: () => {},
   // },
-  {
-    title: "QCM",
-    type: "nav-item",
-    path: "/question/Test/questionanswer",
-    icon: <FlatColor.FcDocument />,
-    onItemClick: () => {},
-  },
 ];
