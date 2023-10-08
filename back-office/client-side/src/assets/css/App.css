@@ -60,3 +60,9 @@
     border: none;
     border-bottom: 1px solid;
 }
+
+.dashed-bottom-border {
+    outline: none;
+    border: none;
+    border-bottom: 1px dashed;
+}

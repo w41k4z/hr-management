@@ -8,7 +8,6 @@ import { FiLogOut } from "react-icons/fi";
 /* PAGES */
 import AllDepartment from "./pages/all-department";
 import Needs from "./pages/needs";
-import Resume from "./pages/client-side-page/resume";
 import ListResume from "./pages/list/resume";
 import ListInterview from "./pages/list/list-to-interview";
 import PageAddQuestion from "./pages/test/questionadd";
@@ -20,6 +19,7 @@ import Grades from "./pages/management/grades";
 import Positions from "./pages/management/positions";
 import Regions from "./pages/management/regions";
 import FicheDePoste from "./pages/fiche-de-poste";
+import Contract from "./pages/contract";
 
 /* INTERFACES */
 import Region from "./model/RegionInterface";
@@ -97,14 +97,11 @@ function App() {
                 />
                 <Route path="/department/needs" element={<Needs />} />
 
-                <Route
-                  path="/forms/resume"
-                  element={<Resume regions={allRegion} />}
-                />
-
                 <Route path="/list/resume" element={<ListResume />} />
-                <Route path="/list/able-to-interview" element={<ListInterview />} />
-                
+                <Route
+                  path="/list/able-to-interview"
+                  element={<ListInterview />}
+                />
 
                 <Route path="/management/services" element={<Services />} />
                 <Route path="/management/sectors" element={<Sectors />} />
@@ -124,15 +121,17 @@ function App() {
 
                 <Route path="/offre/annonce" element={<Annonce />}></Route>
 
-                
-
                 {/* Client side page test */}
                 <Route
                   path="/question/Test/questionanswer"
                   element={<PageAnswerQuestion />}
                 />
 
-                <Route path="/embauche/fichedeposte" element={<FicheDePoste/>}/>
+                <Route
+                  path="/embauche/fichedeposte"
+                  element={<FicheDePoste />}
+                />
+                <Route path="/embauche/contrat" element={<Contract />} />
 
                 {/* Error 404 */}
                 <Route path="*" element={<p>404 Not Found</p>} />

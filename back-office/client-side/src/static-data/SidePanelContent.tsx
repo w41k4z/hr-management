@@ -111,10 +111,22 @@ export const SidePanelContent = [
     onItemClick: () => {},
   },
   {
+    title: "Extra",
+    type: "menu-title",
+    onItemClick: () => {},
+  },
+  {
     title: "Fiche de poste",
     type: "nav-item",
     path: "embauche/fichedeposte",
     icon: <FlatColor.FcKindle />,
+    onItemClick: () => {},
+  },
+  {
+    title: "Contract",
+    type: "nav-item",
+    path: "embauche/contrat",
+    icon: <FlatColor.FcApproval />,
     onItemClick: () => {},
   },
   // {
