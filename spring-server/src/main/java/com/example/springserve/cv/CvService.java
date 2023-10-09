@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import jakarta.persistence.EntityManager;
-import jakarta.persistence.TypedQuery;
+import jakarta.persistence.Query;
 
 import java.util.List;
 import java.util.Optional;
@@ -46,7 +46,7 @@ public class CvService {
                             " JOIN ReponseTest sb ON sb.idcv = cv.id" +
                             " WHERE sb.idannonce = :idAnnonce";
 
-        TypedQuery<NotedCv> query = em.createQuery(mainQuery, NotedCv.class);
+        Query query = em.createQuery(mainQuery);
         query.setParameter("idAnnonce", idAnnonce);
 
         List<NotedCv> notedCvList = query.getResultList();

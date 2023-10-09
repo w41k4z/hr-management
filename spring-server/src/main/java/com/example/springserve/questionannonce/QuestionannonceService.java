@@ -42,12 +42,12 @@ public class QuestionannonceService {
     public List<Question> getQuestionsByIdAnnonce(Long idAnnonce) {
 
         StringBuilder subQuery = new StringBuilder(
-            "SELECT  date_question_annonce FROM Questionannonce" +
+            "SELECT date_question_annonce FROM Questionannonce" +
             " WHERE idannonce = :idAnnonce " + 
             " ORDER BY date_question_annonce DESC LIMIT 1 "
         );
         StringBuilder questionOfAnnonce = new StringBuilder(
-            "SELECT Q.id , Q.question FROM Questionannonce QA" +
+            "SELECT Q FROM Questionannonce QA" +
                 " JOIN Question Q ON Q.id=QA.idquestion " +
                 " WHERE idannonce = :idAnnonce " +
                 " AND date_question_annonce = (" + subQuery + ")");
@@ -58,6 +58,5 @@ public class QuestionannonceService {
 
         List<Question> result = query.getResultList();
         return result;
-        
     }
 }
