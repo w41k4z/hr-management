@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import jakarta.persistence.EntityManager;
-import jakarta.persistence.Query;
+import jakarta.persistence.TypedQuery;
 
 import java.util.List;
 import java.util.Optional;
@@ -36,21 +36,21 @@ public class CvService {
         cvRepository.deleteById(id);
     }
 
-    public List<Cv> getAllCvByAnnonceId(Long idAnnonce) {
-        StringBuilder idCvs = new StringBuilder(
-            "SELECT idcv FROM ReponseTest " + 
-            " WHERE idannonce = :idAnnonce ");
-        String subQuery = idCvs.toString();
+    public List<NotedCv> getAllNotedCvByAnnonceId(Long idAnnonce) {
+        // public NotedCv(Long id, String cin, String nom, String prenom, String adresse, String tel, String email,
+        // String sm, String sexe, Double idannonce, Double point) 
+        String mainQuery = "SELECT NEW com.example.springserve.cv.NotedCv(" +
+                                    " cv.id, cv.cin, cv.nom, cv.prenom, cv.adresse, cv.tel, cv.email," +
+                                    " cv.sm, cv.sexe, sb.idannonce, sb.point) "+ 
+                            " FROM Cv cv" +
+                            " JOIN ReponseTest sb ON sb.idcv = cv.id" +
+                            " WHERE sb.idannonce = :idAnnonce";
 
-        StringBuilder listCv = new StringBuilder(
-            "SELECT cv FROM Cv cv" +
-                " WHERE cv.id IN (" + subQuery + ")");
-        subQuery = listCv.toString();
-        
-        Query query = em.createQuery(subQuery);
+        TypedQuery<NotedCv> query = em.createQuery(mainQuery, NotedCv.class);
         query.setParameter("idAnnonce", idAnnonce);
 
-        List<Cv> result = query.getResultList();
-        return result;
+        List<NotedCv> notedCvList = query.getResultList();
+        return notedCvList;
     }
+
 }

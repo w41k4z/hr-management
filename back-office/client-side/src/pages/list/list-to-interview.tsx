@@ -4,6 +4,7 @@ import { TableColumn } from "../../components/datatable/TableColumn";
 import ResumeInterface from "../../model/ResumeInterface";
 import BasicCRUDTable from "../../components/datatable/BasicCRUDTable";
 import { V_besoinannonce } from "../../model/V_besoinannonce";
+import { NotedCv } from "../../model/NotedCvInterface";
 
 function ListInterview() {
   const [isPageLoad, setIsPageLoad] = useState<boolean>(false);
@@ -24,9 +25,9 @@ function ListInterview() {
     setIdAnnonce(parseInt(e.target.value));
   };
 
-  const [resumes, setResumes] = React.useState<ResumeInterface[]>([]);
+  const [resumes, setResumes] = React.useState<NotedCv[]>([]);
   useEffect(() => {
-    fetch("http://localhost:8080/Cv/getAllByIdAnnonce/" + idAnnonce)
+    fetch("http://localhost:8080/Cv/getAllNotedCvByAnnonceId/" + idAnnonce)
       .then((res) => res.json())
       .then((data) => setResumes(data));
   }, [idAnnonce]);
@@ -112,7 +113,7 @@ function ListInterview() {
       format: "default",
     },
     {
-      name: "Score",
+      name: "Score (%)",
       propTarget: "point",
       format: "default",
     },

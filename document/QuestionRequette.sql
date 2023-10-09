@@ -32,6 +32,8 @@ SELECT Q.id , Q.question FROM questionannonce QA
 --------------------------------------------------------------------------------------------------------
 
 -- les cv aptes aux entretients
-SELECT * FROM Cv 
-	WHERE Cv.id IN (SELECT idcv FROM Reponsetest WHERE idannonce = 1) 
+SELECT sb.idannonce, Cv.*, sb.point FROM Cv 
+	JOIN (SELECT * FROM Reponsetest WHERE idannonce = 1) sb ON sb.idcv = Cv.id
+	
+---------------------------------------------------------------------------------------------------------
 						

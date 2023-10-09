@@ -7,9 +7,8 @@ import com.example.springserve.question.Question;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
-import jakarta.persistence.Query;
+import jakarta.persistence.TypedQuery;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -52,26 +51,13 @@ public class QuestionannonceService {
                 " JOIN Question Q ON Q.id=QA.idquestion " +
                 " WHERE idannonce = :idAnnonce " +
                 " AND date_question_annonce = (" + subQuery + ")");
-
         String request = questionOfAnnonce.toString();
 
-        System.out.println(request);
-        Query query = em.createQuery(request);
+        TypedQuery<Question> query = em.createQuery(request, Question.class);
         query.setParameter("idAnnonce", idAnnonce);
 
-        List<Object[]> result = query.getResultList();
+        List<Question> result = query.getResultList();
+        return result;
         
-        List<Question> questions = new ArrayList<>();
-        for (Object[] row : result) {
-            Long idquestion = (Long) row[0];
-            String questionText = (String) row[1];
-    
-            Question question = new Question();
-            question.id = (idquestion);
-            question.question = (questionText);
-    
-            questions.add(question);
-        }
-        return questions;
     }
 }

@@ -5,9 +5,8 @@ import org.springframework.stereotype.Service;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
-import jakarta.persistence.Query;
+import jakarta.persistence.TypedQuery;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -56,7 +55,7 @@ public class QuestionService {
             " WHERE idannonce = (" + subQuery + ") ");
         subQuery = correpondant_question.toString();
         
-        Query query = em.createQuery(subQuery);
+        TypedQuery<Question> query = em.createQuery(subQuery, Question.class);
         query.setParameter("idPoste", idPoste);
 
         List<Question> result = query.getResultList();

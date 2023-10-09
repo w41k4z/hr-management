@@ -1,8 +1,8 @@
 export const circleContainer = {
     display: "flex",
     justifyContent: "center",
-    width: "50px",
-    height: "50px",
+    width: "40px",
+    height: "40px",
     alignItems: "center"
 }
 export const icon = {
