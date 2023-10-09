@@ -9,7 +9,7 @@ import com.example.springserve.helpers.OptionalGet;
 
 @RestController
 @RequestMapping("/Region")
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = { "http://localhost:3000", "http://localhost:3001" })
 public class RegionController {
     @Autowired
     private RegionService regionService;

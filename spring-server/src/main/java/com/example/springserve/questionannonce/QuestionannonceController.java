@@ -10,9 +10,8 @@ import com.example.springserve.question.Question;
 
 @RestController
 @RequestMapping("/Questionannonce")
-@CrossOrigin("http://localhost:3000")
-public class QuestionannonceController 
-{
+@CrossOrigin(origins = { "http://localhost:3000", "http://localhost:3001" })
+public class QuestionannonceController {
     @Autowired
     private QuestionannonceService questionannonceService;
 

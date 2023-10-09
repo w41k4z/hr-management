@@ -9,9 +9,8 @@ import com.example.springserve.helpers.OptionalGet;
 
 @RestController
 @RequestMapping("/Critereselection")
-@CrossOrigin(origins = "http://localhost:3000")
-public class CritereselectionController 
-{
+@CrossOrigin(origins = { "http://localhost:3000", "http://localhost:3001" })
+public class CritereselectionController {
     @Autowired
     private CritereselectionService critereselectionService;
 

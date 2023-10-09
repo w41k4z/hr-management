@@ -9,7 +9,7 @@ import com.example.springserve.helpers.OptionalGet;
 
 @RestController
 @RequestMapping("/Cv")
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = { "http://localhost:3000", "http://localhost:3001" })
 public class CvController {
     @Autowired
     private CvService cvService;
@@ -19,7 +19,7 @@ public class CvController {
     public List<Cv> getAllCv() {
         return cvService.getAllCvs();
     }
-    
+
     @GetMapping("/getAllByIdAnnonce/{idAnnonce}")
     public List<Cv> getAllCvByAnnonceId(@PathVariable Long idAnnonce) {
         return cvService.getAllCvByAnnonceId(idAnnonce);

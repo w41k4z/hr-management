@@ -9,9 +9,8 @@ import com.example.springserve.helpers.OptionalGet;
 
 @RestController
 @RequestMapping("/Besoinservice")
-@CrossOrigin(origins = "http://localhost:3000")
-public class BesoinserviceController 
-{
+@CrossOrigin(origins = { "http://localhost:3000", "http://localhost:3001" })
+public class BesoinserviceController {
     @Autowired
     private BesoinserviceService besoinserviceService;
 

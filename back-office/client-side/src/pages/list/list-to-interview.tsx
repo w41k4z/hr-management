@@ -7,20 +7,22 @@ import { V_besoinannonce } from "../../model/V_besoinannonce";
 
 function ListInterview() {
   const [isPageLoad, setIsPageLoad] = useState<boolean>(false);
-  const [all_V_besoinannonce , setBesoinAnnonce] = useState<V_besoinannonce[]>([]);
+  const [all_V_besoinannonce, setBesoinAnnonce] = useState<V_besoinannonce[]>(
+    []
+  );
   useEffect(() => {
-    if(isPageLoad === false){
+    if (isPageLoad === false) {
       setIsPageLoad(true);
       fetch("http://localhost:8080/V_besoinannonce/getAll")
         .then((res) => res.json())
         .then((data) => setBesoinAnnonce(data));
     }
-  } , [isPageLoad, all_V_besoinannonce]);
+  }, [isPageLoad, all_V_besoinannonce]);
 
-  const [idAnnonce , setIdAnnonce] = useState<number>(-1);
+  const [idAnnonce, setIdAnnonce] = useState<number>(-1);
   const handleIdAnnonce = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setIdAnnonce(parseInt(e.target.value));
-  }
+  };
 
   const [resumes, setResumes] = React.useState<ResumeInterface[]>([]);
   useEffect(() => {
@@ -109,16 +111,26 @@ function ListInterview() {
       propTarget: "email",
       format: "default",
     },
+    {
+      name: "Score",
+      propTarget: "point",
+      format: "default",
+    },
   ];
 
-  return (    
+  return (
     <div className="container mt-4">
-      <div className='row'>
-        <div className='col-md-12'>
+      <div className="row">
+        <div className="col-md-12">
           <h3>Annonce associé</h3>
         </div>
         <div>
-          <select defaultValue={0} className="form-select" onChange={handleIdAnnonce} aria-label="Sélectionnez une annonce" >
+          <select
+            defaultValue={0}
+            className="form-select"
+            onChange={handleIdAnnonce}
+            aria-label="Sélectionnez une annonce"
+          >
             <option value={0} disabled selected>
               Sélectionnez une annonce
             </option>

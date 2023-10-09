@@ -9,9 +9,8 @@ import com.example.springserve.helpers.OptionalGet;
 
 @RestController
 @RequestMapping("/Criteregrade")
-@CrossOrigin(origins = "http://localhost:3000")
-public class CriteregradeController 
-{
+@CrossOrigin(origins = { "http://localhost:3000", "http://localhost:3001" })
+public class CriteregradeController {
     @Autowired
     private CriteregradeService criteregradeService;
 

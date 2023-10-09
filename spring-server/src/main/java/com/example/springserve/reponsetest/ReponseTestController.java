@@ -9,9 +9,8 @@ import com.example.springserve.helpers.OptionalGet;
 
 @RestController
 @RequestMapping("/ReponseTest")
-@CrossOrigin("http://localhost:3000")
-public class ReponseTestController 
-{
+@CrossOrigin(origins = { "http://localhost:3000", "http://localhost:3001" })
+public class ReponseTestController {
     @Autowired
     private ReponseTestService reponseTestService;
 

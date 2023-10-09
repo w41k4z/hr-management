@@ -9,8 +9,8 @@ import com.example.springserve.helpers.OptionalGet;
 
 @RestController
 @RequestMapping("/Cvexperience")
-public class CvexperienceController 
-{
+@CrossOrigin(origins = { "http://localhost:3000", "http://localhost:3001" })
+public class CvexperienceController {
     @Autowired
     private CvexperienceService cvexperienceService;
 
