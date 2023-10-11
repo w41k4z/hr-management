@@ -377,3 +377,5 @@ create table fichedeposteaffiliation(
 	foreign key (idaffiliation) references affiliation(id)
 );
 
+
+create or replace view v_personnel as select p.id,p.nom,p.prenom,p.dtn,p.dtembauche,s.nom as service,po.nom as poste,f.nom as fonction from personnel p join service s on s.id=p.idservice join fonction f on f.id=p.idfonction join poste po on po.id=p.idposte;
