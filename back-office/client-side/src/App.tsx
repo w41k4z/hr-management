@@ -20,6 +20,7 @@ import Positions from "./pages/management/positions";
 import Regions from "./pages/management/regions";
 import FicheDePoste from "./pages/fiche-de-poste";
 import Contract from "./pages/contract";
+import Entretient from "./components/entretient/Entretient";
 
 /* INTERFACES */
 import Region from "./model/RegionInterface";
@@ -132,6 +133,7 @@ function App() {
                   element={<FicheDePoste />}
                 />
                 <Route path="/embauche/contrat" element={<Contract />} />
+                <Route path="/entretient/confirm" element={<Entretient />} />
 
                 {/* Error 404 */}
                 <Route path="*" element={<p>404 Not Found</p>} />
