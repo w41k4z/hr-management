@@ -311,3 +311,69 @@ CREATE VIEW "public".v_besoinannonce AS  SELECT a.id AS idannonce,
     bs.typecontrat
    FROM (annonce a
      JOIN besoinservice bs ON ((bs.id = a.idbesoinservice)));
+
+
+create table fonction(
+	id serial primary key,
+	nom varchar(10)
+);
+
+insert into fonction VALUES
+(default,'F1'),
+(default,'HC');
+
+
+CREATE SEQUENCE personnel_id_seq START WITH 1 INCREMENT BY 1;
+
+CREATE  TABLE personnel ( 
+	id                   bigint DEFAULT nextval('personnel_id_seq'::regclass) NOT NULL  ,
+	idposte              bigint    ,
+	idservice            bigint    ,
+	nom varchar(255),
+	prenom varchar(255),
+	dtn date,
+	dtembauche date,
+	idfonction           integer,
+	CONSTRAINT personnel_pkey PRIMARY KEY ( id )
+ );
+
+ALTER TABLE personnel ADD CONSTRAINT fk_personnel_poste FOREIGN KEY ( idposte ) REFERENCES poste( id ) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE personnel ADD CONSTRAINT fk_personnel_service FOREIGN KEY ( idservice ) REFERENCES service( id ) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE personnel ADD CONSTRAINT fk_personnel_fonction FOREIGN KEY ( idfonction ) REFERENCES fonction( id ) ON DELETE CASCADE ON UPDATE CASCADE;
+
+insert into personnel VALUES
+(default,1,1,'PN1','PN1','1990-01-01','2020-01-01',1),
+(default,2,2,'PN2','PN2','1998-08-08','2022-02-02',2);
+
+
+create table affiliation(
+	id serial primary key,
+	nom varchar(200)
+);
+
+insert into affiliation VALUES
+(default,'Cnaps'),
+(default,'Ostie');
+
+
+create table fichedeposte(
+	id serial primary key,
+	idcv bigint,
+	contrat varchar(200),
+	pathcontrat varchar(255),
+	responsabilite text,
+	mission text,
+	idsuperieur bigint,
+	matricule varchar(10),
+	foreign key (idcv) references cv(id),
+	foreign key (idsuperieur) references personnel(id)
+);
+
+create table fichedeposteaffiliation(
+	id serial primary key,
+	idfichedeposte integer,
+	idaffiliation integer,
+	foreign key (idfichedeposte) references fichedeposte(id),
+	foreign key (idaffiliation) references affiliation(id)
+);
+

@@ -140,3 +140,11 @@ INSERT INTO poste VALUES
 (default,'P1'),
 (default,'P2'),
 (default,'P3');
+
+
+insert into cv VALUES 
+(default,'A1','C1','A1@mail.com','CVN1','CVP1','Homme','Marie','T1'),
+(default,'A2','C2','A2@mail.com','CVN2','CVP2','Homme','Marie','T2');
+
+
+
