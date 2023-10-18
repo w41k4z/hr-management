@@ -146,5 +146,16 @@ insert into cv VALUES
 (default,'A1','C1','A1@mail.com','CVN1','CVP1','Homme','Marie','T1'),
 (default,'A2','C2','A2@mail.com','CVN2','CVP2','Homme','Marie','T2');
 
+insert into fonction VALUES
+(default,'F1'),
+(default,'HC');
+
+insert into personnel VALUES
+(default,1,1,'PN1','PN1','1990-01-01','2020-01-01',1),
+(default,2,2,'PN2','PN2','1998-08-08','2022-02-02',2);
+
+insert into affiliation VALUES
+(default,'Cnaps'),
+(default,'Ostie');
 
 

@@ -1,7 +1,7 @@
 export interface V_besoinannonce{
     idannonce         : number,
     id                : number,
-    datebesoinservice : Date,
+    datebesoinservice : Date | null,
     idservice         : number,
     idregion          : number,
     idposte           : number,
