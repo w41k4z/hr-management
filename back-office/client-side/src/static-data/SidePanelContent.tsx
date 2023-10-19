@@ -1,4 +1,5 @@
 import * as FlatColor from "react-icons/fc";
+import { GiPayMoney } from "react-icons/gi";
 
 export const SidePanelContent = [
   // {
@@ -136,13 +137,13 @@ export const SidePanelContent = [
     icon: <FlatColor.FcApproval />,
     onItemClick: () => {},
   },
-  // {
-  //   title: "Form resume",
-  //   type: "nav-item",
-  //   path: "/test/resume",
-  //   icon: <FlatColor.FcKindle />,
-  //   onItemClick: () => {},
-  // },
+  {
+    title: "Payroll",
+    type: "nav-item",
+    path: "/pay/payroll",
+    icon: <GiPayMoney />,
+    onItemClick: () => {},
+  },
 
   // {
   //   title: "Annonce",
