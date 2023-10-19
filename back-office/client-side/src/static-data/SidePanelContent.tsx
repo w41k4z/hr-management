@@ -138,7 +138,13 @@ export const SidePanelContent = [
     onItemClick: () => {},
   },
   {
-
+    title: "Wage slip",
+    type: "nav-item",
+    path: "/wage/wageslip",
+    icon: <FlatColor.FcApproval />,
+    onItemClick: () => {},
+  },
+  {
     title: "Conge",
     type: "nav-item",
     path: "/conge",
@@ -152,7 +158,7 @@ export const SidePanelContent = [
   //   icon: <FlatColor.FcKindle />,
   //   onItemClick: () => {},
   // },
-
+  {
     title: "Payroll",
     type: "nav-item",
     path: "/pay/payroll",

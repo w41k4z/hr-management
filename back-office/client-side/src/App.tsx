@@ -36,6 +36,7 @@ import { SidePanelContent } from "./static-data/SidePanelContent";
 import { useEffect, useState } from "react";
 import PageAnswerQuestion from "./pages/test/answerquestion";
 import Conge from "./pages/conge";
+import WageSlip from "./components/wage-slip/WageSlip";
 
 /* COMPONENTS */
 const sidePanelHeader = (
@@ -138,6 +139,8 @@ function App() {
                 <Route path="/conge" element={<Conge />} />
                 <Route path="/entretient/confirm" element={<Entretient />} />
                 <Route path="/pay/payroll" element={<Payroll />} />
+
+                <Route path="/wage/wageslip" element={<WageSlip />} />
 
                 {/* Error 404 */}
                 <Route path="*" element={<p>404 Not Found</p>} />
