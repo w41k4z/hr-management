@@ -136,6 +136,13 @@ export const SidePanelContent = [
     icon: <FlatColor.FcApproval />,
     onItemClick: () => {},
   },
+  {
+    title: "Wage slip",
+    type: "nav-item",
+    path: "/wage/wageslip",
+    icon: <FlatColor.FcApproval />,
+    onItemClick: () => {},
+  },
   // {
   //   title: "Form resume",
   //   type: "nav-item",
