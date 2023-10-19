@@ -129,6 +129,13 @@ export const SidePanelContent = [
     icon: <FlatColor.FcApproval />,
     onItemClick: () => {},
   },
+  {
+    title: "Conge",
+    type: "nav-item",
+    path: "/conge",
+    icon: <FlatColor.FcApproval />,
+    onItemClick: () => {},
+  },
   // {
   //   title: "Form resume",
   //   type: "nav-item",

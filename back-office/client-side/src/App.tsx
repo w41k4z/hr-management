@@ -33,6 +33,7 @@ import "./assets/css/App.css";
 import { SidePanelContent } from "./static-data/SidePanelContent";
 import { useEffect, useState } from "react";
 import PageAnswerQuestion from "./pages/test/answerquestion";
+import Conge from "./pages/conge";
 
 /* COMPONENTS */
 const sidePanelHeader = (
@@ -132,6 +133,7 @@ function App() {
                   element={<FicheDePoste />}
                 />
                 <Route path="/embauche/contrat" element={<Contract />} />
+                <Route path="/conge" element={<Conge />} />
 
                 {/* Error 404 */}
                 <Route path="*" element={<p>404 Not Found</p>} />
