@@ -19,6 +19,7 @@ interface BasicCRUDTableProps {
   indexedRow?: boolean;
   hasImportCsv?: boolean;
   hasExportPdf?: boolean;
+  hasAction?: boolean;
   addModalFormInputs: { input: ReactNode; label: ReactNode }[];
   onAdd: () => void;
   onUpdate: (row: any) => void;
@@ -37,6 +38,7 @@ const BasicCRUDTable = ({
   indexedRow = false,
   hasImportCsv = false,
   hasExportPdf = false,
+  hasAction = true,
   addModalFormInputs,
   onAdd,
   onUpdate,
@@ -242,12 +244,14 @@ const BasicCRUDTable = ({
               </button>
             )}
           </div>
-          <button
-            className="mx-1 btn btn-outline-primary"
-            onClick={showAddModal}
-          >
-            <BiPlus style={{ fontSize: "20px" }} />
-          </button>
+          {hasAction && (
+            <button
+              className="mx-1 btn btn-outline-primary"
+              onClick={showAddModal}
+            >
+              <BiPlus style={{ fontSize: "20px" }} />
+            </button>
+          )}
           {addModalVisibility && addModal}
         </div>
       </div>
@@ -297,9 +301,11 @@ const BasicCRUDTable = ({
                   </th>
                 );
               })}
-              <th scope="col" className="text-center">
-                <div></div> <div style={{ height: "30px" }}></div>
-              </th>
+              {hasAction && (
+                <th scope="col" className="text-center">
+                  <div></div> <div style={{ height: "30px" }}></div>
+                </th>
+              )}
             </tr>
           </thead>
           <tbody className="px-2">
@@ -318,7 +324,6 @@ const BasicCRUDTable = ({
                     </td>
                   );
                 })}
-                <td></td>
               </tr>
             )}
             {filteredData.map((data, index) => (
@@ -326,6 +331,7 @@ const BasicCRUDTable = ({
                 key={"Table-row-" + index}
                 columns={columns}
                 data={data}
+                hasAction={hasAction}
                 dataPropIDName={dataPropIDName}
                 indexedRow={indexedRow}
                 index={index + 1}

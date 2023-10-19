@@ -13,7 +13,7 @@ public class V_besoinannonceService {
     @Autowired(required = false)
     private V_besoinannonceRepository besoinAnnonceViewRepository;
 
-    public List<V_besoinannonce> getAllRegions() {
+    public List<V_besoinannonce> getAllV_besoinannonces() {
         return besoinAnnonceViewRepository.findAll();
     }
 

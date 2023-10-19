@@ -20,6 +20,8 @@ import Positions from "./pages/management/positions";
 import Regions from "./pages/management/regions";
 import FicheDePoste from "./pages/fiche-de-poste";
 import Contract from "./pages/contract";
+import Entretient from "./components/entretient/Entretient";
+import Payroll from "./pages/payroll";
 
 /* INTERFACES */
 import Region from "./model/RegionInterface";
@@ -62,7 +64,7 @@ function App() {
     <BrowserRouter>
       <div className="d-flex">
         <SidePanel header={sidePanelHeader} panelItems={SidePanelContent} />
-        <div className="content w-100">
+        <div className="content w-75">
           <header className="head-nav sticky-top px-md-5 px-sm-2 d-flex justify-content-between align-items-center">
             <div className="search-bar d-flex align-items-center w-25">
               <input
@@ -134,6 +136,8 @@ function App() {
                 />
                 <Route path="/embauche/contrat" element={<Contract />} />
                 <Route path="/conge" element={<Conge />} />
+                <Route path="/entretient/confirm" element={<Entretient />} />
+                <Route path="/pay/payroll" element={<Payroll />} />
 
                 {/* Error 404 */}
                 <Route path="*" element={<p>404 Not Found</p>} />

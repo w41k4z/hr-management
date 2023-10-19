@@ -7,6 +7,7 @@ import { BiEditAlt, BiTrash } from "react-icons/bi";
 import { formatNumberToCurrency } from "../../helpers/NumberHelper";
 
 interface TableRowProps {
+  hasAction?: boolean;
   columns: any[];
   data: any;
   indexedRow: boolean;
@@ -18,6 +19,7 @@ interface TableRowProps {
 }
 
 const TableRow = ({
+  hasAction = false,
   columns,
   data,
   indexedRow,
@@ -128,27 +130,29 @@ const TableRow = ({
           </td>
         );
       })}
-      <td className="btn-group">
-        <button
-          className="btn btn-outline-warning"
-          onClick={() => {
-            showUpdateModal();
-          }}
-        >
-          <BiEditAlt />
-        </button>
-        {updateModalVisibility && updateModal(data)}
-        <button
-          className="btn btn-outline-danger"
-          onClick={(event) => {
-            event.preventDefault();
-            showDeleteModal();
-          }}
-        >
-          <BiTrash />
-        </button>
-        {deleteModalVisibility && deleteModal(data)}
-      </td>
+      {hasAction && (
+        <td className="btn-group w-100">
+          <button
+            className="btn btn-outline-warning"
+            onClick={() => {
+              showUpdateModal();
+            }}
+          >
+            <BiEditAlt />
+          </button>
+          {updateModalVisibility && updateModal(data)}
+          <button
+            className="btn btn-outline-danger"
+            onClick={(event) => {
+              event.preventDefault();
+              showDeleteModal();
+            }}
+          >
+            <BiTrash />
+          </button>
+          {deleteModalVisibility && deleteModal(data)}
+        </td>
+      )}
     </tr>
   );
 };

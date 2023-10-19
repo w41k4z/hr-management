@@ -1,4 +1,5 @@
 import * as FlatColor from "react-icons/fc";
+import { GiPayMoney } from "react-icons/gi";
 
 export const SidePanelContent = [
   // {
@@ -48,6 +49,13 @@ export const SidePanelContent = [
     title: "Question de test",
     type: "nav-item",
     path: "/question/Test/questionaddy",
+    icon: <FlatColor.FcDocument />,
+    onItemClick: () => {},
+  },
+  {
+    title: "Entretient passe",
+    type: "nav-item",
+    path: "/entretient/confirm",
     icon: <FlatColor.FcDocument />,
     onItemClick: () => {},
   },
@@ -130,6 +138,7 @@ export const SidePanelContent = [
     onItemClick: () => {},
   },
   {
+
     title: "Conge",
     type: "nav-item",
     path: "/conge",
@@ -143,6 +152,14 @@ export const SidePanelContent = [
   //   icon: <FlatColor.FcKindle />,
   //   onItemClick: () => {},
   // },
+
+    title: "Payroll",
+    type: "nav-item",
+    path: "/pay/payroll",
+    icon: <GiPayMoney />,
+    onItemClick: () => {},
+  },
+
 
   // {
   //   title: "Annonce",

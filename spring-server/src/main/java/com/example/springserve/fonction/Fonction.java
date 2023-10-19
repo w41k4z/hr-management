@@ -1,7 +1,4 @@
-package com.example.springserve.fichedeposteaffiliation;
-
-import java.sql.Date;
-
+package com.example.springserve.fonction;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -11,16 +8,14 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "fichedeposteaffiliation")
-public class Fichedeposteaffiliation {
+@Table(name = "filiere")
+public class Fonction {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long id;
 
-    @Column(name = "idfichedeposte")
-    public Long idfichedeposte;
-
-    @Column(name = "idaffiliation")
-    public Long idaffiliation;
+    @Column(name = "nom")
+    public String nom;
+    
 }
