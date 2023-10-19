@@ -138,12 +138,28 @@ export const SidePanelContent = [
     onItemClick: () => {},
   },
   {
+
+    title: "Conge",
+    type: "nav-item",
+    path: "/conge",
+    icon: <FlatColor.FcApproval />,
+    onItemClick: () => {},
+  },
+  // {
+  //   title: "Form resume",
+  //   type: "nav-item",
+  //   path: "/test/resume",
+  //   icon: <FlatColor.FcKindle />,
+  //   onItemClick: () => {},
+  // },
+
     title: "Payroll",
     type: "nav-item",
     path: "/pay/payroll",
     icon: <GiPayMoney />,
     onItemClick: () => {},
   },
+
 
   // {
   //   title: "Annonce",
