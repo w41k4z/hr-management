@@ -54,6 +54,8 @@ CREATE SEQUENCE "public".cvgrade_id_seq2 START WITH 1 INCREMENT BY 1;
 
 CREATE SEQUENCE "public".cvgrade_id_seq3 START WITH 1 INCREMENT BY 1;
 
+CREATE SEQUENCE "public".debutconge_id_seq START WITH 1 INCREMENT BY 1;
+
 CREATE SEQUENCE "public".fichedeposte_id_seq START WITH 1 INCREMENT BY 1;
 
 CREATE SEQUENCE "public".fichedeposteaffiliation_id_seq START WITH 1 INCREMENT BY 1;
@@ -65,6 +67,8 @@ CREATE SEQUENCE "public".filiere_id_seq1 START WITH 1 INCREMENT BY 1;
 CREATE SEQUENCE "public".filiere_id_seq2 START WITH 1 INCREMENT BY 1;
 
 CREATE SEQUENCE "public".filiere_id_seq3 START WITH 1 INCREMENT BY 1;
+
+CREATE SEQUENCE "public".finconge_id_seq START WITH 1 INCREMENT BY 1;
 
 CREATE SEQUENCE "public".fonction_id_seq START WITH 1 INCREMENT BY 1;
 
@@ -171,10 +175,27 @@ CREATE  TABLE "public".cvexperience (
 	CONSTRAINT cvexperience_pkey PRIMARY KEY ( id )
  );
 
+CREATE  TABLE "public".debutconge ( 
+	id                   bigint DEFAULT nextval('debutconge_id_seq'::regclass) NOT NULL  ,
+	debut                date    ,
+	idpersonnel          bigint    ,
+	motif                varchar(255)    ,
+	"type"               bigint    ,
+	CONSTRAINT debutconge_pkey PRIMARY KEY ( id )
+ );
+
 CREATE  TABLE "public".filiere ( 
 	id                   bigint DEFAULT nextval('filiere_id_seq3'::regclass) NOT NULL  ,
 	nom                  varchar(255)    ,
 	CONSTRAINT filiere_pkey PRIMARY KEY ( id )
+ );
+
+CREATE  TABLE "public".finconge ( 
+	id                   bigint DEFAULT nextval('finconge_id_seq'::regclass) NOT NULL  ,
+	duree                double precision    ,
+	fin                  date    ,
+	iddebut              bigint    ,
+	CONSTRAINT finconge_pkey PRIMARY KEY ( id )
  );
 
 CREATE  TABLE "public".fonction ( 
@@ -192,6 +213,7 @@ CREATE  TABLE "public".grade (
 CREATE  TABLE "public".poste ( 
 	id                   bigint DEFAULT nextval('poste_id_seq3'::regclass) NOT NULL  ,
 	nom                  varchar(255)    ,
+	starting_salary      double precision  NOT NULL  ,
 	CONSTRAINT poste_pkey PRIMARY KEY ( id )
  );
 
@@ -241,6 +263,32 @@ CREATE  TABLE "public".service (
 	id                   bigint DEFAULT nextval('service_id_seq3'::regclass) NOT NULL  ,
 	nom                  varchar(255)    ,
 	CONSTRAINT service_pkey PRIMARY KEY ( id )
+ );
+
+CREATE  TABLE "public".v_congerestant ( 
+	idpersonnel          bigint  NOT NULL  ,
+	nom                  varchar(255)    ,
+	prenom               varchar(255)    ,
+	reste                double precision    ,
+	CONSTRAINT v_congerestant_pkey PRIMARY KEY ( idpersonnel )
+ );
+
+CREATE  TABLE "public".v_prendreconge ( 
+	idpersonnel          bigint  NOT NULL  ,
+	nom                  varchar(255)    ,
+	prenom               varchar(255)    ,
+	CONSTRAINT v_prendreconge_pkey PRIMARY KEY ( idpersonnel )
+ );
+
+CREATE  TABLE "public".v_terminerconge ( 
+	iddebut              bigint  NOT NULL  ,
+	debut                date    ,
+	idpersonnel          bigint    ,
+	motif                varchar(255)    ,
+	nom                  varchar(255)    ,
+	prenom               varchar(255)    ,
+	"type"               bigint    ,
+	CONSTRAINT v_terminerconge_pkey PRIMARY KEY ( iddebut )
  );
 
 CREATE  TABLE "public".besoinservice ( 
@@ -367,13 +415,3 @@ CREATE VIEW "public".v_personnel AS  SELECT p.id,
      JOIN service s ON ((s.id = p.idservice)))
      JOIN fonction f ON ((f.id = p.idfonction)))
      JOIN poste po ON ((po.id = p.idposte)));
-
-
-insert into fonction VALUES
-(default,'F1'),
-(default,'HC');
-
-insert into affiliation VALUES
-(default,'Cnaps'),
-(default,'Ostie');
-

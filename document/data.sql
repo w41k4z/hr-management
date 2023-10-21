@@ -1,161 +1,114 @@
-INSERT INTO service VALUES
-(default, 'security'),
-(default, 'finance'),
-(default, 'information system'),
-(default, 'marketing'),
-(default, 'production'),
-(default, 'sales'),
-(default, 'customer service'),
-(default, 'administration'),
-(default, 'maintenance'),
-(default, 'research'),
-(default, 'planning'),
-(default, 'quality assurance'),
-(default, 'driving');
-
-INSERT INTO region VALUES
-(default, 'Diana'),
-(default,	'Sava'),
-(default,	'Itasy'),	
-(default,	'Analamanga'),	
-(default,	'Vakinankaratra'),	
-(default,	'Bongolava'),
-(default,	'Sofia'),
-(default,	'Boeny'),	 	
-(default, 'Betsiboka'),
-(default, 'Melaky'),
-(default, 'Alaotra-Mangoro'),	
-(default, 'Atsinanana'),
-(default, 'Analanjirofo'),
-(default, 'Ambatosoa'),
-(default, 'Amoron i Mania'),	
-(default, 'Vatovavy'),
-(default, 'Fitovinany'),	
-(default, 'Haute Matsiatra'),	
-(default, 'Atsimo-Atsinanana'),	
-(default, 'Ihorombe'),
-(default, 'Menabe'),
-(default, 'Atsimo-Andrefana');
-
-
-
--- FOR ANNONCE ONLY
-INSERT INTO poste VALUES
-(default,'Directeur des opérations'),
-(default,'Responsable des ventes'),
-(default,'Analyste financier'),
-(default,'Ingénieur logiciel'),
-(default,'Spécialiste en marketing'),
-(default,'Assistant administratif'),
-(default,'Technicien de support'),
-(default,'Chef de projet'),
-(default,'Ressources humaines');
-
-INSERT INTO besoinservice (id, datebesoinservice, idservice, idregion, idposte, qualite, description, typecontrat, volumetache, volumehoraire)
-VALUES (default, '2023-10-02', 1, 2, 3, 'High', 'Ingénieur logiciel chez XYZ Corp. - Full-time position', 'Full-time', 40.0, 160.0);
-
-INSERT INTO besoinservice (id, datebesoinservice, idservice, idregion, idposte, qualite, description, typecontrat, volumetache, volumehoraire)
-VALUES (default, '2023-10-03', 2, 1, 4, 'Medium', 'Développeur Full Stack chez ABC Company - Part-time position', 'Part-time', 20.0, 80.0);
-
-INSERT INTO besoinservice (id, datebesoinservice, idservice, idregion, idposte, qualite, description, typecontrat, volumetache, volumehoraire)
-VALUES (default, '2023-10-04', 3, 3, 2, 'Low', 'Chef de projet IT chez DEF Ltd. - Contractor position', 'Contractor', 30.0, 120.0);
-
-INSERT INTO besoinservice (id, datebesoinservice, idservice, idregion, idposte, qualite, description, typecontrat, volumetache, volumehoraire)
-VALUES (default, '2023-10-05', 1, 2, 5, 'High', 'Ingénieur logiciel chez XYZ Corp. - Full-time position', 'Full-time', 35.0, 140.0);
-
-INSERT INTO besoinservice (id, datebesoinservice, idservice, idregion, idposte, qualite, description, typecontrat, volumetache, volumehoraire)
-VALUES (default, '2023-10-06', 2, 3, 1, 'Medium', 'Développeur Front-end - Part-time position', 'Part-time', 25.0, 100.0);
-
-INSERT INTO annonce VALUES (default, 1);
-INSERT INTO annonce VALUES (default, 2);
-INSERT INTO annonce VALUES (default, 3);
-INSERT INTO annonce VALUES (default, 4);
-INSERT INTO annonce VALUES (default, 5);
-
-INSERT INTO question (id, question)
-VALUES 
-(default, 'Quelles sont vos compétences en développement logiciel ?'),
-(default, 'Avez-vous de l''expérience dans le développement Full Stack ?'),
-(default, 'Comment gérez-vous les projets techniques ?'),
-(default, 'Quelle est votre expérience en tant qu''ingénieur logiciel ?'),
-(default, 'Comment gérez-vous le travail à temps plein ?'),
-(default, 'Quelles sont vos compétences en développement Front-end ?'),
-(default, 'Avez-vous de l''expérience en gestion de projet technique ?'),
-(default, 'Décrivez votre expérience en tant que développeur Full Stack.'),
-(default, 'Comment gérez-vous le travail à temps partiel ?'),
-(default, 'Quelles sont vos compétences en gestion de projet IT ?'),
-(default, 'Quelle est votre expérience en tant que chef de projet IT ?'),
-(default, 'Comment gérez-vous les contrats en tant que contractor ?'),
-(default, 'Quelles sont vos compétences en tant que chef de projet IT ?'),
-(default, 'Quelle est votre expérience en tant que chef de projet IT ?'),
-(default, 'Comment gérez-vous les contrats en tant que contractor ?'),
-(default, 'Quelles sont vos compétences en développement logiciel ?'),
-(default, 'Avez-vous de l''expérience dans le développement Full Stack ?'),
-(default, 'Comment gérez-vous les projets techniques ?'),
-(default, 'Quelle est votre expérience en tant qu''ingénieur logiciel ?'),
-(default, 'Comment gérez-vous le travail à temps plein ?'),
-(default, 'Quelles sont vos compétences en développement Front-end ?'),
-(default, 'Avez-vous de l''expérience en gestion de projet technique ?'),
-(default, 'Décrivez votre expérience en tant que développeur Full Stack.'),
-(default, 'Comment gérez-vous le travail à temps partiel ?'),
-(default, 'Quelles sont vos compétences en gestion de projet IT ?');
-
--- Test Data 1
-INSERT INTO questionannonce (idannonce, idquestion, date_question_annonce)
-VALUES (1, 1, '2023-10-05'), (1, 2, '2023-10-05'), (1, 3, '2023-10-05'), (1, 4, '2023-10-05'), (1, 5, '2023-10-05');
-
--- Test Data 2
-INSERT INTO questionannonce (idannonce, idquestion, date_question_annonce)
-VALUES (2, 6, '2023-10-05'), (2, 7, '2023-10-05'), (2, 8, '2023-10-05'), (2, 9, '2023-10-05'), (2, 10, '2023-10-05');
-
--- Test Data 3
-INSERT INTO questionannonce (idannonce, idquestion, date_question_annonce)
-VALUES (3, 11, '2023-10-05'), (3, 12, '2023-10-05'), (3, 13, '2023-10-05'), (3, 14, '2023-10-05'), (3, 15, '2023-10-05');
-
--- Test Data 4
-INSERT INTO questionannonce (idannonce, idquestion, date_question_annonce)
-VALUES (4, 16, '2023-10-05'), (4, 17, '2023-10-05'), (4, 18, '2023-10-05'), (4, 19, '2023-10-05'), (4, 20, '2023-10-05');
-
--- Test Data 5
-INSERT INTO questionannonce (idannonce, idquestion, date_question_annonce)
-VALUES (5, 21, '2023-10-05'), (5, 22, '2023-10-05'), (5, 23, '2023-10-05'), (5, 24, '2023-10-05'), (5, 25, '2023-10-05');
-
-
-INSERT INTO grade VALUES
-(default,'BACC'),
-(default,'DTS'),
-(default,'LICENSE'),
-(default,'MASTER'),
-(default,'DOCTORAT');
-
-
-INSERT INTO filiere VALUES
-(default,'Design'),
-(default,'Info'),
-(default,'Compta'),
-(default,'Managment');
-
-
-INSERT INTO poste VALUES
-(default,'P1', 20000),
-(default,'P2', 20000),
-(default,'P3', 20000);
-
-
-insert into cv VALUES 
-(default,'A1','C1','A1@mail.com','CVN1','CVP1','Homme','Marie','T1'),
-(default,'A2','C2','A2@mail.com','CVN2','CVP2','Homme','Marie','T2');
-
-insert into fonction VALUES
-(default,'F1'),
-(default,'HC');
-
-insert into personnel VALUES
-(default,1,1,'PN1','PN1','1990-01-01','2020-01-01',1),
-(default,2,2,'PN2','PN2','1998-08-08','2022-02-02',2);
-
-insert into affiliation VALUES
-(default,'Cnaps'),
-(default,'Ostie');
-
-
+INSERT INTO "public".affiliation( id, nom ) VALUES ( 1, 'Cnaps');
+INSERT INTO "public".affiliation( id, nom ) VALUES ( 2, 'Ostie');
+INSERT INTO "public".affiliation( id, nom ) VALUES ( 3, 'Cnaps');
+INSERT INTO "public".affiliation( id, nom ) VALUES ( 4, 'Ostie');
+INSERT INTO "public".annonce( id, idbesoinservice ) VALUES ( 1, 1);
+INSERT INTO "public".annonce( id, idbesoinservice ) VALUES ( 2, 2);
+INSERT INTO "public".annonce( id, idbesoinservice ) VALUES ( 3, 3);
+INSERT INTO "public".annonce( id, idbesoinservice ) VALUES ( 4, 4);
+INSERT INTO "public".annonce( id, idbesoinservice ) VALUES ( 5, 5);
+INSERT INTO "public".cv( id, adresse, cin, email, nom, prenom, sexe, sm, tel ) VALUES ( 1, 'A1', 'C1', 'A1@mail.com', 'CVN1', 'CVP1', 'Homme', 'Marie', 'T1');
+INSERT INTO "public".cv( id, adresse, cin, email, nom, prenom, sexe, sm, tel ) VALUES ( 2, 'A2', 'C2', 'A2@mail.com', 'CVN2', 'CVP2', 'Homme', 'Marie', 'T2');
+INSERT INTO "public".filiere( id, nom ) VALUES ( 1, 'Design');
+INSERT INTO "public".filiere( id, nom ) VALUES ( 2, 'Info');
+INSERT INTO "public".filiere( id, nom ) VALUES ( 3, 'Compta');
+INSERT INTO "public".filiere( id, nom ) VALUES ( 4, 'Managment');
+INSERT INTO "public".fonction( id, nom ) VALUES ( 1, 'F1');
+INSERT INTO "public".fonction( id, nom ) VALUES ( 2, 'HC');
+INSERT INTO "public".fonction( id, nom ) VALUES ( 3, 'F1');
+INSERT INTO "public".fonction( id, nom ) VALUES ( 4, 'HC');
+INSERT INTO "public".grade( id, nom ) VALUES ( 1, 'BACC');
+INSERT INTO "public".grade( id, nom ) VALUES ( 2, 'DTS');
+INSERT INTO "public".grade( id, nom ) VALUES ( 3, 'LICENSE');
+INSERT INTO "public".grade( id, nom ) VALUES ( 4, 'MASTER');
+INSERT INTO "public".grade( id, nom ) VALUES ( 5, 'DOCTORAT');
+INSERT INTO "public".poste( id, nom, starting_salary ) VALUES ( 3, 'P1', 20000.0);
+INSERT INTO "public".poste( id, nom, starting_salary ) VALUES ( 4, 'P2', 20000.0);
+INSERT INTO "public".poste( id, nom, starting_salary ) VALUES ( 5, 'P3', 20000.0);
+INSERT INTO "public".question( id, question ) VALUES ( 1, 'Quelles sont vos compétences en développement logiciel ?');
+INSERT INTO "public".question( id, question ) VALUES ( 2, 'Avez-vous de l''expérience dans le développement Full Stack ?');
+INSERT INTO "public".question( id, question ) VALUES ( 3, 'Comment gérez-vous les projets techniques ?');
+INSERT INTO "public".question( id, question ) VALUES ( 4, 'Quelle est votre expérience en tant qu''ingénieur logiciel ?');
+INSERT INTO "public".question( id, question ) VALUES ( 5, 'Comment gérez-vous le travail à temps plein ?');
+INSERT INTO "public".question( id, question ) VALUES ( 6, 'Quelles sont vos compétences en développement Front-end ?');
+INSERT INTO "public".question( id, question ) VALUES ( 7, 'Avez-vous de l''expérience en gestion de projet technique ?');
+INSERT INTO "public".question( id, question ) VALUES ( 8, 'Décrivez votre expérience en tant que développeur Full Stack.');
+INSERT INTO "public".question( id, question ) VALUES ( 9, 'Comment gérez-vous le travail à temps partiel ?');
+INSERT INTO "public".question( id, question ) VALUES ( 10, 'Quelles sont vos compétences en gestion de projet IT ?');
+INSERT INTO "public".question( id, question ) VALUES ( 11, 'Quelle est votre expérience en tant que chef de projet IT ?');
+INSERT INTO "public".question( id, question ) VALUES ( 12, 'Comment gérez-vous les contrats en tant que contractor ?');
+INSERT INTO "public".question( id, question ) VALUES ( 13, 'Quelles sont vos compétences en tant que chef de projet IT ?');
+INSERT INTO "public".question( id, question ) VALUES ( 14, 'Quelle est votre expérience en tant que chef de projet IT ?');
+INSERT INTO "public".question( id, question ) VALUES ( 15, 'Comment gérez-vous les contrats en tant que contractor ?');
+INSERT INTO "public".question( id, question ) VALUES ( 16, 'Quelles sont vos compétences en développement logiciel ?');
+INSERT INTO "public".question( id, question ) VALUES ( 17, 'Avez-vous de l''expérience dans le développement Full Stack ?');
+INSERT INTO "public".question( id, question ) VALUES ( 18, 'Comment gérez-vous les projets techniques ?');
+INSERT INTO "public".question( id, question ) VALUES ( 19, 'Quelle est votre expérience en tant qu''ingénieur logiciel ?');
+INSERT INTO "public".question( id, question ) VALUES ( 20, 'Comment gérez-vous le travail à temps plein ?');
+INSERT INTO "public".question( id, question ) VALUES ( 21, 'Quelles sont vos compétences en développement Front-end ?');
+INSERT INTO "public".question( id, question ) VALUES ( 22, 'Avez-vous de l''expérience en gestion de projet technique ?');
+INSERT INTO "public".question( id, question ) VALUES ( 23, 'Décrivez votre expérience en tant que développeur Full Stack.');
+INSERT INTO "public".question( id, question ) VALUES ( 24, 'Comment gérez-vous le travail à temps partiel ?');
+INSERT INTO "public".question( id, question ) VALUES ( 25, 'Quelles sont vos compétences en gestion de projet IT ?');
+INSERT INTO "public".questionannonce( date_question_annonce, id, idannonce, idquestion ) VALUES ( '2023-10-05', 1, 1, 1);
+INSERT INTO "public".questionannonce( date_question_annonce, id, idannonce, idquestion ) VALUES ( '2023-10-05', 2, 1, 2);
+INSERT INTO "public".questionannonce( date_question_annonce, id, idannonce, idquestion ) VALUES ( '2023-10-05', 3, 1, 3);
+INSERT INTO "public".questionannonce( date_question_annonce, id, idannonce, idquestion ) VALUES ( '2023-10-05', 4, 1, 4);
+INSERT INTO "public".questionannonce( date_question_annonce, id, idannonce, idquestion ) VALUES ( '2023-10-05', 5, 1, 5);
+INSERT INTO "public".questionannonce( date_question_annonce, id, idannonce, idquestion ) VALUES ( '2023-10-05', 6, 2, 6);
+INSERT INTO "public".questionannonce( date_question_annonce, id, idannonce, idquestion ) VALUES ( '2023-10-05', 7, 2, 7);
+INSERT INTO "public".questionannonce( date_question_annonce, id, idannonce, idquestion ) VALUES ( '2023-10-05', 8, 2, 8);
+INSERT INTO "public".questionannonce( date_question_annonce, id, idannonce, idquestion ) VALUES ( '2023-10-05', 9, 2, 9);
+INSERT INTO "public".questionannonce( date_question_annonce, id, idannonce, idquestion ) VALUES ( '2023-10-05', 10, 2, 10);
+INSERT INTO "public".questionannonce( date_question_annonce, id, idannonce, idquestion ) VALUES ( '2023-10-05', 11, 3, 11);
+INSERT INTO "public".questionannonce( date_question_annonce, id, idannonce, idquestion ) VALUES ( '2023-10-05', 12, 3, 12);
+INSERT INTO "public".questionannonce( date_question_annonce, id, idannonce, idquestion ) VALUES ( '2023-10-05', 13, 3, 13);
+INSERT INTO "public".questionannonce( date_question_annonce, id, idannonce, idquestion ) VALUES ( '2023-10-05', 14, 3, 14);
+INSERT INTO "public".questionannonce( date_question_annonce, id, idannonce, idquestion ) VALUES ( '2023-10-05', 15, 3, 15);
+INSERT INTO "public".questionannonce( date_question_annonce, id, idannonce, idquestion ) VALUES ( '2023-10-05', 16, 4, 16);
+INSERT INTO "public".questionannonce( date_question_annonce, id, idannonce, idquestion ) VALUES ( '2023-10-05', 17, 4, 17);
+INSERT INTO "public".questionannonce( date_question_annonce, id, idannonce, idquestion ) VALUES ( '2023-10-05', 18, 4, 18);
+INSERT INTO "public".questionannonce( date_question_annonce, id, idannonce, idquestion ) VALUES ( '2023-10-05', 19, 4, 19);
+INSERT INTO "public".questionannonce( date_question_annonce, id, idannonce, idquestion ) VALUES ( '2023-10-05', 20, 4, 20);
+INSERT INTO "public".questionannonce( date_question_annonce, id, idannonce, idquestion ) VALUES ( '2023-10-05', 21, 5, 21);
+INSERT INTO "public".questionannonce( date_question_annonce, id, idannonce, idquestion ) VALUES ( '2023-10-05', 22, 5, 22);
+INSERT INTO "public".questionannonce( date_question_annonce, id, idannonce, idquestion ) VALUES ( '2023-10-05', 23, 5, 23);
+INSERT INTO "public".questionannonce( date_question_annonce, id, idannonce, idquestion ) VALUES ( '2023-10-05', 24, 5, 24);
+INSERT INTO "public".questionannonce( date_question_annonce, id, idannonce, idquestion ) VALUES ( '2023-10-05', 25, 5, 25);
+INSERT INTO "public".region( id, nom ) VALUES ( 1, 'Diana');
+INSERT INTO "public".region( id, nom ) VALUES ( 2, 'Sava');
+INSERT INTO "public".region( id, nom ) VALUES ( 3, 'Itasy');
+INSERT INTO "public".region( id, nom ) VALUES ( 4, 'Analamanga');
+INSERT INTO "public".region( id, nom ) VALUES ( 5, 'Vakinankaratra');
+INSERT INTO "public".region( id, nom ) VALUES ( 6, 'Bongolava');
+INSERT INTO "public".region( id, nom ) VALUES ( 7, 'Sofia');
+INSERT INTO "public".region( id, nom ) VALUES ( 8, 'Boeny');
+INSERT INTO "public".region( id, nom ) VALUES ( 9, 'Betsiboka');
+INSERT INTO "public".region( id, nom ) VALUES ( 10, 'Melaky');
+INSERT INTO "public".region( id, nom ) VALUES ( 11, 'Alaotra-Mangoro');
+INSERT INTO "public".region( id, nom ) VALUES ( 12, 'Atsinanana');
+INSERT INTO "public".region( id, nom ) VALUES ( 13, 'Analanjirofo');
+INSERT INTO "public".region( id, nom ) VALUES ( 14, 'Ambatosoa');
+INSERT INTO "public".region( id, nom ) VALUES ( 15, 'Amoron i Mania');
+INSERT INTO "public".region( id, nom ) VALUES ( 16, 'Vatovavy');
+INSERT INTO "public".region( id, nom ) VALUES ( 17, 'Fitovinany');
+INSERT INTO "public".region( id, nom ) VALUES ( 18, 'Haute Matsiatra');
+INSERT INTO "public".region( id, nom ) VALUES ( 19, 'Atsimo-Atsinanana');
+INSERT INTO "public".region( id, nom ) VALUES ( 20, 'Ihorombe');
+INSERT INTO "public".region( id, nom ) VALUES ( 21, 'Menabe');
+INSERT INTO "public".region( id, nom ) VALUES ( 22, 'Atsimo-Andrefana');
+INSERT INTO "public".service( id, nom ) VALUES ( 1, 'security');
+INSERT INTO "public".service( id, nom ) VALUES ( 2, 'finance');
+INSERT INTO "public".service( id, nom ) VALUES ( 3, 'information system');
+INSERT INTO "public".service( id, nom ) VALUES ( 4, 'marketing');
+INSERT INTO "public".service( id, nom ) VALUES ( 5, 'production');
+INSERT INTO "public".service( id, nom ) VALUES ( 6, 'sales');
+INSERT INTO "public".service( id, nom ) VALUES ( 7, 'customer service');
+INSERT INTO "public".service( id, nom ) VALUES ( 8, 'administration');
+INSERT INTO "public".service( id, nom ) VALUES ( 9, 'maintenance');
+INSERT INTO "public".service( id, nom ) VALUES ( 10, 'research');
+INSERT INTO "public".service( id, nom ) VALUES ( 11, 'planning');
+INSERT INTO "public".service( id, nom ) VALUES ( 12, 'quality assurance');
+INSERT INTO "public".service( id, nom ) VALUES ( 13, 'driving');
+INSERT INTO "public".personnel( id, idposte, idservice, nom, prenom, dtn, dtembauche, idfonction ) VALUES ( 7, 3, 1, 'PN1', 'PN1', '1990-01-01', '2020-01-01', 1);
+INSERT INTO "public".personnel( id, idposte, idservice, nom, prenom, dtn, dtembauche, idfonction ) VALUES ( 8, 4, 2, 'PN2', 'PN2', '1998-08-08', '2022-02-02', 2);
