@@ -47,12 +47,12 @@ const BasicCRUDTable = ({
   uploadCall,
 }: BasicCRUDTableProps) => {
   /* HOOOKS */
-  const [filters, setFilters] = useState<{ [key: string]: string }>();
+  const [filters, setFilters] = useState<{ [key: string]: string[] }>();
   const [filteredData, setFilteredData] = useState<any[]>([]);
   useEffect(() => {
-    const arrFilters: { [key: string]: string } = {};
+    const arrFilters: { [key: string]: string[] } = {};
     for (const column of columns) {
-      arrFilters[column.propTarget] = "";
+      arrFilters[column.propTarget] = [""];
     }
     setFilters(arrFilters);
     setFilteredData(data);
@@ -89,22 +89,52 @@ const BasicCRUDTable = ({
     let filteredData = data;
     for (const column of columns) {
       filteredData = filteredData.filter((item) => {
-        return item[column.propTarget]
-          .toString()
-          .toLowerCase()
-          .includes(filters ? filters[column.propTarget].toLowerCase() : "");
+        if (column.format === "number" || column.format === "currency") {
+          try {
+            let lowerValue: number = filters
+              ? filters[column.propTarget][column.propTarget][0]
+              : 0;
+            let upperValue: number =
+              filters[column.propTarget][column.propTarget][1];
+            if (
+              lowerValue < item[column.propTarget] &&
+              item[column.propTarget] < upperValue
+            ) {
+              return item[column.propTarget];
+            }
+          } catch (error) {
+            alert(error);
+          }
+        } else {
+          return item[column.propTarget]
+            .toString()
+            .toLowerCase()
+            .includes(
+              filters ? filters[column.propTarget][0].toLowerCase() : ""
+            );
+        }
       });
     }
     setFilteredData(filteredData);
   };
-  const handleFilter = async (filter: string, value: string) => {
+  const handleFilter = (filter: string, value: string) => {
     const arrFilter = { ...filters };
-    arrFilter[filter] = value;
+    arrFilter[filter][0] = value;
+    setFilters({ ...arrFilter });
+  };
+  const handleNumberLowerFilter = (filter: string, value: string) => {
+    const arrFilter = { ...filters };
+    arrFilter[filter][0] = value;
+    setFilters({ ...arrFilter });
+  };
+  const handleNumberUpperFilter = (filter: string, value: string) => {
+    const arrFilter = { ...filters };
+    arrFilter[filter][1] = value;
     setFilters({ ...arrFilter });
   };
   const clearFilter = (filter: string) => {
     const arrFilter = { ...filters };
-    arrFilter[filter] = "";
+    arrFilter[filter][0] = "";
     setFilters({ ...arrFilter });
   };
 
@@ -277,27 +307,91 @@ const BasicCRUDTable = ({
                 return (
                   <th scope="col" key={"table-header-" + index}>
                     <div>{column.name}</div>
-                    <div style={filterContainerStyle}>
-                      <BsFilter
-                        className="me-1 d-none d-md-block"
-                        style={{ fontSize: "23px" }}
-                      />
-                      <input
-                        className="bg-dark text-white"
-                        style={filterStyle}
-                        placeholder={"Filter by '" + column.name + "'"}
-                        type="text"
-                        value={filters ? filters[column.propTarget] : ""}
-                        onChange={(event) => {
-                          handleFilter(column.propTarget, event.target.value);
-                        }}
-                      />
-                      <AiOutlineClose
-                        onClick={() => {
-                          clearFilter(column.propTarget);
-                        }}
-                      />
-                    </div>
+                    {column.format === "default" && (
+                      <>
+                        <div style={filterContainerStyle}>
+                          <BsFilter
+                            className="me-1 d-none d-md-block"
+                            style={{ fontSize: "23px" }}
+                          />
+                          <input
+                            className="bg-dark text-white"
+                            style={filterStyle}
+                            placeholder={"Filter by '" + column.name + "'"}
+                            type="text"
+                            value={filters ? filters[column.propTarget] : ""}
+                            onChange={(event) => {
+                              handleNumberLowerFilter(
+                                column.propTarget,
+                                event.target.value
+                              );
+                            }}
+                          />
+                          <AiOutlineClose
+                            onClick={() => {
+                              clearFilter(column.propTarget);
+                            }}
+                          />
+                        </div>
+                      </>
+                    )}
+                    {(column.format === "number" ||
+                      column.format === "currency") && (
+                      <div className="d-flex">
+                        <div style={filterContainerStyle}>
+                          <BsFilter
+                            className="me-1 d-none d-md-block"
+                            style={{ fontSize: "23px" }}
+                          />
+                          <input
+                            className="bg-dark text-white"
+                            style={{
+                              outline: "none",
+                              border: "unset",
+                              width: "65px",
+                            }}
+                            placeholder={"Min"}
+                            type="text"
+                            value={filters ? filters[column.propTarget] : ""}
+                            onChange={(event) => {
+                              handleNumberUpperFilter(
+                                column.propTarget,
+                                event.target.value
+                              );
+                            }}
+                          />
+                          <AiOutlineClose
+                            onClick={() => {
+                              clearFilter(column.propTarget);
+                            }}
+                          />
+                        </div>
+                        <div className="ms-2" style={filterContainerStyle}>
+                          <input
+                            className="bg-dark text-white"
+                            style={{
+                              outline: "none",
+                              border: "unset",
+                              width: "85px",
+                            }}
+                            placeholder={"Max"}
+                            type="text"
+                            value={filters ? filters[column.propTarget] : ""}
+                            onChange={(event) => {
+                              handleFilter(
+                                column.propTarget,
+                                event.target.value
+                              );
+                            }}
+                          />
+                          <AiOutlineClose
+                            onClick={() => {
+                              clearFilter(column.propTarget);
+                            }}
+                          />
+                        </div>
+                      </div>
+                    )}
                   </th>
                 );
               })}
