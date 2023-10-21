@@ -137,9 +137,9 @@ INSERT INTO filiere VALUES
 
 
 INSERT INTO poste VALUES
-(default,'P1'),
-(default,'P2'),
-(default,'P3');
+(default,'P1', 20000),
+(default,'P2', 20000),
+(default,'P3', 20000);
 
 
 insert into cv VALUES 

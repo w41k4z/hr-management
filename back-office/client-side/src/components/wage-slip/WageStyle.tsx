@@ -44,3 +44,8 @@ export const Signature:CSSProperties = {
     marginLeft: '1%',
     width: '99%'
 }
+
+export const PersonnelSelect:CSSProperties ={
+    width: '15%',
+    position: 'fixed'
+}

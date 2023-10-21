@@ -11,11 +11,11 @@ import com.example.springserve.helpers.OptionalGet;
 @RequestMapping("/Personnel")
 @CrossOrigin(origins = { "http://localhost:3000", "http://localhost:3001" })
 public class PersonnelController {
+
     @Autowired
     private PersonnelService personnelService;
 
     @GetMapping("/getAll")
-    @ResponseBody
     public List<Personnel> getAllPersonnel() {
         return personnelService.getAllPersonnels();
     }

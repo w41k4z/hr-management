@@ -1,10 +1,49 @@
-import React from 'react';
-import { h6 , tableTitle , ficheLabel , arrowStyle , Money , MoneyUnit, Conclusion , Signature } from './WageStyle';
+import React, { useEffect, useState } from 'react';
+import { h6 , tableTitle , ficheLabel , arrowStyle , Money , MoneyUnit, Conclusion , Signature, PersonnelSelect } from './WageStyle';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { Container, Row, Col } from 'react-bootstrap';
+import { Personnel } from '../../model/PersonnelInterface';
+import { GainSalary } from '../../model/GainSalary';
+import { StraySalary } from '../../model/StraySalary';
 
 const WageSlip = () => {
+    const [personnelList , setPersonnelList] = useState<Personnel[]>([]);
+    const [isPageLoad , setIsPageLoad] = useState<boolean>(false);
+    const [idPersonnel, setIdPersonnel] = useState<number>();
+    const [gainSalaries , setGainSalaries] = useState<GainSalary[]>([]);
+    const [straySalaries , setStraySalaries] = useState<StraySalary[]>([]);
+
+    useEffect(() => {
+        if(!isPageLoad){
+            setIsPageLoad(true);
+            fetch("http://localhost:8080/Personnel/getAll")
+                .then((result) => result.json())
+                .then((data) => setPersonnelList(data));
+        }
+    });
+
+    const handleSelectedPersonnel = (e:React.ChangeEvent<HTMLSelectElement>) => {
+        setIdPersonnel(parseInt(e.target.value));
+    }
+
+    useEffect(() => {
+        if(idPersonnel === undefined) return;
+        fetch("http://localhost:8080/WageSlip/getGainSalary/"+idPersonnel)
+            .then((result) => result.json())
+            .then((data) => {
+                console.log(data);
+                setGainSalaries(data)
+            });
+
+        fetch("http://localhost:8080/WageSlip/getStraySalary/"+idPersonnel)
+            .then((result) => result.json())
+            .then((data) => {
+                console.log(data);
+                setStraySalaries(data)
+            });
+
+    }, [idPersonnel])
 
     const handleExportToPDF = () => {
         const contentToPrint = document.getElementById('wage-slip-container');
@@ -36,6 +75,26 @@ const WageSlip = () => {
 
     return (
         <>
+            <Row>
+            <div className="col-md-2 offset-md-9">
+                <select
+                    defaultValue={0}
+                    onChange={handleSelectedPersonnel}
+                    className="form-select"
+                    aria-label="Sélectionnez le personnel"
+                    style={PersonnelSelect}
+                    >
+                <option value={0} disabled>
+                    Personnel
+                </option>
+                {personnelList.map((option) => (
+                    <option key={option.id} value={option.id}>
+                    {option.nom + " " + option.prenom}
+                    </option>
+                ))}
+                </select>
+            </div>
+            </Row>
             <Container id='wage-slip-container'>
                 <Row>
                     <Col className="text-center mt-5">

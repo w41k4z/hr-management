@@ -71,7 +71,7 @@ const QuestionAnswer = () => {
       await Promise.all(
         changequestions.map(async (quest) => {
           const response = await fetch(
-            "http://localhost:8080/Questionreponse/getByIdQuestion/" + quest.id
+            "http://localhost/8080/Questionreponse/getByIdQuestion/" + quest.id
           );
           const data = await response.json();
           updatequestionswithanswer.push({

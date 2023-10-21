@@ -1,13 +1,20 @@
 package com.example.springserve.personnel;
 
 import java.sql.Date;
+import java.time.LocalDate;
+import java.time.Period;
+import java.util.ArrayList;
+import java.util.List;
 
+import com.example.springserve.poste.Poste;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -20,6 +27,10 @@ public class Personnel {
 
     @Column(name = "idposte")
     public Long idposte;
+
+    @ManyToOne
+    @JoinColumn(name = "idposte", insertable=false, updatable=false)
+    public Poste poste;
 
     @Column(name = "idservice")
     public Long idservice;
@@ -39,4 +50,20 @@ public class Personnel {
     @Column(name = "idfonction")
     public Long idfonction;    
 
+    public List<Integer> getSeniority(){
+        LocalDate dateEmbauche = dtembauche.toLocalDate();
+        LocalDate dateActuelle = LocalDate.now();
+        Period difference = Period.between(dateEmbauche, dateActuelle);
+
+        Integer jours = difference.getDays();
+        Integer mois = difference.getMonths();
+        Integer annees = difference.getYears();
+        
+        List<Integer> answer = new ArrayList<>();
+        answer.add(annees);        
+        answer.add(mois);
+        answer.add(jours);
+
+        return answer;
+    }
 }

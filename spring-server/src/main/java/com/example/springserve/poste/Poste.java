@@ -17,6 +17,9 @@ public class Poste {
 
     @Column(name = "nom")
     public String nom;
+
+    @Column(name = "starting_salary")
+    public Double starting_salary;
     
 
 }
