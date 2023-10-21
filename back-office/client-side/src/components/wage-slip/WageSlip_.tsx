@@ -7,14 +7,12 @@ import { Personnel } from '../../model/PersonnelInterface';
 import { GainSalary } from '../../model/GainSalary';
 import { StraySalary } from '../../model/StraySalary';
 
-const WageSlip = () => {
+const WageSlip_ = () => {
     const [personnelList , setPersonnelList] = useState<Personnel[]>([]);
     const [isPageLoad , setIsPageLoad] = useState<boolean>(false);
     const [employee, setEmployee] = useState<Personnel>();
     const [gainSalaries , setGainSalaries] = useState<GainSalary[]>([]);
     const [straySalaries , setStraySalaries] = useState<StraySalary[]>([]);
-    const [assessablePay, setAssessablePay] = useState<number>(0);
-    const [netPay, setNetPay] = useState<number>(0);
 
     useEffect(() => {
         if(!isPageLoad){
@@ -31,24 +29,18 @@ const WageSlip = () => {
 
     useEffect(() => {
         if(employee == null || employee.id === undefined) return;
-        if(!gainSalaries || gainSalaries.length <= 0)return;
-        let grossPay = gainSalaries[gainSalaries.length - 1].montant;
-        fetch("http://localhost:8080/WageSlip/getStraySalary/"+employee.id+"/"+grossPay)
-            .then((result) => result.json())
-            .then((data) => {
-                setAssessablePay(grossPay - data[0].montant - data[1].montant)
-                setNetPay(grossPay - data[data.length - 1].montant);
-                setStraySalaries(data)
-            });
-    }, [gainSalaries, employee])
-
-    useEffect(() => {
-        if(employee == null || employee.id === undefined) return;
         fetch("http://localhost:8080/WageSlip/getGainSalary/"+employee.id)
             .then((result) => result.json())
             .then((data) => {
                 console.log(data);
                 setGainSalaries(data)
+            });
+
+        fetch("http://localhost:8080/WageSlip/getStraySalary/"+employee.id)
+            .then((result) => result.json())
+            .then((data) => {
+                console.log(data);
+                setStraySalaries(data)
             });
 
     }, [employee])
@@ -107,7 +99,7 @@ const WageSlip = () => {
                 <Row>
                     <Col className="text-center mt-5">
                         <h4 style={{ color : '#176b17', ...h6} }>FICHE DE PAIE</h4>
-                        <p className='mt-5'><b><u>ARRETE AU :</u> </b>  {(new Date()).toLocaleDateString('fr-FR', { day: '2-digit', month: '2-digit', year: '2-digit' })}</p>
+                        <p className='mt-5'><b><u>ARRETE AU :</u></b> 31/08/23</p>
                     </Col>
                 </Row>
                 <Row className='mt-5'>
@@ -117,7 +109,7 @@ const WageSlip = () => {
                                 <tr className='row'>
                                     <td className='row col-md-6'>
                                         <span style={ficheLabel} className='col-md-5 offset-md-1'>Nom et Prénoms :</span>
-                                        <span className='col-md-5 offset-md-0' style={Money}>{employee?.nom + " " + employee?.prenom}</span>
+                                        <span className='col-md-5 offset-md-0' style={Money}>RAZAFIARISON Laza</span>
                                     </td>
                                 </tr>
                                 <tr className='row'>
@@ -137,7 +129,7 @@ const WageSlip = () => {
                                     </td>
                                     <td className="row col-md-6">
                                         <span style={ficheLabel} className='col-md-5 offset-md-2'>Salaire de base :</span>
-                                        <span className='col-md-5 text-right' style={Money}>{employee?.poste.starting_salary.toFixed(2)} <span style={MoneyUnit}>MGA</span></span>
+                                        <span className='col-md-5 text-right' style={Money}>4 083 409,09 <span style={MoneyUnit}>MGA</span></span>
                                     </td>
                                 </tr>
                                 <tr className='row'>
@@ -147,17 +139,17 @@ const WageSlip = () => {
                                     </td>
                                     <td className="row col-md-6">
                                         <span style={ficheLabel} className='col-md-5 offset-md-2'>Taux journaliers :</span>
-                                        <span className='col-md-5 text-right' style={Money}>{employee?.poste.starting_salary ? (employee?.poste.starting_salary/30).toFixed(2) :  ""} <span style={MoneyUnit}>MGA</span></span>
+                                        <span className='col-md-5 text-right' style={Money}>136 114,00 <span style={MoneyUnit}>MGA</span></span>
                                     </td>
                                 </tr>
                                 <tr className='row'>
                                     <td className='row col-md-6'>
                                         <span style={ficheLabel} className='col-md-5 offset-md-1'>Date d'embauche :</span>
-                                        <span className='col-md-5 offset-md-0' style={Money}>{employee?.dtembauche ? employee.dtembauche.toString() : ""}</span>
+                                        <span className='col-md-5 offset-md-0' style={Money}>25/03/2011</span>
                                     </td>
                                     <td className="row col-md-6">
-                                        <span style={ficheLabel} className='col-md-5 offset-md-2'>taux horaires :</span>
-                                        <span className='col-md-5 text-right' style={Money}>{employee?.poste.starting_salary ? (employee?.poste.starting_salary/173.33).toFixed(2) :  ""} <span style={MoneyUnit}>MGA</span></span>
+                                        <span style={ficheLabel} className='col-md-5 offset-md-2'>Taux horaires :</span>
+                                        <span className='col-md-5 text-right' style={Money}>23 559,00 <span style={MoneyUnit}>MGA</span></span>
                                     </td>
                                 </tr>
                                 <tr className='row'>
@@ -181,52 +173,146 @@ const WageSlip = () => {
                                 <tr>
                                     <th style={tableTitle}>Désignations</th>
                                     <th style={tableTitle}>Nombre</th>
-                                    <th style={tableTitle}>taux</th>
+                                    <th style={tableTitle}>Taux</th>
                                     <th style={tableTitle}>Montant</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                {gainSalaries.map((gainSalary, index) => (
-                                    index <= gainSalaries.length - 2 && (
-                                    <tr key={index}>
-                                        <td>{gainSalary.designation}</td>
-                                        <td style={Money}>{gainSalary.nombre}</td>
-                                        <td style={Money}>{gainSalary.taux ? gainSalary.taux.toFixed(2) : ""} <span style={MoneyUnit}>MGA</span></td>
-                                        <td style={Money}>{gainSalary.montant ? gainSalary.montant.toFixed(2) : ""} <span style={MoneyUnit}>MGA</span></td>
-                                    </tr>
-                                    )
-                                ))}
+                                <tr>
+                                    <td>Salaire du 01/06/23 au 30/06/23</td>
+                                    <td>1 mois</td>
+                                    <td></td>
+                                    <td style={Money}>136 114,00 <span style={MoneyUnit}>MGA</span></td>
+                                </tr>
+                                <tr>
+                                    <td>Absences déductibles</td>
+                                    <td></td>
+                                    <td style={Money}>136 114,00 <span style={MoneyUnit}>MGA</span></td>
+                                    <td style={Money}></td>
+                                </tr>
+                                <tr>
+                                    <td>Primes de rendement</td>
+                                    <td colSpan={2}></td>
+                                    <td style={Money}></td>
+                                </tr>
+                                <tr>
+                                    <td>Primes d'ancienneté</td>
+                                    <td colSpan={2}></td>
+                                    <td style={Money}></td>
+                                </tr>
+                                <tr>
+                                    <td>Heures supplémentaires majorées de 30%</td>
+                                    <td colSpan={2}></td>
+                                    <td style={Money}>30 627,00 <span style={MoneyUnit}>MGA</span></td>
+                                </tr>
+                                <tr>
+                                    <td>Heures supplémentaires majorées de 40%</td>
+                                    <td colSpan={2}></td>
+                                    <td style={Money}>32 983,00 <span style={MoneyUnit}>MGA</span></td>
+                                </tr>
+                                <tr>
+                                    <td>Heures supplémentaires majorées de 50%</td>
+                                    <td colSpan={2}></td>
+                                    <td style={Money}>35 339,00 <span style={MoneyUnit}>MGA</span></td>
+                                </tr>
+                                <tr>
+                                    <td>Heures supplémentaires majorées de 100%</td>
+                                    <td colSpan={2}></td>
+                                    <td style={Money}>47 118,00 <span style={MoneyUnit}>MGA</span></td>
+                                </tr>
+                                <tr>
+                                    <td>Majoration pour heures de nuit</td>
+                                    <td colSpan={2}></td>
+                                    <td style={Money}>7 068,00 <span style={MoneyUnit}>MGA</span></td>
+                                </tr>
+                                <tr>
+                                    <td>Primes diverses</td>
+                                    <td colSpan={2}></td>
+                                    <td style={Money}></td>
+                                </tr>
+                                <tr>
+                                    <td>Rappels sur période antérieure</td>
+                                    <td colSpan={2}></td>
+                                    <td style={Money}></td>
+                                </tr>
+                                <tr>
+                                    <td>Droits de congés</td>
+                                    <td></td>
+                                    <td style={Money}>136 114,00 <span style={MoneyUnit}>MGA</span></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>Droits de préavis</td>
+                                    <td></td>
+                                    <td style={Money}>136 114,00 <span style={MoneyUnit}>MGA</span></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>Indemnités de licenciement</td>
+                                    <td></td>
+                                    <td style={Money}>136 114,00 <span style={MoneyUnit}>MGA</span></td>
+                                    <td></td>
+                                </tr>
                                 <tr>
                                     <td colSpan={2}></td>
                                     <td style={tableTitle}>Salaire brut</td>
-                                    <td style={Money}>{gainSalaries.length > 0 ? gainSalaries[gainSalaries.length - 1].montant : ""} <span style={MoneyUnit}>MGA</span></td>
+                                    <td style={Money}>4 083 409,09 <span style={MoneyUnit}>MGA</span></td>
                                 </tr>
                                 <tr>
                                     <td colSpan={4}><hr/></td>
                                 </tr>
-
-                                {straySalaries.map((straySalary , index) => (
-                                    index <= straySalaries.length - 3 && (
-                                    <tr key={index}>
-                                        <td style={{ textAlign : 'right' }}>{straySalary.designation} :</td>
-                                        <td colSpan={2} style={Money}>{straySalary.taux ? straySalary.taux.toFixed(2) + " %" : ""} </td>
-                                        <td style={Money}>{straySalary.montant ? straySalary.montant.toFixed(2) : ""} <span style={MoneyUnit}>MGA</span></td>
-                                    </tr>
-                                    )
-                                ))}
-
+                                <tr>
+                                    <td style={{ textAlign : 'right' }}>Retenue CNaPS 1% :</td>
+                                    <td colSpan={2}></td>
+                                    <td style={Money}>20 000,00 <span style={MoneyUnit}>MGA</span></td>
+                                </tr>
+                                <tr>
+                                    <td style={{ textAlign : 'right' }}>Retenue sanitaire</td>
+                                    <td colSpan={2}></td>
+                                    <td style={Money}>40 834,09 <span style={MoneyUnit}>MGA</span></td>
+                                </tr>
+                                <tr>
+                                    <td style={{ textAlign : 'right' }}>Tranche IRSA INF 350 0000</td>
+                                    <td colSpan={2}></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td style={{ textAlign : 'right' }}>Tranche IRSA I DE 350 0001 à 400 000</td>
+                                    <td></td>
+                                    <td>5 %</td>
+                                    <td style={Money}>2 500,00 <span style={MoneyUnit}>MGA</span></td>
+                                </tr>
+                                <tr>
+                                    <td style={{ textAlign : 'right' }}>Tranche IRSA I DE 400 0001 à 500 000</td>
+                                    <td></td>
+                                    <td>10 %</td>
+                                    <td style={Money}>10 000,00 <span style={MoneyUnit}>MGA</span></td>
+                                </tr>
+                                <tr>
+                                    <td style={{ textAlign : 'right' }}>Tranche IRSA I DE 500 001 à 600 000</td>
+                                    <td></td>
+                                    <td>15 %</td>
+                                    <td style={Money}>15 000,00 <span style={MoneyUnit}>MGA</span></td>
+                                </tr>
+                                <tr>
+                                    <td style={{ textAlign : 'right' }}>Tranche IRSA SUP 600 0000</td>
+                                    <td></td>
+                                    <td>20 %</td>
+                                    <td style={Money}>684 515,00 <span style={MoneyUnit}>MGA</span></td>
+                                </tr>
                                 <tr>
                                     <td colSpan={4}><hr/></td>
                                 </tr>
-                                {straySalaries.map((straySalary , index) => (
-                                    index >= straySalaries.length - 2 && (
-                                        <tr>
-                                            <td colSpan={1} style={{ textAlign : 'right' }}>{straySalary.designation}</td>
-                                            <td colSpan={2} style={{ textAlign : 'center' }}><FontAwesomeIcon icon={faArrowRight} style={arrowStyle} /> </td>
-                                            <td style={Money}>{straySalary.montant.toFixed(2)} <span style={MoneyUnit}>MGA</span></td>
-                                        </tr>
-                                    )
-                                ))}
+                                <tr>
+                                    <td colSpan={1} style={{ textAlign : 'right' }}>TOTAL IRSA</td>
+                                    <td colSpan={2} style={{ textAlign : 'center' }}><FontAwesomeIcon icon={faArrowRight} style={arrowStyle} /> </td>
+                                    <td style={Money}>712 015,00 <span style={MoneyUnit}>MGA</span></td>
+                                </tr>
+                                <tr>
+                                    <td colSpan={1} style={{ textAlign : 'right' }}>Total des retenues</td>
+                                    <td colSpan={2} style={{ textAlign : 'center' }}><FontAwesomeIcon icon={faArrowRight} style={arrowStyle} /></td>
+                                    <td style={Money}>772 849,09 <span style={MoneyUnit}>MGA</span></td>
+                                </tr>
                                 <tr>
                                     <td colSpan={1} style={{ textAlign : 'right' }}>Autres indemnités</td>
                                     <td colSpan={2} style={{ textAlign : 'center' }}><FontAwesomeIcon icon={faArrowRight} style={arrowStyle} /></td>
@@ -238,7 +324,7 @@ const WageSlip = () => {
                                 <tr>
                                     <td colSpan={1} style={{ textAlign : 'right' }}>Net à payer</td>
                                     <td colSpan={2} style={{ textAlign : 'center' }}><FontAwesomeIcon icon={faArrowRight} style={arrowStyle} /></td>
-                                    <td style={Money}>{netPay ? netPay.toFixed(2) : ""} <span style={MoneyUnit}>MGA</span></td>
+                                    <td style={Money}>3 310 560,00 <span style={MoneyUnit}>MGA</span></td>
                                 </tr>
                                 <tr>
                                     <td colSpan={4}><hr/></td>
@@ -262,7 +348,7 @@ const WageSlip = () => {
                                 </tr>
                                 <tr>
                                     <td>Montant imposable :</td>
-                                    <td style={Money}>{assessablePay ? assessablePay.toFixed(2) : ""} <span style={MoneyUnit}>MGA</span></td>
+                                    <td style={Money}>4 022 575,00</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -314,4 +400,4 @@ const WageSlip = () => {
     );
 }
 
-export default WageSlip;
+export default WageSlip_;

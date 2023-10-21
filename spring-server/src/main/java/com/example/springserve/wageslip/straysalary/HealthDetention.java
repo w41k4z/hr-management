@@ -17,6 +17,6 @@ public class HealthDetention extends StraySalary {
         else montant = plafond;
         
         super.setTaux(null);
-        super.setMontant(montant*1/100);
+        super.setMontant(montant);
     }
 }

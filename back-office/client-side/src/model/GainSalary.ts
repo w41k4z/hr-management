@@ -1,7 +1,7 @@
 export interface GainSalary{
-    IdPersonnel : number;    
-    Designation : string;  
-    Nombre      : number; 
-    Taux        : number;  
-    Montant     : number;  
+    idPersonnel : number;    
+    designation : string;  
+    nombre      : number;
+    montant     : number;   
+    taux        : number;  
 }

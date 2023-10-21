@@ -22,10 +22,12 @@ import com.example.springserve.wageslip.gainsalary.OvertimeGift;
 import com.example.springserve.wageslip.gainsalary.SeniorityGift;
 import com.example.springserve.wageslip.gainsalary.YieldGift;
 import com.example.springserve.wageslip.gainsalary.mother.GainSalary;
+import com.example.springserve.wageslip.gainsalary.mother.GrossPay;
 import com.example.springserve.wageslip.straysalary.CnapsDetention;
 import com.example.springserve.wageslip.straysalary.HealthDetention;
 import com.example.springserve.wageslip.straysalary.IrsaSlice;
-import com.example.springserve.wageslip.straysalary.Total;
+import com.example.springserve.wageslip.straysalary.TotalDetention;
+import com.example.springserve.wageslip.straysalary.TotalIrsa;
 import com.example.springserve.wageslip.straysalary.mother.StraySalary;
 
 @RestController
@@ -52,21 +54,26 @@ public class WageSlipController {
         result.add(new HolidayRight(personnelService,idPersonne));
         result.add(new AdvanceNoticeRight(personnelService,idPersonne));
         result.add(new DismissalRights(personnelService,idPersonne));
+        result.add(new GrossPay(result));
 
         return result;
     }
 
-    @GetMapping("/getStraySalary/{idPersonne}")
-    public List<StraySalary> getAllSalaryStray(@PathVariable Long idPersonne) {
+    @GetMapping("/getStraySalary/{idPersonne}/{grossPay}")
+    public List<StraySalary> getAllSalaryStray(@PathVariable Long idPersonne, @PathVariable Double grossPay) {
         List<StraySalary> result = new ArrayList<StraySalary>();
-        Double assessableSum = Double.valueOf(0);
         result.add(new CnapsDetention(personnelService,idPersonne));
         result.add(new HealthDetention(personnelService,idPersonne));
+
+        Double assessableSum = grossPay - result.get(0).getMontant() - result.get(1).getMontant();
+
         result.add(new IrsaSlice(personnelService,idPersonne, IrsaSlice.allSlice[0] , assessableSum ));
         result.add(new IrsaSlice(personnelService,idPersonne, IrsaSlice.allSlice[1] , assessableSum ));
         result.add(new IrsaSlice(personnelService,idPersonne, IrsaSlice.allSlice[2] , assessableSum ));
         result.add(new IrsaSlice(personnelService,idPersonne, IrsaSlice.allSlice[3] , assessableSum ));
-        result.add(new Total(result));
+        result.add(new TotalIrsa(result,2, 5));        
+        result.add(new TotalDetention(result,0, result.size() - 1));
+
         return result;
     }
 }

@@ -1,6 +1,6 @@
 export interface StraySalary{
-    IdPersonnel  :  number;
-    Designation  :  string;
-    Taux         :  number;
-    Montant      :  number;
+    idPersonnel  :  number;
+    designation  :  string;
+    taux         :  number;
+    montant      :  number;
 }
