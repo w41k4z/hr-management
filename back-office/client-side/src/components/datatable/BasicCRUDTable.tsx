@@ -91,16 +91,19 @@ const BasicCRUDTable = ({
       filteredData = filteredData.filter((item) => {
         if (column.format === "number" || column.format === "currency") {
           try {
-            let lowerValue: number = filters
-              ? filters[column.propTarget][column.propTarget][0]
-              : 0;
-            let upperValue: number =
-              filters[column.propTarget][column.propTarget][1];
-            if (
-              lowerValue < item[column.propTarget] &&
-              item[column.propTarget] < upperValue
-            ) {
-              return item[column.propTarget];
+            if (filters) {
+              let lowerValue: number = filters[column.propTarget][0]
+                ? parseFloat(filters[column.propTarget][0])
+                : 0;
+              let upperValue: number = filters[column.propTarget][1]
+                ? parseFloat(filters[column.propTarget][1])
+                : Number.MAX_VALUE;
+              if (
+                lowerValue <= item[column.propTarget] &&
+                item[column.propTarget] <= upperValue
+              ) {
+                return item[column.propTarget];
+              }
             }
           } catch (error) {
             alert(error);
@@ -319,9 +322,9 @@ const BasicCRUDTable = ({
                             style={filterStyle}
                             placeholder={"Filter by '" + column.name + "'"}
                             type="text"
-                            value={filters ? filters[column.propTarget] : ""}
+                            value={filters ? filters[column.propTarget][0] : ""}
                             onChange={(event) => {
-                              handleNumberLowerFilter(
+                              handleFilter(
                                 column.propTarget,
                                 event.target.value
                               );
@@ -352,9 +355,9 @@ const BasicCRUDTable = ({
                             }}
                             placeholder={"Min"}
                             type="text"
-                            value={filters ? filters[column.propTarget] : ""}
+                            value={filters ? filters[column.propTarget][0] : ""}
                             onChange={(event) => {
-                              handleNumberUpperFilter(
+                              handleNumberLowerFilter(
                                 column.propTarget,
                                 event.target.value
                               );
@@ -376,9 +379,9 @@ const BasicCRUDTable = ({
                             }}
                             placeholder={"Max"}
                             type="text"
-                            value={filters ? filters[column.propTarget] : ""}
+                            value={filters ? filters[column.propTarget][1] : ""}
                             onChange={(event) => {
-                              handleFilter(
+                              handleNumberUpperFilter(
                                 column.propTarget,
                                 event.target.value
                               );
