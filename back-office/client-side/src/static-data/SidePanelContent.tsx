@@ -53,9 +53,9 @@ export const SidePanelContent = [
     onItemClick: () => {},
   },
   {
-    title: "Entretient passe",
+    title: "Employment",
     type: "nav-item",
-    path: "/entretient/confirm",
+    path: "/employment/confirm",
     icon: <FlatColor.FcDocument />,
     onItemClick: () => {},
   },

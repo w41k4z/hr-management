@@ -20,7 +20,7 @@ import Positions from "./pages/management/positions";
 import Regions from "./pages/management/regions";
 import FicheDePoste from "./pages/fiche-de-poste";
 import Contract from "./pages/contract";
-import Entretient from "./components/entretient/Entretient";
+import Employment from "./components/employment/Employment";
 import Payroll from "./pages/payroll";
 
 /* INTERFACES */
@@ -137,7 +137,7 @@ function App() {
                 />
                 <Route path="/embauche/contrat" element={<Contract />} />
                 <Route path="/conge" element={<Conge />} />
-                <Route path="/entretient/confirm" element={<Entretient />} />
+                <Route path="/employment/confirm" element={<Employment />} />
                 <Route path="/pay/payroll" element={<Payroll />} />
 
                 <Route path="/wage/wageslip" element={<WageSlip />} />

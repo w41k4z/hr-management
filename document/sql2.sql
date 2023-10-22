@@ -1,58 +1,22 @@
+DROP DATABASE hrmanagment;
+CREATE DATABASE hrmanagment;
+\c hrmanagment;
+
 CREATE SEQUENCE "public".affiliation_id_seq START WITH 1 INCREMENT BY 1;
 
 CREATE SEQUENCE "public".annonce_id_seq START WITH 1 INCREMENT BY 1;
 
-CREATE SEQUENCE "public".annonce_id_seq1 START WITH 1 INCREMENT BY 1;
-
-CREATE SEQUENCE "public".annonce_id_seq2 START WITH 1 INCREMENT BY 1;
-
-CREATE SEQUENCE "public".annonce_id_seq3 START WITH 1 INCREMENT BY 1;
-
 CREATE SEQUENCE "public".besoinservice_id_seq START WITH 1 INCREMENT BY 1;
-
-CREATE SEQUENCE "public".besoinservice_id_seq1 START WITH 1 INCREMENT BY 1;
-
-CREATE SEQUENCE "public".besoinservice_id_seq2 START WITH 1 INCREMENT BY 1;
-
-CREATE SEQUENCE "public".besoinservice_id_seq3 START WITH 1 INCREMENT BY 1;
 
 CREATE SEQUENCE "public".criteregrade_id_seq START WITH 1 INCREMENT BY 1;
 
-CREATE SEQUENCE "public".criteregrade_id_seq1 START WITH 1 INCREMENT BY 1;
-
-CREATE SEQUENCE "public".criteregrade_id_seq2 START WITH 1 INCREMENT BY 1;
-
-CREATE SEQUENCE "public".criteregrade_id_seq3 START WITH 1 INCREMENT BY 1;
-
 CREATE SEQUENCE "public".critereselection_id_seq START WITH 1 INCREMENT BY 1;
-
-CREATE SEQUENCE "public".critereselection_id_seq1 START WITH 1 INCREMENT BY 1;
-
-CREATE SEQUENCE "public".critereselection_id_seq2 START WITH 1 INCREMENT BY 1;
 
 CREATE SEQUENCE "public".cv_id_seq START WITH 1 INCREMENT BY 1;
 
-CREATE SEQUENCE "public".cv_id_seq1 START WITH 1 INCREMENT BY 1;
-
-CREATE SEQUENCE "public".cv_id_seq2 START WITH 1 INCREMENT BY 1;
-
-CREATE SEQUENCE "public".cv_id_seq3 START WITH 1 INCREMENT BY 1;
-
 CREATE SEQUENCE "public".cvexperience_id_seq START WITH 1 INCREMENT BY 1;
 
-CREATE SEQUENCE "public".cvexperience_id_seq1 START WITH 1 INCREMENT BY 1;
-
-CREATE SEQUENCE "public".cvexperience_id_seq2 START WITH 1 INCREMENT BY 1;
-
-CREATE SEQUENCE "public".cvexperience_id_seq3 START WITH 1 INCREMENT BY 1;
-
 CREATE SEQUENCE "public".cvgrade_id_seq START WITH 1 INCREMENT BY 1;
-
-CREATE SEQUENCE "public".cvgrade_id_seq1 START WITH 1 INCREMENT BY 1;
-
-CREATE SEQUENCE "public".cvgrade_id_seq2 START WITH 1 INCREMENT BY 1;
-
-CREATE SEQUENCE "public".cvgrade_id_seq3 START WITH 1 INCREMENT BY 1;
 
 CREATE SEQUENCE "public".debutconge_id_seq START WITH 1 INCREMENT BY 1;
 
@@ -62,21 +26,11 @@ CREATE SEQUENCE "public".fichedeposteaffiliation_id_seq START WITH 1 INCREMENT B
 
 CREATE SEQUENCE "public".filiere_id_seq START WITH 1 INCREMENT BY 1;
 
-CREATE SEQUENCE "public".filiere_id_seq1 START WITH 1 INCREMENT BY 1;
-
-CREATE SEQUENCE "public".filiere_id_seq2 START WITH 1 INCREMENT BY 1;
-
-CREATE SEQUENCE "public".filiere_id_seq3 START WITH 1 INCREMENT BY 1;
-
 CREATE SEQUENCE "public".finconge_id_seq START WITH 1 INCREMENT BY 1;
 
 CREATE SEQUENCE "public".fonction_id_seq START WITH 1 INCREMENT BY 1;
 
 CREATE SEQUENCE "public".grade_id_seq START WITH 1 INCREMENT BY 1;
-
-CREATE SEQUENCE "public".grade_id_seq1 START WITH 1 INCREMENT BY 1;
-
-CREATE SEQUENCE "public".grade_id_seq2 START WITH 1 INCREMENT BY 1;
 
 CREATE SEQUENCE "public".myuser_id_seq START WITH 1 INCREMENT BY 1;
 
@@ -84,63 +38,21 @@ CREATE SEQUENCE "public".personnel_id_seq START WITH 1 INCREMENT BY 1;
 
 CREATE SEQUENCE "public".poste_id_seq START WITH 1 INCREMENT BY 1;
 
-CREATE SEQUENCE "public".poste_id_seq1 START WITH 1 INCREMENT BY 1;
-
-CREATE SEQUENCE "public".poste_id_seq2 START WITH 1 INCREMENT BY 1;
-
-CREATE SEQUENCE "public".poste_id_seq3 START WITH 1 INCREMENT BY 1;
-
 CREATE SEQUENCE "public".posteservice_id_seq START WITH 1 INCREMENT BY 1;
-
-CREATE SEQUENCE "public".posteservice_id_seq1 START WITH 1 INCREMENT BY 1;
-
-CREATE SEQUENCE "public".posteservice_id_seq2 START WITH 1 INCREMENT BY 1;
-
-CREATE SEQUENCE "public".posteservice_id_seq3 START WITH 1 INCREMENT BY 1;
 
 CREATE SEQUENCE "public".question_id_seq START WITH 1 INCREMENT BY 1;
 
-CREATE SEQUENCE "public".question_id_seq1 START WITH 1 INCREMENT BY 1;
-
-CREATE SEQUENCE "public".question_id_seq2 START WITH 1 INCREMENT BY 1;
-
-CREATE SEQUENCE "public".question_id_seq3 START WITH 1 INCREMENT BY 1;
-
 CREATE SEQUENCE "public".questionannonce_id_seq START WITH 1 INCREMENT BY 1;
-
-CREATE SEQUENCE "public".questionannonce_id_seq1 START WITH 1 INCREMENT BY 1;
-
-CREATE SEQUENCE "public".questionannonce_id_seq2 START WITH 1 INCREMENT BY 1;
-
-CREATE SEQUENCE "public".questionannonce_id_seq3 START WITH 1 INCREMENT BY 1;
 
 CREATE SEQUENCE "public".questionreponse_id_seq START WITH 1 INCREMENT BY 1;
 
-CREATE SEQUENCE "public".questionreponse_id_seq1 START WITH 1 INCREMENT BY 1;
-
-CREATE SEQUENCE "public".questionreponse_id_seq2 START WITH 1 INCREMENT BY 1;
-
-CREATE SEQUENCE "public".questionreponse_id_seq3 START WITH 1 INCREMENT BY 1;
-
 CREATE SEQUENCE "public".region_id_seq START WITH 1 INCREMENT BY 1;
-
-CREATE SEQUENCE "public".region_id_seq1 START WITH 1 INCREMENT BY 1;
-
-CREATE SEQUENCE "public".region_id_seq2 START WITH 1 INCREMENT BY 1;
-
-CREATE SEQUENCE "public".region_id_seq3 START WITH 1 INCREMENT BY 1;
 
 CREATE SEQUENCE "public".reponsetest_id_seq START WITH 1 INCREMENT BY 1;
 
 CREATE SEQUENCE "public".reponsetest_id_seq1 START WITH 1 INCREMENT BY 1;
 
 CREATE SEQUENCE "public".service_id_seq START WITH 1 INCREMENT BY 1;
-
-CREATE SEQUENCE "public".service_id_seq1 START WITH 1 INCREMENT BY 1;
-
-CREATE SEQUENCE "public".service_id_seq2 START WITH 1 INCREMENT BY 1;
-
-CREATE SEQUENCE "public".service_id_seq3 START WITH 1 INCREMENT BY 1;
 
 CREATE  TABLE "public".affiliation ( 
 	id                   bigint DEFAULT nextval('affiliation_id_seq'::regclass) NOT NULL  ,
@@ -149,13 +61,13 @@ CREATE  TABLE "public".affiliation (
  );
 
 CREATE  TABLE "public".annonce ( 
-	id                   bigint DEFAULT nextval('annonce_id_seq3'::regclass) NOT NULL  ,
+	id                   bigint DEFAULT nextval('annonce_id_seq'::regclass) NOT NULL  ,
 	idbesoinservice      bigint    ,
 	CONSTRAINT annonce_pkey PRIMARY KEY ( id )
  );
 
-CREATE  TABLE "public".cv ( 
-	id                   bigint DEFAULT nextval('cv_id_seq3'::regclass) NOT NULL  ,
+CREATE  TABLE "public".cv (
+	id                   bigint DEFAULT nextval('cv_id_seq'::regclass) NOT NULL  ,
 	adresse              varchar(255)    ,
 	cin                  varchar(255)    ,
 	email                varchar(255)    ,
@@ -168,7 +80,7 @@ CREATE  TABLE "public".cv (
  );
 
 CREATE  TABLE "public".cvexperience ( 
-	id                   bigint DEFAULT nextval('cvexperience_id_seq3'::regclass) NOT NULL  ,
+	id                   bigint DEFAULT nextval('cvexperience_id_seq'::regclass) NOT NULL  ,
 	idcv                 bigint    ,
 	description          varchar(255)    ,
 	lienpreuveexperience varchar(255)    ,
@@ -185,7 +97,7 @@ CREATE  TABLE "public".debutconge (
  );
 
 CREATE  TABLE "public".filiere ( 
-	id                   bigint DEFAULT nextval('filiere_id_seq3'::regclass) NOT NULL  ,
+	id                   bigint DEFAULT nextval('filiere_id_seq'::regclass) NOT NULL  ,
 	nom                  varchar(255)    ,
 	CONSTRAINT filiere_pkey PRIMARY KEY ( id )
  );
@@ -205,27 +117,27 @@ CREATE  TABLE "public".fonction (
  );
 
 CREATE  TABLE "public".grade ( 
-	id                   bigint DEFAULT nextval('grade_id_seq2'::regclass) NOT NULL  ,
+	id                   bigint DEFAULT nextval('grade_id_seq'::regclass) NOT NULL  ,
 	nom                  varchar(255)    ,
 	CONSTRAINT grade_pkey PRIMARY KEY ( id )
  );
 
 CREATE  TABLE "public".poste ( 
-	id                   bigint DEFAULT nextval('poste_id_seq3'::regclass) NOT NULL  ,
+	id                   bigint DEFAULT nextval('poste_id_seq'::regclass) NOT NULL  ,
 	nom                  varchar(255)    ,
 	starting_salary      double precision  NOT NULL  ,
 	CONSTRAINT poste_pkey PRIMARY KEY ( id )
  );
 
 CREATE  TABLE "public".question ( 
-	id                   bigint DEFAULT nextval('question_id_seq3'::regclass) NOT NULL  ,
+	id                   bigint DEFAULT nextval('question_id_seq'::regclass) NOT NULL  ,
 	question             varchar(255)  NOT NULL  ,
 	CONSTRAINT question_pkey PRIMARY KEY ( id )
  );
 
 CREATE  TABLE "public".questionannonce ( 
 	date_question_annonce date  NOT NULL  ,
-	id                   bigint DEFAULT nextval('questionannonce_id_seq3'::regclass) NOT NULL  ,
+	id                   bigint DEFAULT nextval('questionannonce_id_seq'::regclass) NOT NULL  ,
 	idannonce            bigint  NOT NULL  ,
 	idquestion           bigint  NOT NULL  ,
 	CONSTRAINT questionannonce_pkey PRIMARY KEY ( id ),
@@ -234,7 +146,7 @@ CREATE  TABLE "public".questionannonce (
  );
 
 CREATE  TABLE "public".questionreponse ( 
-	id                   bigint DEFAULT nextval('questionreponse_id_seq3'::regclass) NOT NULL  ,
+	id                   bigint DEFAULT nextval('questionreponse_id_seq'::regclass) NOT NULL  ,
 	idquestion           bigint  NOT NULL  ,
 	reponse              varchar(255)  NOT NULL  ,
 	status               varchar(255)  NOT NULL  ,
@@ -243,7 +155,7 @@ CREATE  TABLE "public".questionreponse (
  );
 
 CREATE  TABLE "public".region ( 
-	id                   bigint DEFAULT nextval('region_id_seq3'::regclass) NOT NULL  ,
+	id                   bigint DEFAULT nextval('region_id_seq'::regclass) NOT NULL  ,
 	nom                  varchar(255)    ,
 	CONSTRAINT region_pkey PRIMARY KEY ( id )
  );
@@ -260,7 +172,7 @@ CREATE  TABLE "public".reponsetest (
  );
 
 CREATE  TABLE "public".service ( 
-	id                   bigint DEFAULT nextval('service_id_seq3'::regclass) NOT NULL  ,
+	id                   bigint DEFAULT nextval('service_id_seq'::regclass) NOT NULL  ,
 	nom                  varchar(255)    ,
 	CONSTRAINT service_pkey PRIMARY KEY ( id )
  );
@@ -295,7 +207,7 @@ CREATE  TABLE "public".besoinservice (
 	datebesoinservice    date    ,
 	volumehoraire        double precision    ,
 	volumetache          double precision    ,
-	id                   bigint DEFAULT nextval('besoinservice_id_seq3'::regclass) NOT NULL  ,
+	id                   bigint DEFAULT nextval('besoinservice_id_seq'::regclass) NOT NULL  ,
 	idposte              bigint    ,
 	idregion             bigint    ,
 	idservice            bigint    ,
@@ -309,7 +221,7 @@ CREATE  TABLE "public".besoinservice (
  );
 
 CREATE  TABLE "public".critereselection ( 
-	id                   bigint DEFAULT nextval('critereselection_id_seq2'::regclass) NOT NULL  ,
+	id                   bigint DEFAULT nextval('critereselection_id_seq'::regclass) NOT NULL  ,
 	idbesoin             bigint    ,
 	experience           varchar(255)    ,
 	sexe                 varchar(255)    ,
@@ -319,7 +231,7 @@ CREATE  TABLE "public".critereselection (
  );
 
 CREATE  TABLE "public".cvgrade ( 
-	id                   bigint DEFAULT nextval('cvgrade_id_seq3'::regclass) NOT NULL  ,
+	id                   bigint DEFAULT nextval('cvgrade_id_seq'::regclass) NOT NULL  ,
 	idcv                 bigint    ,
 	idfiliere            bigint    ,
 	idgrade              bigint    ,
@@ -346,7 +258,7 @@ CREATE  TABLE "public".personnel (
  );
 
 CREATE  TABLE "public".posteservice ( 
-	id                   bigint DEFAULT nextval('posteservice_id_seq3'::regclass) NOT NULL  ,
+	id                   bigint DEFAULT nextval('posteservice_id_seq'::regclass) NOT NULL  ,
 	idposte              bigint    ,
 	idservice            bigint    ,
 	CONSTRAINT posteservice_pkey PRIMARY KEY ( id ),
@@ -356,7 +268,7 @@ CREATE  TABLE "public".posteservice (
 
 CREATE  TABLE "public".criteregrade ( 
 	coeff                double precision    ,
-	id                   bigint DEFAULT nextval('criteregrade_id_seq3'::regclass) NOT NULL  ,
+	id                   bigint DEFAULT nextval('criteregrade_id_seq'::regclass) NOT NULL  ,
 	idcritereselection   bigint    ,
 	idfiliere            bigint    ,
 	idgrade              bigint    ,

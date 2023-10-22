@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 import { Cv } from "../../model/CvInterface";
 import { V_besoinannonce } from "../../model/V_besoinannonce";
-import { h6, questionnaireTitle } from "../../assets/css/rounded-circle-adding";
+import { h6, EmploymentTitle } from "./EmploymentCSS";
 import { Fonction } from "../../model/FonctionInterface";
 import { Personnel } from "../../model/PersonnelInterface";
 import axiosInstance from "../../http-client-side/Axios";
 
-const Entretient = () => {
+const Employment = () => {
     const [isPageLoad, setIsPageLoad] = useState<boolean>(false);
 
     const [Cvs, setCvs] = useState<Cv[]>([]);
@@ -58,8 +58,7 @@ const Entretient = () => {
         });
     });
     const handleSelectedAnnonce = (e: React.ChangeEvent<HTMLSelectElement>) => {
-        const IdAnnonce = e.target.value;
-        setSelectedAnnonce({idannonce: -1,id: parseInt(IdAnnonce),datebesoinservice : null,idservice: -1,idregion : -1,idposte  : -1,qualite  : "",description: "",typecontrat: "",volumetache : -1,volumehoraire: -1 });
+        setSelectedAnnonce(v_besoinannonces.find(annonce => annonce.idannonce == parseInt(e.target.value)));
     }
     const embauchement = async () => {
         if(selectedCv && selectedAnnonce){
@@ -75,7 +74,7 @@ const Entretient = () => {
                 } as Personnel;
 
                 await axiosInstance.post("/Personnel/save", personnel);
-                alert("Teste sauvegarder");
+                alert("Nouvelle personnel ajouter");
             }catch(error){
                 alert("Erreur : " + error);
             }
@@ -95,7 +94,7 @@ const Entretient = () => {
     return (
         
         <div className="container mt-4" style={{ maxWidth: "100%" }}>
-            <h2 style={{textAlign: 'center' ,...questionnaireTitle }}>Passer l` entretien</h2>
+            <h2 style={EmploymentTitle}>Embauche</h2>
 
             <div className="row">
 
@@ -187,4 +186,4 @@ const Entretient = () => {
     );
 };
 
-export default Entretient;
+export default Employment;
