@@ -21,196 +21,161 @@ const Payroll = () => {
   /* CONST DATA */
   const columns: TableColumn[] = [
     {
-      name: "Nom",
+      name: "Date",
       propTarget: "nom",
       format: "default",
     },
     {
-      name: "Age",
-      propTarget: "age",
-      format: "number",
+      name: "NBRE",
+      propTarget: "nom",
+      format: "default",
+    },
+    {
+      name: "N* MATR",
+      propTarget: "nom",
+      format: "default",
+    },
+    {
+      name: "N* CNAPS",
+      propTarget: "nom",
+      format: "default",
+    },
+    {
+      name: "Nom/Prenom",
+      propTarget: "nom",
+      format: "default",
+    },
+    {
+      name: "Date d'embauche",
+      propTarget: "nom",
+      format: "default",
+    },
+    {
+      name: "Absence du mois",
+      propTarget: "nom",
+      format: "default",
+    },
+    {
+      name: "CAT",
+      propTarget: "nom",
+      format: "default",
+    },
+    {
+      name: "Fonction",
+      propTarget: "nom",
+      format: "default",
+    },
+    {
+      name: "Salaire de base",
+      propTarget: "nom",
+      format: "default",
+    },
+    {
+      name: "Retenues sur absence",
+      propTarget: "nom",
+      format: "default",
+    },
+    {
+      name: "Salaire de base du mois",
+      propTarget: "nom",
+      format: "default",
+    },
+    {
+      name: "Indemnite",
+      propTarget: "nom",
+      format: "default",
+    },
+    {
+      name: "Rappel",
+      propTarget: "nom",
+      format: "default",
+    },
+    {
+      name: "Autres",
+      propTarget: "nom",
+      format: "default",
+    },
+    {
+      name: "HP SUP/MAJ",
+      propTarget: "nom",
+      format: "default",
+    },
+    {
+      name: "Salaire brut",
+      propTarget: "nom",
+      format: "default",
+    },
+    {
+      name: "Cnaps 1%",
+      propTarget: "nom",
+      format: "default",
+    },
+    {
+      name: "OSTIE 1%",
+      propTarget: "nom",
+      format: "default",
+    },
+    {
+      name: "OSTIE 5%",
+      propTarget: "nom",
+      format: "default",
+    },
+    {
+      name: "Revenu imposable",
+      propTarget: "nom",
+      format: "default",
+    },
+    {
+      name: "Impot du",
+      propTarget: "nom",
+      format: "default",
+    },
+    {
+      name: "Enfant a charge",
+      propTarget: "nom",
+      format: "default",
+    },
+    {
+      name: "Montant",
+      propTarget: "nom",
+      format: "default",
+    },
+    {
+      name: "IGR net",
+      propTarget: "nom",
+      format: "default",
+    },
+    {
+      name: "Autre retenues",
+      propTarget: "nom",
+      format: "default",
+    },
+    {
+      name: "Salaire net",
+      propTarget: "nom",
+      format: "default",
+    },
+    {
+      name: "Avance",
+      propTarget: "nom",
+      format: "default",
+    },
+    {
+      name: "Net a payer",
+      propTarget: "nom",
+      format: "default",
+    },
+    {
+      name: "Autre indemnite",
+      propTarget: "nom",
+      format: "default",
+    },
+    {
+      name: "Net du mois",
+      propTarget: "nom",
+      format: "default",
     },
   ];
-
-  const testData = [
-    {
-      nom: "Alain",
-      age: 19,
-    },
-    {
-      nom: "Dylan",
-      age: 20,
-    },
-    {
-      nom: "Misa",
-      age: 18,
-    },
-    {
-      nom: "Rotsy",
-      age: 20,
-    },
-    {
-      nom: "Tsiky",
-      age: 20,
-    },
-  ];
-  //   const columns: TableColumn[] = [
-  //     {
-  //       name: "Date",
-  //       propTarget: "nom",
-  //       format: "default",
-  //     },
-  //     {
-  //       name: "NBRE",
-  //       propTarget: "nom",
-  //       format: "default",
-  //     },
-  //     {
-  //       name: "N* MATR",
-  //       propTarget: "nom",
-  //       format: "default",
-  //     },
-  //     {
-  //       name: "N* CNAPS",
-  //       propTarget: "nom",
-  //       format: "default",
-  //     },
-  //     {
-  //       name: "Nom/Prenom",
-  //       propTarget: "nom",
-  //       format: "default",
-  //     },
-  //     {
-  //       name: "Date d'embauche",
-  //       propTarget: "nom",
-  //       format: "default",
-  //     },
-  //     {
-  //       name: "Absence du mois",
-  //       propTarget: "nom",
-  //       format: "default",
-  //     },
-  //     {
-  //       name: "CAT",
-  //       propTarget: "nom",
-  //       format: "default",
-  //     },
-  //     {
-  //       name: "Fonction",
-  //       propTarget: "nom",
-  //       format: "default",
-  //     },
-  //     {
-  //       name: "Salaire de base",
-  //       propTarget: "nom",
-  //       format: "default",
-  //     },
-  //     {
-  //       name: "Retenues sur absence",
-  //       propTarget: "nom",
-  //       format: "default",
-  //     },
-  //     {
-  //       name: "Salaire de base du mois",
-  //       propTarget: "nom",
-  //       format: "default",
-  //     },
-  //     {
-  //       name: "Indemnite",
-  //       propTarget: "nom",
-  //       format: "default",
-  //     },
-  //     {
-  //       name: "Rappel",
-  //       propTarget: "nom",
-  //       format: "default",
-  //     },
-  //     {
-  //       name: "Autres",
-  //       propTarget: "nom",
-  //       format: "default",
-  //     },
-  //     {
-  //       name: "HP SUP/MAJ",
-  //       propTarget: "nom",
-  //       format: "default",
-  //     },
-  //     {
-  //       name: "Salaire brut",
-  //       propTarget: "nom",
-  //       format: "default",
-  //     },
-  //     {
-  //       name: "Cnaps 1%",
-  //       propTarget: "nom",
-  //       format: "default",
-  //     },
-  //     {
-  //       name: "OSTIE 1%",
-  //       propTarget: "nom",
-  //       format: "default",
-  //     },
-  //     {
-  //       name: "OSTIE 5%",
-  //       propTarget: "nom",
-  //       format: "default",
-  //     },
-  //     {
-  //       name: "Revenu imposable",
-  //       propTarget: "nom",
-  //       format: "default",
-  //     },
-  //     {
-  //       name: "Impot du",
-  //       propTarget: "nom",
-  //       format: "default",
-  //     },
-  //     {
-  //       name: "Enfant a charge",
-  //       propTarget: "nom",
-  //       format: "default",
-  //     },
-  //     {
-  //       name: "Montant",
-  //       propTarget: "nom",
-  //       format: "default",
-  //     },
-  //     {
-  //       name: "IGR net",
-  //       propTarget: "nom",
-  //       format: "default",
-  //     },
-  //     {
-  //       name: "Autre retenues",
-  //       propTarget: "nom",
-  //       format: "default",
-  //     },
-  //     {
-  //       name: "Salaire net",
-  //       propTarget: "nom",
-  //       format: "default",
-  //     },
-  //     {
-  //       name: "Avance",
-  //       propTarget: "nom",
-  //       format: "default",
-  //     },
-  //     {
-  //       name: "Net a payer",
-  //       propTarget: "nom",
-  //       format: "default",
-  //     },
-  //     {
-  //       name: "Autre indemnite",
-  //       propTarget: "nom",
-  //       format: "default",
-  //     },
-  //     {
-  //       name: "Net du mois",
-  //       propTarget: "nom",
-  //       format: "default",
-  //     },
-  //   ];
 
   return (
     <BasicCRUDTable
@@ -218,7 +183,7 @@ const Payroll = () => {
       indexedRow
       hasAction={false}
       columns={columns}
-      data={testData}
+      data={[]}
       dataPropIDName={""}
       addModalFormInputs={[]}
       onAdd={() => {}}

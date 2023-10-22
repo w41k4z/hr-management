@@ -90,24 +90,21 @@ const BasicCRUDTable = ({
     for (const column of columns) {
       filteredData = filteredData.filter((item) => {
         if (column.format === "number" || column.format === "currency") {
-          try {
-            if (filters) {
-              let lowerValue: number = filters[column.propTarget][0]
-                ? parseFloat(filters[column.propTarget][0])
-                : 0;
-              let upperValue: number = filters[column.propTarget][1]
-                ? parseFloat(filters[column.propTarget][1])
-                : Number.MAX_VALUE;
-              if (
-                lowerValue <= item[column.propTarget] &&
-                item[column.propTarget] <= upperValue
-              ) {
-                return item[column.propTarget];
-              }
-            }
-          } catch (error) {
-            alert(error);
+          let lowerValue: number =
+            filters && filters[column.propTarget][0]
+              ? parseFloat(filters[column.propTarget][0])
+              : Number.MIN_VALUE;
+          let upperValue: number =
+            filters && filters[column.propTarget][1]
+              ? parseFloat(filters[column.propTarget][1])
+              : Number.MAX_VALUE;
+          if (
+            lowerValue <= item[column.propTarget] &&
+            item[column.propTarget] <= upperValue
+          ) {
+            return item[column.propTarget];
           }
+          return null;
         } else {
           return item[column.propTarget]
             .toString()
@@ -125,12 +122,7 @@ const BasicCRUDTable = ({
     arrFilter[filter][0] = value;
     setFilters({ ...arrFilter });
   };
-  const handleNumberLowerFilter = (filter: string, value: string) => {
-    const arrFilter = { ...filters };
-    arrFilter[filter][0] = value;
-    setFilters({ ...arrFilter });
-  };
-  const handleNumberUpperFilter = (filter: string, value: string) => {
+  const handleUpperNumberFilter = (filter: string, value: string) => {
     const arrFilter = { ...filters };
     arrFilter[filter][1] = value;
     setFilters({ ...arrFilter });
@@ -138,6 +130,11 @@ const BasicCRUDTable = ({
   const clearFilter = (filter: string) => {
     const arrFilter = { ...filters };
     arrFilter[filter][0] = "";
+    setFilters({ ...arrFilter });
+  };
+  const clearUpperNumberFilter = (filter: string) => {
+    const arrFilter = { ...filters };
+    arrFilter[filter][1] = "";
     setFilters({ ...arrFilter });
   };
 
@@ -357,7 +354,7 @@ const BasicCRUDTable = ({
                             type="text"
                             value={filters ? filters[column.propTarget][0] : ""}
                             onChange={(event) => {
-                              handleNumberLowerFilter(
+                              handleFilter(
                                 column.propTarget,
                                 event.target.value
                               );
@@ -381,7 +378,7 @@ const BasicCRUDTable = ({
                             type="text"
                             value={filters ? filters[column.propTarget][1] : ""}
                             onChange={(event) => {
-                              handleNumberUpperFilter(
+                              handleUpperNumberFilter(
                                 column.propTarget,
                                 event.target.value
                               );
@@ -389,7 +386,7 @@ const BasicCRUDTable = ({
                           />
                           <AiOutlineClose
                             onClick={() => {
-                              clearFilter(column.propTarget);
+                              clearUpperNumberFilter(column.propTarget);
                             }}
                           />
                         </div>
