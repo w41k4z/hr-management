@@ -35,6 +35,8 @@ const Employment = () => {
     const [idFonction, setIdFonction] = useState<number>(-1);
     const [dtn, setDtn] = useState<Date>();
     const [dtembauche, setDtEmbauche] = useState<Date>();
+    const [cnapsMtr , setCnapsMtr] = useState<string>();
+    const [mtr , setMtr] = useState<string>();
 
     useEffect(() => {
         if(selectedCv === undefined || selectedCv.adresse !== "-1")return;
@@ -71,6 +73,8 @@ const Employment = () => {
                     dtn         : dtn,
                     dtembauche  : dtembauche,
                     idfonction  : idFonction,
+                    cnaps       : cnapsMtr,
+                    mtr         : mtr
                 } as Personnel;
 
                 await axiosInstance.post("/Personnel/save", personnel);
@@ -79,6 +83,12 @@ const Employment = () => {
                 alert("Erreur : " + error);
             }
         }
+    }
+    const handleChangeCnapsMtr = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setCnapsMtr(e.target.value);
+    }
+    const handleChangedMtr = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setMtr(e.target.value);
     }
 
     const handleSelectedFonction = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -150,6 +160,22 @@ const Employment = () => {
                     <h6 style={h6}>Date de naissance</h6>
                     <br />
                     <input  onChange={handleChangeDtn} type="date" name="dtn" className="form-control"/>
+                </div>
+
+            </div>
+
+            <div className="row">
+
+                <div className="col-md-6 mt-5 form-input">
+                    <h6 style={h6}>N~Cnaps</h6>
+                    <br />
+                    <input  onChange={handleChangeCnapsMtr} type="text" name="dtn" className="form-control"/>
+                </div>
+
+                <div className="col-md-6 mt-5 form-input">
+                    <h6 style={h6}>N~Matricule</h6>
+                    <br />
+                    <input  onChange={handleChangedMtr} type="text" name="dtn" className="form-control"/>
                 </div>
 
             </div>

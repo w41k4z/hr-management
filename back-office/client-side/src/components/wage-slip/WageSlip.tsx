@@ -69,10 +69,14 @@ const WageSlip = () => {
       });
   }, [employee]);
 
+  const GetSeniorityString = (list: number[]) => {
+    return list[0] + " an(s) " + list[1] + " mois " + list[2] + " jour(s)";
+  }
+
   const handleExportToPDF = () => {
     const contentToPrint = document.getElementById("wage-slip-container");
     if (contentToPrint) {
-      const printWindow = window.open("", "_blank");
+      const printWindow = window.open("...", "_blank");
       if (printWindow) {
         // Include Bootstrap stylesheet
         printWindow.document.write("<html><head><title>Imprimer</title>");
@@ -145,13 +149,24 @@ const WageSlip = () => {
               <tbody>
                 <tr className="row">
                   <td className="row col-md-6">
-                    <span style={ficheLabel} className="col-md-5 offset-md-1">
-                      Nom et Prénoms :
+                    <span style={ficheLabel} className="col-md-4 offset-md-1">
+                      Nom :
                     </span>
-                    <span className="col-md-5 offset-md-0" style={Money}>
-                      {employee?.nom + " " + employee?.prenom}
+                    <span className="col-md-5 offset-md-1" style={Money}>
+                      {employee ? (employee.nom ? (employee.nom) : "...") : "..."}
                     </span>
                   </td>
+                  <td className="row col-md-6">
+                    <span style={ficheLabel} className="col-md-4 offset-md-2">
+                      Prénom(s) :
+                    </span>
+                    <span className="col-md-5 offset-md-1" style={Money}>
+                      {employee ? (employee.prenom ? (employee.prenom) : "...") : "..."}
+                    </span>
+                  </td>
+                </tr>
+                <tr>
+                  <td colSpan={2}><hr /></td>
                 </tr>
                 <tr className="row">
                   <td className="row col-md-6">
@@ -159,7 +174,7 @@ const WageSlip = () => {
                       Matricule :
                     </span>
                     <span className="col-md-5 offset-md-1" style={Money}>
-                      627/TNR
+                      {employee ? (employee.mtr ? employee.mtr : "...") : "..."}
                     </span>
                   </td>
                   <td className="row col-md-6">
@@ -177,7 +192,7 @@ const WageSlip = () => {
                       Fonction :
                     </span>
                     <span className="col-md-5 offset-md-1" style={Money}>
-                      MPITOLONA
+                      {employee ? (employee.fonction ? employee.fonction.nom : "...") : "..."}
                     </span>
                   </td>
                   <td className="row col-md-6">
@@ -198,7 +213,9 @@ const WageSlip = () => {
                     <span
                       className="col-md-5 offset-md-1 text-right"
                       style={Money}
-                    ></span>
+                    >
+                      {employee ? (employee.cnaps ? employee.cnaps : "...") : "..."}
+                    </span>
                   </td>
                   <td className="row col-md-6">
                     <span style={ficheLabel} className="col-md-5 offset-md-2">
@@ -207,7 +224,7 @@ const WageSlip = () => {
                     <span className="col-md-5 text-right" style={Money}>
                       {employee?.poste.starting_salary
                         ? (employee?.poste.starting_salary / 30).toFixed(2)
-                        : ""}{" "}
+                        : "..."}{" "}
                       <span style={MoneyUnit}>MGA</span>
                     </span>
                   </td>
@@ -220,17 +237,17 @@ const WageSlip = () => {
                     <span className="col-md-5 offset-md-0" style={Money}>
                       {employee?.dtembauche
                         ? employee.dtembauche.toString()
-                        : ""}
+                        : "..."}
                     </span>
                   </td>
                   <td className="row col-md-6">
                     <span style={ficheLabel} className="col-md-5 offset-md-2">
-                      taux horaires :
+                      Taux horaires :
                     </span>
                     <span className="col-md-5 text-right" style={Money}>
                       {employee?.poste.starting_salary
                         ? (employee?.poste.starting_salary / 173.33).toFixed(2)
-                        : ""}{" "}
+                        : "..."}{" "}
                       <span style={MoneyUnit}>MGA</span>
                     </span>
                   </td>
@@ -241,7 +258,7 @@ const WageSlip = () => {
                       Ancienneté :
                     </span>
                     <span className="col-md-6 offset-md-0">
-                      12 an(s) 5 mois et 10 jour(s)
+                      {employee ? (employee.seniority ? GetSeniorityString(employee.seniority) : "...") : "..."}
                     </span>
                   </td>
                   <td className="row col-md-6">
@@ -276,13 +293,13 @@ const WageSlip = () => {
                         <td>{gainSalary.designation}</td>
                         <td style={Money}>{gainSalary.nombre}</td>
                         <td style={Money}>
-                          {gainSalary.taux ? gainSalary.taux.toFixed(2) : ""}{" "}
+                          {gainSalary.taux ? gainSalary.taux.toFixed(2) : "..."}{" "}
                           <span style={MoneyUnit}>MGA</span>
                         </td>
                         <td style={Money}>
                           {gainSalary.montant
                             ? gainSalary.montant.toFixed(2)
-                            : ""}{" "}
+                            : "..."}{" "}
                           <span style={MoneyUnit}>MGA</span>
                         </td>
                       </tr>
@@ -294,7 +311,7 @@ const WageSlip = () => {
                   <td style={Money}>
                     {gainSalaries.length > 0
                       ? gainSalaries[gainSalaries.length - 1].montant
-                      : ""}{" "}
+                      : "..."}{" "}
                     <span style={MoneyUnit}>MGA</span>
                   </td>
                 </tr>
@@ -314,12 +331,12 @@ const WageSlip = () => {
                         <td colSpan={2} style={Money}>
                           {straySalary.taux
                             ? straySalary.taux.toFixed(2) + " %"
-                            : ""}{" "}
+                            : "..."}{" "}
                         </td>
                         <td style={Money}>
                           {straySalary.montant
                             ? straySalary.montant.toFixed(2)
-                            : ""}{" "}
+                            : "..."}{" "}
                           <span style={MoneyUnit}>MGA</span>
                         </td>
                       </tr>
@@ -373,7 +390,7 @@ const WageSlip = () => {
                     <FontAwesomeIcon icon={faArrowRight} style={arrowStyle} />
                   </td>
                   <td style={Money}>
-                    {netPay ? netPay.toFixed(2) : ""}{" "}
+                    {netPay ? netPay.toFixed(2) : "..."}{" "}
                     <span style={MoneyUnit}>MGA</span>
                   </td>
                 </tr>
@@ -402,7 +419,7 @@ const WageSlip = () => {
                 <tr>
                   <td>Montant imposable :</td>
                   <td style={Money}>
-                    {assessablePay ? assessablePay.toFixed(2) : ""}{" "}
+                    {assessablePay ? assessablePay.toFixed(2) : "..."}{" "}
                     <span style={MoneyUnit}>MGA</span>
                   </td>
                 </tr>

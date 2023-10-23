@@ -28,4 +28,8 @@ public class HeureSuppService {
     public void deleteHeureSupp(Long id) {
         heureSuppRepository.deleteById(id);
     }
+
+    public HeureSupp getHeureSuppByIdPersonnel(Long idPersonnel){
+        return heureSuppRepository.getHeureSuppByIdPersonnel(idPersonnel);
+    }
 }
