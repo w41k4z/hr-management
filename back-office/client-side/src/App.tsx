@@ -37,6 +37,7 @@ import { useEffect, useState } from "react";
 import PageAnswerQuestion from "./pages/test/answerquestion";
 import Conge from "./pages/conge";
 import WageSlip from "./components/wage-slip/WageSlip";
+import HeureSupp from "./pages/management/heure-supp";
 
 /* COMPONENTS */
 const sidePanelHeader = (
@@ -112,6 +113,7 @@ function App() {
                 <Route path="/management/grades" element={<Grades />} />
                 <Route path="/management/positions" element={<Positions />} />
                 <Route path="/management/regions" element={<Regions />} />
+                <Route path="/management/heure-supp" element={<HeureSupp />} />
 
                 <Route
                   path="/question/Test/questionaddy"
