@@ -30,7 +30,7 @@ public class DebutcongeController {
         return OptionalGet.get(debutcongeService.getDebutcongeById(id));
     }
 
-    @DeleteMapping("/deleteById/{id}")
+    @PostMapping("/deleteById/{id}")
     public void deleteDebutconge(@PathVariable Long id) {
         debutcongeService.deleteDebutconge(id);
     }
