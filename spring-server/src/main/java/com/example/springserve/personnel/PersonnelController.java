@@ -27,7 +27,9 @@ public class PersonnelController {
 
     @GetMapping("/getById/{id}")
     public Personnel getPersonnelById(@PathVariable Long id) {
-        return OptionalGet.get(personnelService.getPersonnelById(id));
+        Personnel personnel =  OptionalGet.get(personnelService.getPersonnelById(id));
+        personnel.setSeniority();
+        return personnel;
     }
 
     @DeleteMapping("/deleteById/{id}")

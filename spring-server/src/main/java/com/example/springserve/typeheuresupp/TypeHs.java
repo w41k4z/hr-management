@@ -14,9 +14,9 @@ public class TypeHs {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long id;
 
-    @Column
+    @Column(name = "nom")
     public String nom;
 
-    @Column
-    public Integer status;
+    @Column(name = "pourcentage")
+    public Double pourcentage;
 }
