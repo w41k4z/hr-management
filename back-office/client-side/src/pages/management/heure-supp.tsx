@@ -41,12 +41,13 @@ const HeureSupp = () => {
 
   /* LOGIC */
   const addNewHeureSupp = async () => {
-    const formData = new FormData();
-    formData.append("idPersonnel", newHeureSupp.idPersonnel + "");
-    formData.append("date", newHeureSupp.date + "");
-    formData.append("idTypeHS", newHeureSupp.idTypeHS + "");
-    formData.append("nombreHeure", newHeureSupp.nombreHeure + "");
-    await Axios.post("/HeureSupp/save", formData)
+    const newHeureSuppp = {
+      idPersonnel: newHeureSupp.idPersonnel,
+      date: newHeureSupp.date,
+      idTypeHS: newHeureSupp.idTypeHS,
+      nombreHeure: newHeureSupp.nombreHeure,
+    }
+    await Axios.post("/HeureSupp/save", newHeureSuppp)
       .then((res) => {
         const newHeureSupps = [...heureSupps];
         newHeureSupps.push(res.data);

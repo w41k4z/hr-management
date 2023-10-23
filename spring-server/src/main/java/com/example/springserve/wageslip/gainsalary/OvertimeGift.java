@@ -13,7 +13,7 @@ public class OvertimeGift extends GainSalary{
         double percent = type_heure_supp.pourcentage;
         String percentLabel = type_heure_supp.pourcentage + "%";
 
-        HeureSupp heureSupp = heureSuppService.getHeureSuppByIdPersonnel(IdPersonnel);
+        HeureSupp heureSupp = heureSuppService.getHeureSuppByIdPersonnelAndIdType(IdPersonnel, type_heure_supp.id);
         if(heureSupp == null)
         {
             heureSupp = new HeureSupp();

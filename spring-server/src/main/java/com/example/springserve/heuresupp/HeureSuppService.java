@@ -29,7 +29,7 @@ public class HeureSuppService {
         heureSuppRepository.deleteById(id);
     }
 
-    public HeureSupp getHeureSuppByIdPersonnel(Long idPersonnel){
-        return heureSuppRepository.getHeureSuppByIdPersonnel(idPersonnel);
+    public HeureSupp getHeureSuppByIdPersonnelAndIdType(Long idPersonnel, Long idTypeHs){
+        return heureSuppRepository.findByIdPersonnelAndIdTypeHS(idPersonnel, idTypeHs);
     }
 }
