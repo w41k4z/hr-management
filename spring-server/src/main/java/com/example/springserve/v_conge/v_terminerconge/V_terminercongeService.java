@@ -17,4 +17,8 @@ public class V_terminercongeService {
         return terminercongeViewRepository.findAll();
     }
 
+    public List<V_terminerconge> getAllByEtat(Long etat) {
+        return terminercongeViewRepository.findByEtat(etat);
+    }
+
 }

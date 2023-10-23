@@ -6,5 +6,7 @@ export default interface Terminerconge {
     debut : Date;
     type : number;
     motif: string;
+    fin : Date;
+    etat : number;
   }
   
