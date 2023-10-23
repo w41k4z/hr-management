@@ -28,6 +28,7 @@ const Positions = () => {
   const addNewPosition = async () => {
     const formData = new FormData();
     formData.append("nom", newPosition.nom);
+    formData.append("starting_salary", newPosition.starting_salary + "");
     await Axios.post("/Poste/save", formData)
       .then((res) => {
         const newPositions = [...positions];
@@ -54,7 +55,8 @@ const Positions = () => {
     const formData = new FormData();
     formData.append("id", data.id.toString());
     formData.append("nom", data.nom);
-    await Axios.post("/Poste/save", formData)
+    formData.append("starting_salary", data.starting_salary + "");
+    await Axios.post("/Poste/update", formData)
       .then(() => {
         const newPositions = [...positions];
         newPositions.forEach((service) => {
@@ -63,6 +65,7 @@ const Positions = () => {
             setPositionToUpdate({} as PositionInterface);
           }
         });
+        alert("update OK");
         setPositions(newPositions);
       })
       .catch((value) => {
@@ -84,11 +87,28 @@ const Positions = () => {
           className="form-control"
           id="name"
           onChange={(e) => {
-            setNewPosition({ id: newPosition.id, nom: e.target.value });
+            setNewPosition({ id: newPosition.id, nom: e.target.value, starting_salary: newPosition.starting_salary });
           }}
         />
       ),
     },
+    {
+      label: (
+        <label htmlFor="starting_salary" className="form-label">
+          Salaire de base
+        </label>
+      ),
+      input: (
+        <input
+          type="text"
+          className="form-control"
+          id="starting_salary"
+          onChange={(e) => {
+            setNewPosition({ id: newPosition.id, nom: newPosition.nom, starting_salary: parseFloat(e.target.value) });
+          }}
+        />
+      ),
+    }
   ];
 
   const updateModalFormInputs = (row: PositionInterface) => [
@@ -116,7 +136,25 @@ const Positions = () => {
           id="name"
           defaultValue={row.nom}
           onChange={(e) => {
-            setPositionToUpdate({ id: row.id, nom: e.target.value });
+            setPositionToUpdate({ id: row.id, nom: e.target.value, starting_salary: row.starting_salary });
+          }}
+        />
+      ),
+    },
+    {
+      label: (
+        <label htmlFor="starting_salary" className="form-label">
+          Salaire de base
+        </label>
+      ),
+      input: (
+        <input
+          type="number"
+          className="form-control"
+          id="starting_salary"
+          defaultValue={row.starting_salary}
+          onChange={(e) => {
+            setPositionToUpdate({ id: row.id, nom: row.nom, starting_salary: parseFloat(e.target.value) });
           }}
         />
       ),
@@ -130,6 +168,11 @@ const Positions = () => {
       propTarget: "nom",
       format: "default",
     },
+    {
+      name: "Salaire de base",
+      propTarget: "starting_salary",
+      format: "currency",
+    }, 
   ];
 
   return (
