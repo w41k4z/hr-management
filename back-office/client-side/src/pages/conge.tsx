@@ -239,7 +239,30 @@ export default function Conge() {
 
         // console.log('Form Data:', formDataObject1);
     };
-    // 
+
+    const [formData3, setFormData3] = useState({ id: ''});
+
+    const handleFormSubmit3 = async (event: React.FormEvent) => {
+        event.preventDefault(); // Prevent the default form submission behavior
+
+        // Get the form data
+        const form = event.target as HTMLFormElement;
+        const formData3 = new FormData(form);
+        const formDataObject3: { [key: string]: string } = {};
+        formData3.forEach((value, key) => {
+            formDataObject3[key] = value as string;
+        });
+        try {
+            const response = await axiosInstance.post('/Debutconge/deleteById/'+formDataObject3.id,{
+            });
+            window.location.reload();
+        }
+        catch (error) {
+        }
+
+        // console.log('Form Data:', formDataObject1);
+    };
+    // /deleteById/{id}
 
 
     return (
@@ -330,6 +353,7 @@ export default function Conge() {
                             <th>Motif</th>
                             <th>Fin Suppose</th>
                             <th>Action</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -367,6 +391,14 @@ export default function Conge() {
                                         </div>
                                     </form>
                                 </td>
+                                <td>
+                                    <form onSubmit={handleFormSubmit3}>
+                                        <div className="d-flex align-items-center">
+                                            <input type="hidden" name="id" value={terminerconge.iddebut} />
+                                            <button type="submit" className="btn btn-primary" style={{ marginLeft: "10px" }}>Refuser Superieur</button>
+                                        </div>
+                                    </form>
+                                </td>
                             </tr>
                         ))}
                     </tbody>
@@ -383,6 +415,7 @@ export default function Conge() {
                             <th>Motif</th>
                             <th>Fin Suppose</th>
                             <th>Action</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -403,6 +436,14 @@ export default function Conge() {
                                             <input type="hidden" name="type" value={terminerconge.type} />
                                             <input type="hidden" name="fin" value={terminerconge.fin.toString()} />
                                             <button type="submit" className="btn btn-primary" style={{ marginLeft: "10px" }}>Valider RH</button>
+                                        </div>
+                                    </form>
+                                </td>
+                                <td>
+                                    <form onSubmit={handleFormSubmit3}>
+                                        <div className="d-flex align-items-center">
+                                            <input type="hidden" name="id" value={terminerconge.iddebut} />
+                                            <button type="submit" className="btn btn-primary" style={{ marginLeft: "10px" }}>Refuser RH</button>
                                         </div>
                                     </form>
                                 </td>
