@@ -184,6 +184,7 @@ const Payroll = () => {
       hasAction={false}
       columns={columns}
       data={payrolls}
+      hasExportPdf
       dataPropIDName={"id"}
       addModalFormInputs={[]}
       onAdd={() => {}}
