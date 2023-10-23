@@ -170,11 +170,11 @@ const Payroll = () => {
     //   propTarget: "nom",
     //   format: "default",
     // },
-    {
-      name: "Net du mois",
-      propTarget: "netOfMonth",
-      format: "currency",
-    },
+    // {
+    //   name: "Net du mois",
+    //   propTarget: "netOfMonth",
+    //   format: "currency",
+    // },
   ];
 
   return (
