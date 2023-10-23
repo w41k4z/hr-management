@@ -28,6 +28,8 @@ CREATE SEQUENCE "public".fonction_id_seq START WITH 1 INCREMENT BY 1;
 
 CREATE SEQUENCE "public".grade_id_seq START WITH 1 INCREMENT BY 1;
 
+CREATE SEQUENCE "public".heure_supp_id_seq START WITH 1 INCREMENT BY 1;
+
 CREATE SEQUENCE "public".myuser_id_seq START WITH 1 INCREMENT BY 1;
 
 CREATE SEQUENCE "public".personnel_id_seq START WITH 1 INCREMENT BY 1;
@@ -49,6 +51,8 @@ CREATE SEQUENCE "public".reponsetest_id_seq START WITH 1 INCREMENT BY 1;
 CREATE SEQUENCE "public".reponsetest_id_seq1 START WITH 1 INCREMENT BY 1;
 
 CREATE SEQUENCE "public".service_id_seq START WITH 1 INCREMENT BY 1;
+
+CREATE SEQUENCE "public".type_hs_id_seq START WITH 1 INCREMENT BY 1;
 
 CREATE  TABLE "public".affiliation ( 
 	id                   bigint DEFAULT nextval('affiliation_id_seq'::regclass) NOT NULL  ,
@@ -200,6 +204,9 @@ CREATE  TABLE "public".personnel (
 	dtn                  date    ,
 	dtembauche           date    ,
 	idfonction           bigint    ,
+	cnaps                varchar  NOT NULL  ,
+	mtr                  varchar  NOT NULL  ,
+	seniority            integer[]    ,
 	CONSTRAINT personnel_pkey PRIMARY KEY ( id )
  );
 
@@ -225,6 +232,8 @@ CREATE  TABLE "public".debutconge (
 	idpersonnel          bigint    ,
 	motif                varchar(255)    ,
 	"type"               bigint    ,
+	etat                 bigint    ,
+	fin                  date    ,
 	CONSTRAINT debutconge_pkey PRIMARY KEY ( id )
  );
 
@@ -306,6 +315,8 @@ ALTER TABLE "public".personnel ADD CONSTRAINT fk_personnel_poste FOREIGN KEY ( i
 
 ALTER TABLE "public".personnel ADD CONSTRAINT fk_personnel_service FOREIGN KEY ( idservice ) REFERENCES "public".service( id ) ON DELETE CASCADE ON UPDATE CASCADE;
 
+ALTER TABLE "public".personnel ADD CONSTRAINT fkmla5xrmak15pwth5vf1r3dxuk FOREIGN KEY ( idfonction ) REFERENCES "public".filiere( id );
+
 ALTER TABLE "public".posteservice ADD CONSTRAINT fk_posteservice_poste FOREIGN KEY ( idposte ) REFERENCES "public".poste( id ) ON DELETE CASCADE ON UPDATE CASCADE;
 
 ALTER TABLE "public".posteservice ADD CONSTRAINT fk_posteservice_service FOREIGN KEY ( idservice ) REFERENCES "public".service( id ) ON DELETE CASCADE ON UPDATE CASCADE;
@@ -383,7 +394,9 @@ CREATE VIEW "public".v_terminerconge AS  SELECT d.id AS iddebut,
     p.prenom,
     d.debut,
     d.type,
-    d.motif
+    d.motif,
+    d.fin,
+    d.etat
    FROM (debutconge d
      JOIN personnel p ON ((p.id = d.idpersonnel)))
   WHERE (NOT (d.id IN ( SELECT finconge.iddebut
@@ -395,3 +408,5 @@ CREATE VIEW "public".v_prendreconge AS  SELECT personnel.id AS idpersonnel,
    FROM personnel
   WHERE (NOT (personnel.id IN ( SELECT v_terminerconge.idpersonnel
            FROM v_terminerconge)));
+
+
