@@ -1,7 +1,3 @@
-DROP DATABASE hrmanagment;
-CREATE DATABASE hrmanagment;
-\c hrmanagment;
-
 CREATE SEQUENCE "public".affiliation_id_seq START WITH 1 INCREMENT BY 1;
 
 CREATE SEQUENCE "public".annonce_id_seq START WITH 1 INCREMENT BY 1;
@@ -66,7 +62,7 @@ CREATE  TABLE "public".annonce (
 	CONSTRAINT annonce_pkey PRIMARY KEY ( id )
  );
 
-CREATE  TABLE "public".cv (
+CREATE  TABLE "public".cv ( 
 	id                   bigint DEFAULT nextval('cv_id_seq'::regclass) NOT NULL  ,
 	adresse              varchar(255)    ,
 	cin                  varchar(255)    ,
@@ -87,27 +83,10 @@ CREATE  TABLE "public".cvexperience (
 	CONSTRAINT cvexperience_pkey PRIMARY KEY ( id )
  );
 
-CREATE  TABLE "public".debutconge ( 
-	id                   bigint DEFAULT nextval('debutconge_id_seq'::regclass) NOT NULL  ,
-	debut                date    ,
-	idpersonnel          bigint    ,
-	motif                varchar(255)    ,
-	"type"               bigint    ,
-	CONSTRAINT debutconge_pkey PRIMARY KEY ( id )
- );
-
 CREATE  TABLE "public".filiere ( 
 	id                   bigint DEFAULT nextval('filiere_id_seq'::regclass) NOT NULL  ,
 	nom                  varchar(255)    ,
 	CONSTRAINT filiere_pkey PRIMARY KEY ( id )
- );
-
-CREATE  TABLE "public".finconge ( 
-	id                   bigint DEFAULT nextval('finconge_id_seq'::regclass) NOT NULL  ,
-	duree                double precision    ,
-	fin                  date    ,
-	iddebut              bigint    ,
-	CONSTRAINT finconge_pkey PRIMARY KEY ( id )
  );
 
 CREATE  TABLE "public".fonction ( 
@@ -140,9 +119,7 @@ CREATE  TABLE "public".questionannonce (
 	id                   bigint DEFAULT nextval('questionannonce_id_seq'::regclass) NOT NULL  ,
 	idannonce            bigint  NOT NULL  ,
 	idquestion           bigint  NOT NULL  ,
-	CONSTRAINT questionannonce_pkey PRIMARY KEY ( id ),
-	CONSTRAINT fk_questionannonce_annonce FOREIGN KEY ( idannonce ) REFERENCES "public".annonce( id ) ON DELETE CASCADE ON UPDATE CASCADE ,
-	CONSTRAINT fk_questionannonce_question FOREIGN KEY ( idquestion ) REFERENCES "public".question( id ) ON DELETE CASCADE ON UPDATE CASCADE 
+	CONSTRAINT questionannonce_pkey PRIMARY KEY ( id )
  );
 
 CREATE  TABLE "public".questionreponse ( 
@@ -150,8 +127,7 @@ CREATE  TABLE "public".questionreponse (
 	idquestion           bigint  NOT NULL  ,
 	reponse              varchar(255)  NOT NULL  ,
 	status               varchar(255)  NOT NULL  ,
-	CONSTRAINT questionreponse_pkey PRIMARY KEY ( id ),
-	CONSTRAINT fkho8caewikn0e7nwn76je0f8cm FOREIGN KEY ( idquestion ) REFERENCES "public".question( id )   
+	CONSTRAINT questionreponse_pkey PRIMARY KEY ( id )
  );
 
 CREATE  TABLE "public".region ( 
@@ -166,41 +142,13 @@ CREATE  TABLE "public".reponsetest (
 	id                   bigint DEFAULT nextval('reponsetest_id_seq1'::regclass) NOT NULL  ,
 	idannonce            bigint  NOT NULL  ,
 	idcv                 bigint  NOT NULL  ,
-	CONSTRAINT reponsetest_pkey PRIMARY KEY ( id ),
-	CONSTRAINT fk_reponsetest_annonce FOREIGN KEY ( idannonce ) REFERENCES "public".annonce( id ) ON DELETE CASCADE ON UPDATE CASCADE ,
-	CONSTRAINT fk_reponsetest_cv FOREIGN KEY ( idcv ) REFERENCES "public".cv( id ) ON DELETE CASCADE ON UPDATE CASCADE 
+	CONSTRAINT reponsetest_pkey PRIMARY KEY ( id )
  );
 
 CREATE  TABLE "public".service ( 
 	id                   bigint DEFAULT nextval('service_id_seq'::regclass) NOT NULL  ,
 	nom                  varchar(255)    ,
 	CONSTRAINT service_pkey PRIMARY KEY ( id )
- );
-
-CREATE  TABLE "public".v_congerestant ( 
-	idpersonnel          bigint  NOT NULL  ,
-	nom                  varchar(255)    ,
-	prenom               varchar(255)    ,
-	reste                double precision    ,
-	CONSTRAINT v_congerestant_pkey PRIMARY KEY ( idpersonnel )
- );
-
-CREATE  TABLE "public".v_prendreconge ( 
-	idpersonnel          bigint  NOT NULL  ,
-	nom                  varchar(255)    ,
-	prenom               varchar(255)    ,
-	CONSTRAINT v_prendreconge_pkey PRIMARY KEY ( idpersonnel )
- );
-
-CREATE  TABLE "public".v_terminerconge ( 
-	iddebut              bigint  NOT NULL  ,
-	debut                date    ,
-	idpersonnel          bigint    ,
-	motif                varchar(255)    ,
-	nom                  varchar(255)    ,
-	prenom               varchar(255)    ,
-	"type"               bigint    ,
-	CONSTRAINT v_terminerconge_pkey PRIMARY KEY ( iddebut )
  );
 
 CREATE  TABLE "public".besoinservice ( 
@@ -214,10 +162,7 @@ CREATE  TABLE "public".besoinservice (
 	description          varchar(255)    ,
 	qualite              varchar(255)    ,
 	typecontrat          varchar(255)    ,
-	CONSTRAINT besoinservice_pkey PRIMARY KEY ( id ),
-	CONSTRAINT fk_besoinservice_poste FOREIGN KEY ( idposte ) REFERENCES "public".poste( id ) ON DELETE CASCADE ON UPDATE CASCADE ,
-	CONSTRAINT fk_besoinservice_region FOREIGN KEY ( idregion ) REFERENCES "public".region( id ) ON DELETE CASCADE ON UPDATE CASCADE ,
-	CONSTRAINT fk_besoinservice_service FOREIGN KEY ( idservice ) REFERENCES "public".service( id ) ON DELETE CASCADE ON UPDATE CASCADE 
+	CONSTRAINT besoinservice_pkey PRIMARY KEY ( id )
  );
 
 CREATE  TABLE "public".critereselection ( 
@@ -226,8 +171,7 @@ CREATE  TABLE "public".critereselection (
 	experience           varchar(255)    ,
 	sexe                 varchar(255)    ,
 	sm                   varchar(255)    ,
-	CONSTRAINT critereselection_pkey PRIMARY KEY ( id ),
-	CONSTRAINT fk_critereselection_besoinservice FOREIGN KEY ( idbesoin ) REFERENCES "public".besoinservice( id ) ON DELETE CASCADE ON UPDATE CASCADE 
+	CONSTRAINT critereselection_pkey PRIMARY KEY ( id )
  );
 
 CREATE  TABLE "public".cvgrade ( 
@@ -236,10 +180,7 @@ CREATE  TABLE "public".cvgrade (
 	idfiliere            bigint    ,
 	idgrade              bigint    ,
 	lienpreuvegrade      varchar(255)    ,
-	CONSTRAINT cvgrade_pkey PRIMARY KEY ( id ),
-	CONSTRAINT fk_cvgrade_cv FOREIGN KEY ( idcv ) REFERENCES "public".cv( id ) ON DELETE CASCADE ON UPDATE CASCADE ,
-	CONSTRAINT fk_cvgrade_filiere FOREIGN KEY ( idfiliere ) REFERENCES "public".filiere( id ) ON DELETE CASCADE ON UPDATE CASCADE ,
-	CONSTRAINT fk_cvgrade_grade FOREIGN KEY ( idgrade ) REFERENCES "public".grade( id ) ON DELETE CASCADE ON UPDATE CASCADE 
+	CONSTRAINT cvgrade_pkey PRIMARY KEY ( id )
  );
 
 CREATE  TABLE "public".personnel ( 
@@ -251,19 +192,14 @@ CREATE  TABLE "public".personnel (
 	dtn                  date    ,
 	dtembauche           date    ,
 	idfonction           bigint    ,
-	CONSTRAINT personnel_pkey PRIMARY KEY ( id ),
-	CONSTRAINT fk_personnel_fonction FOREIGN KEY ( idfonction ) REFERENCES "public".fonction( id ) ON DELETE CASCADE ON UPDATE CASCADE ,
-	CONSTRAINT fk_personnel_poste FOREIGN KEY ( idposte ) REFERENCES "public".poste( id ) ON DELETE CASCADE ON UPDATE CASCADE ,
-	CONSTRAINT fk_personnel_service FOREIGN KEY ( idservice ) REFERENCES "public".service( id ) ON DELETE CASCADE ON UPDATE CASCADE 
+	CONSTRAINT personnel_pkey PRIMARY KEY ( id )
  );
 
 CREATE  TABLE "public".posteservice ( 
 	id                   bigint DEFAULT nextval('posteservice_id_seq'::regclass) NOT NULL  ,
 	idposte              bigint    ,
 	idservice            bigint    ,
-	CONSTRAINT posteservice_pkey PRIMARY KEY ( id ),
-	CONSTRAINT fk_posteservice_poste FOREIGN KEY ( idposte ) REFERENCES "public".poste( id ) ON DELETE CASCADE ON UPDATE CASCADE ,
-	CONSTRAINT fk_posteservice_service FOREIGN KEY ( idservice ) REFERENCES "public".service( id ) ON DELETE CASCADE ON UPDATE CASCADE 
+	CONSTRAINT posteservice_pkey PRIMARY KEY ( id )
  );
 
 CREATE  TABLE "public".criteregrade ( 
@@ -272,10 +208,16 @@ CREATE  TABLE "public".criteregrade (
 	idcritereselection   bigint    ,
 	idfiliere            bigint    ,
 	idgrade              bigint    ,
-	CONSTRAINT criteregrade_pkey PRIMARY KEY ( id ),
-	CONSTRAINT fk_criteregrade_critereselection FOREIGN KEY ( idcritereselection ) REFERENCES "public".critereselection( id ) ON DELETE CASCADE ON UPDATE CASCADE ,
-	CONSTRAINT fk_criteregrade_filiere FOREIGN KEY ( idfiliere ) REFERENCES "public".filiere( id ) ON DELETE CASCADE ON UPDATE CASCADE ,
-	CONSTRAINT fk_criteregrade_grade FOREIGN KEY ( idgrade ) REFERENCES "public".grade( id ) ON DELETE CASCADE ON UPDATE CASCADE 
+	CONSTRAINT criteregrade_pkey PRIMARY KEY ( id )
+ );
+
+CREATE  TABLE "public".debutconge ( 
+	id                   bigint DEFAULT nextval('debutconge_id_seq'::regclass) NOT NULL  ,
+	debut                date    ,
+	idpersonnel          bigint    ,
+	motif                varchar(255)    ,
+	"type"               bigint    ,
+	CONSTRAINT debutconge_pkey PRIMARY KEY ( id )
  );
 
 CREATE  TABLE "public".fichedeposte ( 
@@ -287,19 +229,75 @@ CREATE  TABLE "public".fichedeposte (
 	mission              text    ,
 	idsuperieur          bigint    ,
 	matricule            varchar(10)    ,
-	CONSTRAINT fichedeposte_pkey PRIMARY KEY ( id ),
-	CONSTRAINT fichedeposte_idcv_fkey FOREIGN KEY ( idcv ) REFERENCES "public".cv( id )   ,
-	CONSTRAINT fichedeposte_idsuperieur_fkey FOREIGN KEY ( idsuperieur ) REFERENCES "public".personnel( id )   
+	CONSTRAINT fichedeposte_pkey PRIMARY KEY ( id )
  );
 
 CREATE  TABLE "public".fichedeposteaffiliation ( 
 	id                   bigint DEFAULT nextval('fichedeposteaffiliation_id_seq'::regclass) NOT NULL  ,
 	idfichedeposte       bigint    ,
 	idaffiliation        bigint    ,
-	CONSTRAINT fichedeposteaffiliation_pkey PRIMARY KEY ( id ),
-	CONSTRAINT fichedeposteaffiliation_idaffiliation_fkey FOREIGN KEY ( idaffiliation ) REFERENCES "public".affiliation( id )   ,
-	CONSTRAINT fichedeposteaffiliation_idfichedeposte_fkey FOREIGN KEY ( idfichedeposte ) REFERENCES "public".fichedeposte( id )   
+	CONSTRAINT fichedeposteaffiliation_pkey PRIMARY KEY ( id )
  );
+
+CREATE  TABLE "public".finconge ( 
+	id                   bigint DEFAULT nextval('finconge_id_seq'::regclass) NOT NULL  ,
+	duree                double precision    ,
+	fin                  date    ,
+	iddebut              bigint    ,
+	CONSTRAINT finconge_pkey PRIMARY KEY ( id )
+ );
+
+ALTER TABLE "public".besoinservice ADD CONSTRAINT fk_besoinservice_poste FOREIGN KEY ( idposte ) REFERENCES "public".poste( id ) ON DELETE CASCADE ON UPDATE CASCADE;
+
+ALTER TABLE "public".besoinservice ADD CONSTRAINT fk_besoinservice_region FOREIGN KEY ( idregion ) REFERENCES "public".region( id ) ON DELETE CASCADE ON UPDATE CASCADE;
+
+ALTER TABLE "public".besoinservice ADD CONSTRAINT fk_besoinservice_service FOREIGN KEY ( idservice ) REFERENCES "public".service( id ) ON DELETE CASCADE ON UPDATE CASCADE;
+
+ALTER TABLE "public".criteregrade ADD CONSTRAINT fk_criteregrade_critereselection FOREIGN KEY ( idcritereselection ) REFERENCES "public".critereselection( id ) ON DELETE CASCADE ON UPDATE CASCADE;
+
+ALTER TABLE "public".criteregrade ADD CONSTRAINT fk_criteregrade_filiere FOREIGN KEY ( idfiliere ) REFERENCES "public".filiere( id ) ON DELETE CASCADE ON UPDATE CASCADE;
+
+ALTER TABLE "public".criteregrade ADD CONSTRAINT fk_criteregrade_grade FOREIGN KEY ( idgrade ) REFERENCES "public".grade( id ) ON DELETE CASCADE ON UPDATE CASCADE;
+
+ALTER TABLE "public".critereselection ADD CONSTRAINT fk_critereselection_besoinservice FOREIGN KEY ( idbesoin ) REFERENCES "public".besoinservice( id ) ON DELETE CASCADE ON UPDATE CASCADE;
+
+ALTER TABLE "public".cvgrade ADD CONSTRAINT fk_cvgrade_cv FOREIGN KEY ( idcv ) REFERENCES "public".cv( id ) ON DELETE CASCADE ON UPDATE CASCADE;
+
+ALTER TABLE "public".cvgrade ADD CONSTRAINT fk_cvgrade_filiere FOREIGN KEY ( idfiliere ) REFERENCES "public".filiere( id ) ON DELETE CASCADE ON UPDATE CASCADE;
+
+ALTER TABLE "public".cvgrade ADD CONSTRAINT fk_cvgrade_grade FOREIGN KEY ( idgrade ) REFERENCES "public".grade( id ) ON DELETE CASCADE ON UPDATE CASCADE;
+
+ALTER TABLE "public".debutconge ADD CONSTRAINT fk_debutconge_personnel FOREIGN KEY ( idpersonnel ) REFERENCES "public".personnel( id ) ON DELETE CASCADE ON UPDATE CASCADE;
+
+ALTER TABLE "public".fichedeposte ADD CONSTRAINT fichedeposte_idcv_fkey FOREIGN KEY ( idcv ) REFERENCES "public".cv( id );
+
+ALTER TABLE "public".fichedeposte ADD CONSTRAINT fichedeposte_idsuperieur_fkey FOREIGN KEY ( idsuperieur ) REFERENCES "public".personnel( id );
+
+ALTER TABLE "public".fichedeposteaffiliation ADD CONSTRAINT fichedeposteaffiliation_idaffiliation_fkey FOREIGN KEY ( idaffiliation ) REFERENCES "public".affiliation( id );
+
+ALTER TABLE "public".fichedeposteaffiliation ADD CONSTRAINT fichedeposteaffiliation_idfichedeposte_fkey FOREIGN KEY ( idfichedeposte ) REFERENCES "public".fichedeposte( id );
+
+ALTER TABLE "public".finconge ADD CONSTRAINT fk_finconge_debutconge FOREIGN KEY ( iddebut ) REFERENCES "public".debutconge( id ) ON DELETE CASCADE ON UPDATE CASCADE;
+
+ALTER TABLE "public".personnel ADD CONSTRAINT fk_personnel_fonction FOREIGN KEY ( idfonction ) REFERENCES "public".fonction( id ) ON DELETE CASCADE ON UPDATE CASCADE;
+
+ALTER TABLE "public".personnel ADD CONSTRAINT fk_personnel_poste FOREIGN KEY ( idposte ) REFERENCES "public".poste( id ) ON DELETE CASCADE ON UPDATE CASCADE;
+
+ALTER TABLE "public".personnel ADD CONSTRAINT fk_personnel_service FOREIGN KEY ( idservice ) REFERENCES "public".service( id ) ON DELETE CASCADE ON UPDATE CASCADE;
+
+ALTER TABLE "public".posteservice ADD CONSTRAINT fk_posteservice_poste FOREIGN KEY ( idposte ) REFERENCES "public".poste( id ) ON DELETE CASCADE ON UPDATE CASCADE;
+
+ALTER TABLE "public".posteservice ADD CONSTRAINT fk_posteservice_service FOREIGN KEY ( idservice ) REFERENCES "public".service( id ) ON DELETE CASCADE ON UPDATE CASCADE;
+
+ALTER TABLE "public".questionannonce ADD CONSTRAINT fk_questionannonce_annonce FOREIGN KEY ( idannonce ) REFERENCES "public".annonce( id ) ON DELETE CASCADE ON UPDATE CASCADE;
+
+ALTER TABLE "public".questionannonce ADD CONSTRAINT fk_questionannonce_question FOREIGN KEY ( idquestion ) REFERENCES "public".question( id ) ON DELETE CASCADE ON UPDATE CASCADE;
+
+ALTER TABLE "public".questionreponse ADD CONSTRAINT fkho8caewikn0e7nwn76je0f8cm FOREIGN KEY ( idquestion ) REFERENCES "public".question( id );
+
+ALTER TABLE "public".reponsetest ADD CONSTRAINT fk_reponsetest_annonce FOREIGN KEY ( idannonce ) REFERENCES "public".annonce( id ) ON DELETE CASCADE ON UPDATE CASCADE;
+
+ALTER TABLE "public".reponsetest ADD CONSTRAINT fk_reponsetest_cv FOREIGN KEY ( idcv ) REFERENCES "public".cv( id ) ON DELETE CASCADE ON UPDATE CASCADE;
 
 CREATE VIEW "public".v_besoinannonce AS  SELECT a.id AS idannonce,
     bs.datebesoinservice,
@@ -315,6 +313,36 @@ CREATE VIEW "public".v_besoinannonce AS  SELECT a.id AS idannonce,
    FROM (annonce a
      JOIN besoinservice bs ON ((bs.id = a.idbesoinservice)));
 
+CREATE VIEW "public".v_congerestant AS  SELECT r.idpersonnel,
+    r.nom,
+    r.prenom,
+    (((r.months_since_hiring * 2.5))::double precision - r.total_duree) AS reste
+   FROM ( SELECT p.id AS idpersonnel,
+            p.nom,
+            p.prenom,
+            COALESCE(sum(
+                CASE
+                    WHEN (dc.type = 0) THEN fc.duree
+                    ELSE (0)::double precision
+                END), (0)::double precision) AS total_duree,
+            ((EXTRACT(year FROM age(now(), (p.dtembauche)::timestamp with time zone)) * (12)::numeric) + EXTRACT(month FROM age(now(), (p.dtembauche)::timestamp with time zone))) AS months_since_hiring
+           FROM ((personnel p
+             LEFT JOIN debutconge dc ON ((p.id = dc.idpersonnel)))
+             LEFT JOIN finconge fc ON ((dc.id = fc.iddebut)))
+          GROUP BY p.id, p.nom, p.prenom, p.dtembauche) r;
+
+CREATE VIEW "public".v_payroll AS  SELECT personnel.id,
+    (((personnel.nom)::text || ' '::text) || (personnel.prenom)::text) AS full_name,
+    personnel.dtembauche,
+    fonction.nom AS fonction,
+    service.nom AS service,
+    poste.nom AS poste,
+    poste.starting_salary
+   FROM (((personnel
+     JOIN fonction ON ((personnel.idfonction = fonction.id)))
+     JOIN service ON ((personnel.idservice = service.id)))
+     JOIN poste ON ((personnel.idposte = poste.id)));
+
 CREATE VIEW "public".v_personnel AS  SELECT p.id,
     p.nom,
     p.prenom,
@@ -327,3 +355,22 @@ CREATE VIEW "public".v_personnel AS  SELECT p.id,
      JOIN service s ON ((s.id = p.idservice)))
      JOIN fonction f ON ((f.id = p.idfonction)))
      JOIN poste po ON ((po.id = p.idposte)));
+
+CREATE VIEW "public".v_prendreconge AS  SELECT personnel.id AS idpersonnel,
+    personnel.nom,
+    personnel.prenom
+   FROM personnel
+  WHERE (NOT (personnel.id IN ( SELECT v_terminerconge.idpersonnel
+           FROM v_terminerconge)));
+
+CREATE VIEW "public".v_terminerconge AS  SELECT d.id AS iddebut,
+    p.id AS idpersonnel,
+    p.nom,
+    p.prenom,
+    d.debut,
+    d.type,
+    d.motif
+   FROM (debutconge d
+     JOIN personnel p ON ((p.id = d.idpersonnel)))
+  WHERE (NOT (d.id IN ( SELECT finconge.iddebut
+           FROM finconge)));
