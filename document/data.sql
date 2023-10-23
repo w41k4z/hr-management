@@ -59,3 +59,8 @@ INSERT INTO "public".service( id, nom ) VALUES ( 10, 'research');
 INSERT INTO "public".service( id, nom ) VALUES ( 11, 'planning');
 INSERT INTO "public".service( id, nom ) VALUES ( 12, 'quality assurance');
 INSERT INTO "public".service( id, nom ) VALUES ( 13, 'driving');
+INSERT INTO "public".type_hs ( id, nom, pourcentage) VALUES ( default, '8 premieres heure', 30 );
+INSERT INTO "public".type_hs ( id, nom, pourcentage) VALUES ( default, '+ de 8 heure', 50 );
+INSERT INTO "public".type_hs ( id, nom, pourcentage) VALUES ( default, 'Week-end', 40 );
+INSERT INTO "public".type_hs ( id, nom, pourcentage) VALUES ( default, 'Jour ferier', 100 );
+INSERT INTO "public".type_hs ( id, nom, pourcentage) VALUES ( default, 'Nuit', 30 );
