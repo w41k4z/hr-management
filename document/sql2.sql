@@ -151,6 +151,14 @@ CREATE  TABLE "public".service (
 	CONSTRAINT service_pkey PRIMARY KEY ( id )
  );
 
+CREATE  TABLE "public".type_hs ( 
+	id                   bigint DEFAULT nextval('type_hs_id_seq'::regclass) NOT NULL  ,
+	nom                  varchar(255)  NOT NULL  ,
+	pourcentage          double precision  NOT NULL  ,
+	status               integer    ,
+	CONSTRAINT pk_type_hs PRIMARY KEY ( id )
+ );
+
 CREATE  TABLE "public".besoinservice ( 
 	datebesoinservice    date    ,
 	volumehoraire        double precision    ,
@@ -247,6 +255,15 @@ CREATE  TABLE "public".finconge (
 	CONSTRAINT finconge_pkey PRIMARY KEY ( id )
  );
 
+CREATE  TABLE "public".heure_supp ( 
+	id                   bigint DEFAULT nextval('heure_supp_id_seq'::regclass) NOT NULL  ,
+	idpersonnel          bigint  NOT NULL  ,
+	idtype_hs            bigint    ,
+	date_                date DEFAULT CURRENT_DATE NOT NULL  ,
+	nb_heure             integer  NOT NULL  ,
+	CONSTRAINT pk_heure_supp PRIMARY KEY ( id )
+ );
+
 ALTER TABLE "public".besoinservice ADD CONSTRAINT fk_besoinservice_poste FOREIGN KEY ( idposte ) REFERENCES "public".poste( id ) ON DELETE CASCADE ON UPDATE CASCADE;
 
 ALTER TABLE "public".besoinservice ADD CONSTRAINT fk_besoinservice_region FOREIGN KEY ( idregion ) REFERENCES "public".region( id ) ON DELETE CASCADE ON UPDATE CASCADE;
@@ -278,6 +295,10 @@ ALTER TABLE "public".fichedeposteaffiliation ADD CONSTRAINT fichedeposteaffiliat
 ALTER TABLE "public".fichedeposteaffiliation ADD CONSTRAINT fichedeposteaffiliation_idfichedeposte_fkey FOREIGN KEY ( idfichedeposte ) REFERENCES "public".fichedeposte( id );
 
 ALTER TABLE "public".finconge ADD CONSTRAINT fk_finconge_debutconge FOREIGN KEY ( iddebut ) REFERENCES "public".debutconge( id ) ON DELETE CASCADE ON UPDATE CASCADE;
+
+ALTER TABLE "public".heure_supp ADD CONSTRAINT fk_heure_supp_type_hs FOREIGN KEY ( idtype_hs ) REFERENCES "public".type_hs( id ) ON DELETE CASCADE ON UPDATE CASCADE;
+
+ALTER TABLE "public".heure_supp ADD CONSTRAINT fk_heure_supp_personnel FOREIGN KEY ( idpersonnel ) REFERENCES "public".personnel( id ) ON DELETE CASCADE ON UPDATE CASCADE;
 
 ALTER TABLE "public".personnel ADD CONSTRAINT fk_personnel_fonction FOREIGN KEY ( idfonction ) REFERENCES "public".fonction( id ) ON DELETE CASCADE ON UPDATE CASCADE;
 
@@ -356,13 +377,6 @@ CREATE VIEW "public".v_personnel AS  SELECT p.id,
      JOIN fonction f ON ((f.id = p.idfonction)))
      JOIN poste po ON ((po.id = p.idposte)));
 
-CREATE VIEW "public".v_prendreconge AS  SELECT personnel.id AS idpersonnel,
-    personnel.nom,
-    personnel.prenom
-   FROM personnel
-  WHERE (NOT (personnel.id IN ( SELECT v_terminerconge.idpersonnel
-           FROM v_terminerconge)));
-
 CREATE VIEW "public".v_terminerconge AS  SELECT d.id AS iddebut,
     p.id AS idpersonnel,
     p.nom,
@@ -374,3 +388,10 @@ CREATE VIEW "public".v_terminerconge AS  SELECT d.id AS iddebut,
      JOIN personnel p ON ((p.id = d.idpersonnel)))
   WHERE (NOT (d.id IN ( SELECT finconge.iddebut
            FROM finconge)));
+		   
+CREATE VIEW "public".v_prendreconge AS  SELECT personnel.id AS idpersonnel,
+    personnel.nom,
+    personnel.prenom
+   FROM personnel
+  WHERE (NOT (personnel.id IN ( SELECT v_terminerconge.idpersonnel
+           FROM v_terminerconge)));
