@@ -18,5 +18,5 @@ public class TypeHs {
     public String nom;
 
     @Column
-    public Integer status;
+    public Double pourcentage;
 }
