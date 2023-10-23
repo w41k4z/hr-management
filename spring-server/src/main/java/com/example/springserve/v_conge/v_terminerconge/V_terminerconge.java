@@ -36,4 +36,10 @@ public class V_terminerconge {
     @Column(name = "motif")
     public String motif;
 
+    @Column(name = "fin")
+    public Date fin;
+
+    @Column(name = "etat")
+    public Long etat;
+
 }

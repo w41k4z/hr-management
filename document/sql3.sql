@@ -538,7 +538,7 @@ INSERT INTO fichedeposteaffiliation( id, idfichedeposte, idaffiliation ) VALUES 
 
 
 
-create  or replace view v_terminerconge as select d.id as iddebut,p.id as idpersonnel,p.nom,p.prenom,d.debut,d.type,d.motif from debutconge d join personnel p on p.id=d.idpersonnel where d.id not in (select iddebut from finconge);
+create  or replace view v_terminerconge as select d.id as iddebut,p.id as idpersonnel,p.nom,p.prenom,d.debut,d.type,d.motif,d.fin,d.etat from debutconge d join personnel p on p.id=d.idpersonnel where d.id not in (select iddebut from finconge);
 
 create or replace view v_prendreconge as  select id as idpersonnel,nom,prenom from personnel where id not in (select idpersonnel from v_terminerconge);
 

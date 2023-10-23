@@ -18,4 +18,10 @@ public class V_terminercongeController {
     public List<V_terminerconge> getAll() {
         return terminercongeViewService.getAll();
     }
+
+    @GetMapping("/getAllByEtat")
+    @ResponseBody
+    public List<V_terminerconge> getAllByEtat(@RequestParam Long etat) {
+        return terminercongeViewService.getAllByEtat(etat);
+    }
 }
