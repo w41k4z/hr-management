@@ -4,176 +4,176 @@ import BasicCRUDTable from "../components/datatable/BasicCRUDTable";
 import { TableColumn } from "../components/datatable/TableColumn";
 
 /* INTERFACE */
-import GradeInterface from "../model/GradeInterface";
+import PayrollInterface from "../model/V_payroll";
 
 /* REQUEST */
 import Axios from "../http-client-side/Axios";
 
 const Payroll = () => {
   /* HOOKS */
-  const [grades, setGrades] = useState<GradeInterface[]>([]);
+  const [payrolls, setPayrolls] = useState<PayrollInterface[]>([]);
   useEffect(() => {
-    fetch("http://localhost:8080/Grade/getAll")
+    fetch("http://localhost:8080/V_payroll/getAll")
       .then((res) => res.json())
-      .then((data) => setGrades(data));
+      .then((data) => setPayrolls(data));
   }, []);
 
   /* CONST DATA */
   const columns: TableColumn[] = [
     {
       name: "Date",
-      propTarget: "nom",
+      propTarget: "date",
       format: "default",
     },
     {
       name: "NBRE",
-      propTarget: "nom",
-      format: "default",
+      propTarget: "number",
+      format: "number",
     },
     {
       name: "N* MATR",
-      propTarget: "nom",
+      propTarget: "matricule",
       format: "default",
     },
     {
       name: "N* CNAPS",
-      propTarget: "nom",
+      propTarget: "cnaps",
       format: "default",
     },
     {
       name: "Nom/Prenom",
-      propTarget: "nom",
+      propTarget: "fullName",
       format: "default",
     },
     {
       name: "Date d'embauche",
-      propTarget: "nom",
+      propTarget: "Date",
       format: "default",
     },
     {
       name: "Absence du mois",
-      propTarget: "nom",
+      propTarget: "month_abs",
       format: "default",
     },
     {
       name: "CAT",
-      propTarget: "nom",
+      propTarget: "classification",
       format: "default",
     },
     {
       name: "Fonction",
-      propTarget: "nom",
+      propTarget: "fonction",
       format: "default",
     },
     {
       name: "Salaire de base",
-      propTarget: "nom",
-      format: "default",
+      propTarget: "startingSalary",
+      format: "currency",
     },
-    {
-      name: "Retenues sur absence",
-      propTarget: "nom",
-      format: "default",
-    },
+    // {
+    //   name: "Retenues sur absence",
+    //   propTarget: "nom",
+    //   format: "default",
+    // },
     {
       name: "Salaire de base du mois",
-      propTarget: "nom",
-      format: "default",
+      propTarget: "monthBaseSalary",
+      format: "currency",
     },
     {
       name: "Indemnite",
-      propTarget: "nom",
+      propTarget: "indemnite",
       format: "default",
     },
-    {
-      name: "Rappel",
-      propTarget: "nom",
-      format: "default",
-    },
-    {
-      name: "Autres",
-      propTarget: "nom",
-      format: "default",
-    },
-    {
-      name: "HP SUP/MAJ",
-      propTarget: "nom",
-      format: "default",
-    },
+    // {
+    //   name: "Rappel",
+    //   propTarget: "nom",
+    //   format: "default",
+    // },
+    // {
+    //   name: "Autres",
+    //   propTarget: "nom",
+    //   format: "default",
+    // },
+    // {
+    //   name: "HP SUP/MAJ",
+    //   propTarget: "nom",
+    //   format: "default",
+    // },
     {
       name: "Salaire brut",
-      propTarget: "nom",
-      format: "default",
+      propTarget: "grossSalary",
+      format: "currency",
     },
     {
       name: "Cnaps 1%",
-      propTarget: "nom",
-      format: "default",
+      propTarget: "cnaps_1",
+      format: "currency",
     },
     {
       name: "OSTIE 1%",
-      propTarget: "nom",
-      format: "default",
+      propTarget: "ostie_1",
+      format: "currency",
     },
     {
       name: "OSTIE 5%",
-      propTarget: "nom",
-      format: "default",
+      propTarget: "ostie_5",
+      format: "currency",
     },
-    {
-      name: "Revenu imposable",
-      propTarget: "nom",
-      format: "default",
-    },
-    {
-      name: "Impot du",
-      propTarget: "nom",
-      format: "default",
-    },
-    {
-      name: "Enfant a charge",
-      propTarget: "nom",
-      format: "default",
-    },
-    {
-      name: "Montant",
-      propTarget: "nom",
-      format: "default",
-    },
-    {
-      name: "IGR net",
-      propTarget: "nom",
-      format: "default",
-    },
-    {
-      name: "Autre retenues",
-      propTarget: "nom",
-      format: "default",
-    },
+    // {
+    //   name: "Revenu imposable",
+    //   propTarget: "nom",
+    //   format: "default",
+    // },
+    // {
+    //   name: "Impot du",
+    //   propTarget: "nom",
+    //   format: "default",
+    // },
+    // {
+    //   name: "Enfant a charge",
+    //   propTarget: "nom",
+    //   format: "default",
+    // },
+    // {
+    //   name: "Montant",
+    //   propTarget: "nom",
+    //   format: "default",
+    // },
+    // {
+    //   name: "IGR net",
+    //   propTarget: "nom",
+    //   format: "default",
+    // },
+    // {
+    //   name: "Autre retenues",
+    //   propTarget: "nom",
+    //   format: "default",
+    // },
     {
       name: "Salaire net",
-      propTarget: "nom",
-      format: "default",
+      propTarget: "netSalary",
+      format: "currency",
     },
-    {
-      name: "Avance",
-      propTarget: "nom",
-      format: "default",
-    },
+    // {
+    //   name: "Avance",
+    //   propTarget: "nom",
+    //   format: "default",
+    // },
     {
       name: "Net a payer",
-      propTarget: "nom",
-      format: "default",
+      propTarget: "netToPay",
+      format: "currency",
     },
-    {
-      name: "Autre indemnite",
-      propTarget: "nom",
-      format: "default",
-    },
+    // {
+    //   name: "Autre indemnite",
+    //   propTarget: "nom",
+    //   format: "default",
+    // },
     {
       name: "Net du mois",
-      propTarget: "nom",
-      format: "default",
+      propTarget: "netOfMonth",
+      format: "currency",
     },
   ];
 
@@ -183,8 +183,8 @@ const Payroll = () => {
       indexedRow
       hasAction={false}
       columns={columns}
-      data={[]}
-      dataPropIDName={""}
+      data={payrolls}
+      dataPropIDName={"id"}
       addModalFormInputs={[]}
       onAdd={() => {}}
       onUpdate={(row: any) => {}}
