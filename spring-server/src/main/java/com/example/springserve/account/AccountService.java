@@ -30,9 +30,9 @@ public class AccountService {
     }
 
     public Account login(String userName, String password) {
-        Account existingAccount = accountRepository.findByUserName(userName);
-        if (existingAccount != null && existingAccount.password.equals(password)) {
-            return existingAccount;
+        Account account = accountRepository.findByUserName(userName);
+        if (account != null && account.password.equals(password)) {
+            return account;
         }
         return null;
     }
