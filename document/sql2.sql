@@ -28,6 +28,8 @@ CREATE SEQUENCE "public".fonction_id_seq START WITH 1 INCREMENT BY 1;
 
 CREATE SEQUENCE "public".grade_id_seq START WITH 1 INCREMENT BY 1;
 
+CREATE SEQUENCE "public".heure_supp_id_seq START WITH 1 INCREMENT BY 1;
+
 CREATE SEQUENCE "public".myuser_id_seq START WITH 1 INCREMENT BY 1;
 
 CREATE SEQUENCE "public".personnel_id_seq START WITH 1 INCREMENT BY 1;
@@ -49,6 +51,8 @@ CREATE SEQUENCE "public".reponsetest_id_seq START WITH 1 INCREMENT BY 1;
 CREATE SEQUENCE "public".reponsetest_id_seq1 START WITH 1 INCREMENT BY 1;
 
 CREATE SEQUENCE "public".service_id_seq START WITH 1 INCREMENT BY 1;
+
+CREATE SEQUENCE "public".type_hs_id_seq START WITH 1 INCREMENT BY 1;
 
 CREATE  TABLE "public".affiliation ( 
 	id                   bigint DEFAULT nextval('affiliation_id_seq'::regclass) NOT NULL  ,
@@ -151,6 +155,14 @@ CREATE  TABLE "public".service (
 	CONSTRAINT service_pkey PRIMARY KEY ( id )
  );
 
+CREATE  TABLE "public".type_hs ( 
+	id                   bigint DEFAULT nextval('type_hs_id_seq'::regclass) NOT NULL  ,
+	nom                  varchar(255)  NOT NULL  ,
+	pourcentage          double precision  NOT NULL  ,
+	status               integer    ,
+	CONSTRAINT pk_type_hs PRIMARY KEY ( id )
+ );
+
 CREATE  TABLE "public".besoinservice ( 
 	datebesoinservice    date    ,
 	volumehoraire        double precision    ,
@@ -192,6 +204,9 @@ CREATE  TABLE "public".personnel (
 	dtn                  date    ,
 	dtembauche           date    ,
 	idfonction           bigint    ,
+	cnaps                varchar  NOT NULL  ,
+	mtr                  varchar  NOT NULL  ,
+	seniority            integer[]    ,
 	CONSTRAINT personnel_pkey PRIMARY KEY ( id )
  );
 
@@ -217,6 +232,8 @@ CREATE  TABLE "public".debutconge (
 	idpersonnel          bigint    ,
 	motif                varchar(255)    ,
 	"type"               bigint    ,
+	etat                 bigint    ,
+	fin                  date    ,
 	CONSTRAINT debutconge_pkey PRIMARY KEY ( id )
  );
 
@@ -245,6 +262,15 @@ CREATE  TABLE "public".finconge (
 	fin                  date    ,
 	iddebut              bigint    ,
 	CONSTRAINT finconge_pkey PRIMARY KEY ( id )
+ );
+
+CREATE  TABLE "public".heure_supp ( 
+	id                   bigint DEFAULT nextval('heure_supp_id_seq'::regclass) NOT NULL  ,
+	idpersonnel          bigint  NOT NULL  ,
+	idtype_hs            bigint    ,
+	date_                date DEFAULT CURRENT_DATE NOT NULL  ,
+	nb_heure             integer  NOT NULL  ,
+	CONSTRAINT pk_heure_supp PRIMARY KEY ( id )
  );
 
 ALTER TABLE "public".besoinservice ADD CONSTRAINT fk_besoinservice_poste FOREIGN KEY ( idposte ) REFERENCES "public".poste( id ) ON DELETE CASCADE ON UPDATE CASCADE;
@@ -279,11 +305,17 @@ ALTER TABLE "public".fichedeposteaffiliation ADD CONSTRAINT fichedeposteaffiliat
 
 ALTER TABLE "public".finconge ADD CONSTRAINT fk_finconge_debutconge FOREIGN KEY ( iddebut ) REFERENCES "public".debutconge( id ) ON DELETE CASCADE ON UPDATE CASCADE;
 
+ALTER TABLE "public".heure_supp ADD CONSTRAINT fk_heure_supp_type_hs FOREIGN KEY ( idtype_hs ) REFERENCES "public".type_hs( id ) ON DELETE CASCADE ON UPDATE CASCADE;
+
+ALTER TABLE "public".heure_supp ADD CONSTRAINT fk_heure_supp_personnel FOREIGN KEY ( idpersonnel ) REFERENCES "public".personnel( id ) ON DELETE CASCADE ON UPDATE CASCADE;
+
 ALTER TABLE "public".personnel ADD CONSTRAINT fk_personnel_fonction FOREIGN KEY ( idfonction ) REFERENCES "public".fonction( id ) ON DELETE CASCADE ON UPDATE CASCADE;
 
 ALTER TABLE "public".personnel ADD CONSTRAINT fk_personnel_poste FOREIGN KEY ( idposte ) REFERENCES "public".poste( id ) ON DELETE CASCADE ON UPDATE CASCADE;
 
 ALTER TABLE "public".personnel ADD CONSTRAINT fk_personnel_service FOREIGN KEY ( idservice ) REFERENCES "public".service( id ) ON DELETE CASCADE ON UPDATE CASCADE;
+
+ALTER TABLE "public".personnel ADD CONSTRAINT fkmla5xrmak15pwth5vf1r3dxuk FOREIGN KEY ( idfonction ) REFERENCES "public".filiere( id );
 
 ALTER TABLE "public".posteservice ADD CONSTRAINT fk_posteservice_poste FOREIGN KEY ( idposte ) REFERENCES "public".poste( id ) ON DELETE CASCADE ON UPDATE CASCADE;
 
@@ -356,6 +388,20 @@ CREATE VIEW "public".v_personnel AS  SELECT p.id,
      JOIN fonction f ON ((f.id = p.idfonction)))
      JOIN poste po ON ((po.id = p.idposte)));
 
+CREATE VIEW "public".v_terminerconge AS  SELECT d.id AS iddebut,
+    p.id AS idpersonnel,
+    p.nom,
+    p.prenom,
+    d.debut,
+    d.type,
+    d.motif,
+    d.fin,
+    d.etat
+   FROM (debutconge d
+     JOIN personnel p ON ((p.id = d.idpersonnel)))
+  WHERE (NOT (d.id IN ( SELECT finconge.iddebut
+           FROM finconge)));
+		   
 CREATE VIEW "public".v_prendreconge AS  SELECT personnel.id AS idpersonnel,
     personnel.nom,
     personnel.prenom
@@ -363,14 +409,4 @@ CREATE VIEW "public".v_prendreconge AS  SELECT personnel.id AS idpersonnel,
   WHERE (NOT (personnel.id IN ( SELECT v_terminerconge.idpersonnel
            FROM v_terminerconge)));
 
-CREATE VIEW "public".v_terminerconge AS  SELECT d.id AS iddebut,
-    p.id AS idpersonnel,
-    p.nom,
-    p.prenom,
-    d.debut,
-    d.type,
-    d.motif
-   FROM (debutconge d
-     JOIN personnel p ON ((p.id = d.idpersonnel)))
-  WHERE (NOT (d.id IN ( SELECT finconge.iddebut
-           FROM finconge)));
+

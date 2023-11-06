@@ -119,6 +119,13 @@ export const SidePanelContent = [
     onItemClick: () => {},
   },
   {
+    title: "Heure supp",
+    type: "nav-item",
+    path: "management/heure-supp",
+    icon: <FlatColor.FcRegisteredTrademark />,
+    onItemClick: () => {},
+  },
+  {
     title: "Extra",
     type: "menu-title",
     onItemClick: () => {},
@@ -165,7 +172,6 @@ export const SidePanelContent = [
     icon: <GiPayMoney />,
     onItemClick: () => {},
   },
-
 
   // {
   //   title: "Annonce",

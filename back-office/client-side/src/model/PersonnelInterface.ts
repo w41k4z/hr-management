@@ -1,3 +1,4 @@
+import { Fonction } from "./FonctionInterface";
 import Poste from "./PosteInterface";
 
 export interface Personnel{
@@ -10,4 +11,8 @@ export interface Personnel{
     dtn : Date;
     dtembauche : Date;
     idfonction : number;
+    fonction : Fonction;
+    cnaps    : string;
+    mtr      : string;
+    seniority : number[];
 }

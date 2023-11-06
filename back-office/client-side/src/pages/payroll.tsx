@@ -20,26 +20,26 @@ const Payroll = () => {
 
   /* CONST DATA */
   const columns: TableColumn[] = [
-    {
-      name: "Date",
-      propTarget: "date",
-      format: "default",
-    },
-    {
-      name: "NBRE",
-      propTarget: "number",
-      format: "number",
-    },
-    {
-      name: "N* MATR",
-      propTarget: "matricule",
-      format: "default",
-    },
-    {
-      name: "N* CNAPS",
-      propTarget: "cnaps",
-      format: "default",
-    },
+    // {
+    //   name: "Date",
+    //   propTarget: "date",
+    //   format: "default",
+    // },
+    // {
+    //   name: "NBRE",
+    //   propTarget: "number",
+    //   format: "number",
+    // },
+    // {
+    //   name: "N* MATR",
+    //   propTarget: "matricule",
+    //   format: "default",
+    // },
+    // {
+    //   name: "N* CNAPS",
+    //   propTarget: "cnaps",
+    //   format: "default",
+    // },
     {
       name: "Nom/Prenom",
       propTarget: "fullName",
@@ -50,16 +50,16 @@ const Payroll = () => {
       propTarget: "Date",
       format: "default",
     },
-    {
-      name: "Absence du mois",
-      propTarget: "month_abs",
-      format: "default",
-    },
-    {
-      name: "CAT",
-      propTarget: "classification",
-      format: "default",
-    },
+    // {
+    //   name: "Absence du mois",
+    //   propTarget: "month_abs",
+    //   format: "default",
+    // },
+    // {
+    //   name: "CAT",
+    //   propTarget: "classification",
+    //   format: "default",
+    // },
     {
       name: "Fonction",
       propTarget: "fonction",
@@ -75,16 +75,16 @@ const Payroll = () => {
     //   propTarget: "nom",
     //   format: "default",
     // },
-    {
-      name: "Salaire de base du mois",
-      propTarget: "monthBaseSalary",
-      format: "currency",
-    },
-    {
-      name: "Indemnite",
-      propTarget: "indemnite",
-      format: "default",
-    },
+    // {
+    //   name: "Salaire de base du mois",
+    //   propTarget: "monthBaseSalary",
+    //   format: "currency",
+    // },
+    // {
+    //   name: "Indemnite",
+    //   propTarget: "indemnite",
+    //   format: "default",
+    // },
     // {
     //   name: "Rappel",
     //   propTarget: "nom",
@@ -100,26 +100,26 @@ const Payroll = () => {
     //   propTarget: "nom",
     //   format: "default",
     // },
-    {
-      name: "Salaire brut",
-      propTarget: "grossSalary",
-      format: "currency",
-    },
-    {
-      name: "Cnaps 1%",
-      propTarget: "cnaps_1",
-      format: "currency",
-    },
-    {
-      name: "OSTIE 1%",
-      propTarget: "ostie_1",
-      format: "currency",
-    },
-    {
-      name: "OSTIE 5%",
-      propTarget: "ostie_5",
-      format: "currency",
-    },
+    // {
+    //   name: "Salaire brut",
+    //   propTarget: "grossSalary",
+    //   format: "currency",
+    // },
+    // {
+    //   name: "Cnaps 1%",
+    //   propTarget: "cnaps_1",
+    //   format: "currency",
+    // },
+    // {
+    //   name: "OSTIE 1%",
+    //   propTarget: "ostie_1",
+    //   format: "currency",
+    // },
+    // {
+    //   name: "OSTIE 5%",
+    //   propTarget: "ostie_5",
+    //   format: "currency",
+    // },
     // {
     //   name: "Revenu imposable",
     //   propTarget: "nom",
@@ -150,31 +150,31 @@ const Payroll = () => {
     //   propTarget: "nom",
     //   format: "default",
     // },
-    {
-      name: "Salaire net",
-      propTarget: "netSalary",
-      format: "currency",
-    },
+    // {
+    //   name: "Salaire net",
+    //   propTarget: "netSalary",
+    //   format: "currency",
+    // },
     // {
     //   name: "Avance",
     //   propTarget: "nom",
     //   format: "default",
     // },
-    {
-      name: "Net a payer",
-      propTarget: "netToPay",
-      format: "currency",
-    },
+    // {
+    //   name: "Net a payer",
+    //   propTarget: "netToPay",
+    //   format: "currency",
+    // },
     // {
     //   name: "Autre indemnite",
     //   propTarget: "nom",
     //   format: "default",
     // },
-    {
-      name: "Net du mois",
-      propTarget: "netOfMonth",
-      format: "currency",
-    },
+    // {
+    //   name: "Net du mois",
+    //   propTarget: "netOfMonth",
+    //   format: "currency",
+    // },
   ];
 
   return (

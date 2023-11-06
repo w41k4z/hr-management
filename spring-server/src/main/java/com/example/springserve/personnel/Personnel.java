@@ -6,6 +6,7 @@ import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.example.springserve.fonction.Fonction;
 import com.example.springserve.poste.Poste;
 
 import jakarta.persistence.Column;
@@ -48,7 +49,24 @@ public class Personnel {
     public Date dtembauche;
 
     @Column(name = "idfonction")
-    public Long idfonction;    
+    public Long idfonction;  
+    
+    @ManyToOne
+    @JoinColumn(name = "idfonction", insertable=false, updatable=false)
+    public Fonction fonction;
+
+    @Column(name = "cnaps")
+    public String cnaps;
+
+    @Column(name = "mtr")
+    public String mtr;
+
+    @Column(insertable = false, updatable = false)
+    public List<Integer> seniority;
+
+    public void setSeniority(){
+        this.seniority = getSeniority();
+    }
 
     public List<Integer> getSeniority(){
         LocalDate dateEmbauche = dtembauche.toLocalDate();

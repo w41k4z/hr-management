@@ -21,6 +21,11 @@ public class PosteService {
         return posteRepository.save(poste);
     }
 
+
+    public Poste updatePoste(Poste poste) {
+        return posteRepository.save(poste);
+    }
+
     public Optional<Poste> getPosteById(Long id) {
         Optional<Poste> res = posteRepository.findById(id);
         return res;

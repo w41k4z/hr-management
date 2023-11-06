@@ -25,6 +25,11 @@ public class PosteController {
         return posteService.savePoste(poste);
     }
 
+    @PostMapping("/update")
+    public Poste updatePoste(@RequestBody Poste poste) {
+        return posteService.updatePoste(poste);
+    }
+
     @GetMapping("/getById/{id}")
     public Poste getPosteById(@PathVariable Long id) {
         return OptionalGet.get(posteService.getPosteById(id));

@@ -10,7 +10,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.springserve.heuresupp.HeureSuppService;
 import com.example.springserve.personnel.PersonnelService;
+import com.example.springserve.typeheuresupp.TypeHs;
+import com.example.springserve.typeheuresupp.TypeHsService;
 import com.example.springserve.wageslip.gainsalary.AdvanceNoticeRight;
 import com.example.springserve.wageslip.gainsalary.AnteriorBackPay;
 import com.example.springserve.wageslip.gainsalary.BasicSalary;
@@ -38,17 +41,24 @@ public class WageSlipController {
     @Autowired
     PersonnelService personnelService;
 
+    @Autowired
+    TypeHsService typeHsService;
+
+    @Autowired
+    HeureSuppService heureSuppService;
+
     @GetMapping("/getGainSalary/{idPersonne}")
     public List<GainSalary> getAllSalaryGain(@PathVariable Long idPersonne) {
         List<GainSalary> result = new ArrayList<GainSalary>();
+        List<TypeHs> allTypeHs = typeHsService.getAll();
+
         result.add(new BasicSalary(personnelService,idPersonne));
         result.add(new DeductibleAbsence(personnelService,idPersonne));
         result.add(new YieldGift(personnelService,idPersonne));
         result.add(new SeniorityGift(personnelService,idPersonne));
-        result.add(new OvertimeGift(personnelService,idPersonne, 30 , "30%" ));
-        result.add(new OvertimeGift(personnelService,idPersonne, 40 , "40%" ));
-        result.add(new OvertimeGift(personnelService,idPersonne, 50 , "50%" ));
-        result.add(new OvertimeGift(personnelService,idPersonne, 100, "100%"));
+        for(TypeHs ths : allTypeHs){
+            result.add(new OvertimeGift(personnelService, heureSuppService,idPersonne, ths));
+        }
         result.add(new NightHour(personnelService,idPersonne));
         result.add(new AnteriorBackPay(personnelService,idPersonne));
         result.add(new HolidayRight(personnelService,idPersonne));
