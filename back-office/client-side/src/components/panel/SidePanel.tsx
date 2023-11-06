@@ -12,6 +12,7 @@ interface SidePanelProps {
     title: string;
     type: string; // nav-item | menu-title
     icon?: ReactNode; // react-icons
+    onlyAdmin: boolean;
     path?: string;
     onItemClick: () => void;
   }[];
@@ -33,42 +34,46 @@ const SidePanel = ({
       <hr />
       <ul className="nav nav-pills flex-column mb-auto">
         {panelItems.map((item, index) => {
-          return item.type === "menu-title" ? (
-            <li
-              className={item.type + " my-2 d-none d-md-block"}
-              key={"section-" + index}
-              style={{ fontWeight: "bold", fontSize: "1.2rem" }}
-            >
-              {item.title}
-            </li>
-          ) : (
-            <li
-              className={item.type}
-              key={"item-" + index}
-              onClick={() => {
-                setActiveItem(index);
-                item.onItemClick();
-              }}
-              style={{ cursor: "pointer" }}
-            >
-              <Link
-                className={
-                  activeItem === index
-                    ? "nav-link active d-flex align-items-center"
-                    : "nav-link text-dark d-flex align-items-center"
-                }
-                to={item.path ? item.path : "/"}
+          if (item.onlyAdmin) {
+          } else {
+            return item.type === "menu-title" ? (
+              <li
+                className={item.type + " my-2 d-none d-md-block"}
+                key={"section-" + index}
+                style={{ fontWeight: "bold", fontSize: "1.2rem" }}
               >
-                <span
-                  className="d-flex align-items-center"
-                  style={{ fontSize: "20px" }}
+                {item.title}
+              </li>
+            ) : (
+              <li
+                className={item.type}
+                key={"item-" + index}
+                onClick={() => {
+                  setActiveItem(index);
+                  item.onItemClick();
+                }}
+                style={{ cursor: "pointer" }}
+              >
+                <Link
+                  className={
+                    activeItem === index
+                      ? "nav-link active d-flex align-items-center"
+                      : "nav-link text-dark d-flex align-items-center"
+                  }
+                  to={item.path ? item.path : "/"}
                 >
-                  {item.icon}
-                </span>
-                <p className="m-0 ms-3 d-none d-md-block">{item.title}</p>
-              </Link>
-            </li>
-          );
+                  <span
+                    className="d-flex align-items-center"
+                    style={{ fontSize: "20px" }}
+                  >
+                    {item.icon}
+                  </span>
+                  <p className="m-0 ms-3 d-none d-md-block">{item.title}</p>
+                </Link>
+              </li>
+            );
+          }
+          return null;
         })}
       </ul>
     </div>

@@ -1,4 +1,5 @@
-import React, { useState, useHistory } from "react";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   MDBContainer,
   MDBCol,
@@ -10,15 +11,17 @@ import logo from "../../assets/images/HR.jpg";
 
 
 function LogIn() {
-  const history = useHistory();
+  const navigate = useNavigate();
   const [credential, setCredential] = useState(
     {}
   );
   const log = async () => {
-    await axios.post("http://localhost:8080/Account/login", credential).then((res) => res.json).then((data) => {
-      if (data) {
-        localStorage.setItem("user", data);
-        history.push("/home");
+    await axios.post("http://localhost:8080/Account/login", credential).then((res) => { console.log(res); return res.data }).then((data) => {
+      if (data && data.userName) {
+        localStorage.setItem("user", JSON.stringify(data));
+        navigate("/department/needs");
+      } else {
+        alert("Wrong user name or password");
       }
     }).catch((err) => {
       alert(err)

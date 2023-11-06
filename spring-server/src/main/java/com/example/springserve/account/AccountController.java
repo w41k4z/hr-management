@@ -1,8 +1,11 @@
 package com.example.springserve.account;
 
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -15,8 +18,9 @@ public class AccountController {
     private AccountService accountService;
 
     @PostMapping("/login")
-    public Account login(Account account) {
-        Account userAccount = accountService.login(account.userName, account.password);
+    public Account login(@RequestBody Map<String, Object> jsonData) {
+        Account userAccount = accountService.login(jsonData.get("userName").toString(),
+                jsonData.get("password").toString());
         if (userAccount == null) {
             return null;
         }

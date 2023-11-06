@@ -2,9 +2,11 @@
 import SidePanel from "../components/panel/SidePanel";
 import { BsSearch } from "react-icons/bs";
 import { FiLogOut } from "react-icons/fi";
+import { useNavigate } from "react-router-dom";
 
 /* STATIC DATA */
 import { SidePanelContent } from "../static-data/SidePanelContent";
+import { useEffect, useState } from "react";
 
 /* COMPONENTS */
 const sidePanelHeader = (
@@ -14,10 +16,31 @@ const sidePanelHeader = (
   </div>
 );
 
-function Application({ children }: { children: React.ReactNode }) {
+function Application({ children }) {
+  const [sidePanelItems, setSidePanelItems] = useState([]);
+  const navigate = useNavigate();
+  useEffect(() => {
+    const jsonUser = localStorage.getItem("user");
+    const user = jsonUser ? JSON.parse(jsonUser) : "";
+    const items = SidePanelContent;
+    for (const item of items) {
+      if (item.onlyAdmin) {
+        if (user.privilege > 50) {
+          item.onlyAdmin = !item.onlyAdmin;
+        }
+      }
+    }
+    setSidePanelItems(items);
+  }, [sidePanelItems]);
+
+  const logout = () => {
+    localStorage.removeItem("user");
+    navigate("/");
+  };
+
   return (
     <div className="d-flex">
-      <SidePanel header={sidePanelHeader} panelItems={SidePanelContent} />
+      <SidePanel header={sidePanelHeader} panelItems={sidePanelItems} />
       <div className="content w-75">
         <header className="head-nav sticky-top px-md-5 px-sm-2 d-flex justify-content-between align-items-center">
           <div className="search-bar d-flex align-items-center w-25">
@@ -31,7 +54,10 @@ function Application({ children }: { children: React.ReactNode }) {
             </span>
           </div>
           <div className="profile">
-            <button className="btn btn-danger d-flex align-items-center">
+            <button
+              onClick={logout}
+              className="btn btn-danger d-flex align-items-center"
+            >
               <span>
                 <FiLogOut />
               </span>
