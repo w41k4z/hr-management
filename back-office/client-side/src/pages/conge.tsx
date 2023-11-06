@@ -129,6 +129,23 @@ export default function Conge() {
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
+        const selectedDate = new Date(formData.debutConge);
+        const currentDate = new Date();
+        const differenceInTime = selectedDate.getTime() - currentDate.getTime();
+        const differenceInDays = differenceInTime / (1000 * 3600 * 24);
+
+        if (differenceInDays < 15) {
+            alert('Le conge doit etre demande 15 jours a l\' avance');
+            return;
+        }
+
+        const date1 = new Date(formData.debutConge);
+        const date2 = new Date(formData.finConge);
+
+        if (date2 <= date1) {
+            alert('Date de fin de conge invalide');
+            return;
+        }
         sendDataToServer();
         window.location.reload();
     };
@@ -203,7 +220,7 @@ export default function Conge() {
     };
     // 
     // 
-    const [formData2, setFormData2] = useState({ id: '', debut: '', idpersonnel: '', motif: '', type: '', fin: ''});
+    const [formData2, setFormData2] = useState({ id: '', debut: '', idpersonnel: '', motif: '', type: '', fin: '' });
 
     const handleFormSubmit2 = async (event: React.FormEvent) => {
         event.preventDefault(); // Prevent the default form submission behavior
@@ -240,7 +257,7 @@ export default function Conge() {
         // console.log('Form Data:', formDataObject1);
     };
 
-    const [formData3, setFormData3] = useState({ id: ''});
+    const [formData3, setFormData3] = useState({ id: '' });
 
     const handleFormSubmit3 = async (event: React.FormEvent) => {
         event.preventDefault(); // Prevent the default form submission behavior
@@ -253,7 +270,7 @@ export default function Conge() {
             formDataObject3[key] = value as string;
         });
         try {
-            const response = await axiosInstance.post('/Debutconge/deleteById/'+formDataObject3.id,{
+            const response = await axiosInstance.post('/Debutconge/deleteById/' + formDataObject3.id, {
             });
             window.location.reload();
         }
@@ -427,7 +444,7 @@ export default function Conge() {
                                 <td>{terminerconge.motif}</td>
                                 <td>{terminerconge.fin.toString()}</td>
                                 <td>
-                                <form onSubmit={handleFormSubmit2}>
+                                    <form onSubmit={handleFormSubmit2}>
                                         <div className="d-flex align-items-center">
                                             <input type="hidden" name="id" value={terminerconge.iddebut} />
                                             <input type="hidden" name="debut" value={terminerconge.debut.toString()} />
